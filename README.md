@@ -11,6 +11,7 @@
 - [Introduction](#introduction)
 - [Quickstart](#quickstart)
 - [Button](#button)
+- [Tests](#tests)
 
 <br />
 
@@ -19,6 +20,8 @@
 This package assumes that you have understood the basic philosophy of Superflows and are ready to explore further. Use this package to access the primary building blocks of the Superflows component system. This package provides the following components:
 
 - Button
+
+<br />
 
 ## Quickstart
 
@@ -50,6 +53,7 @@ Install the react-sf-building-blocks package to gain access to the building bloc
 npm install --save react-sf-building-blocks
 ```
 
+<br />
 
 ## Button
 
@@ -100,3 +104,58 @@ import { ArrowRight } from 'react-bootstrap-icons';
 .
 <SfButton variant={'warning'} type={'filled'} caption={'Next'} onClick={(event) => {console.log('clicked', event);}} icon={<ArrowRight />}/>
 ```
+
+## Tests
+
+### How To Run
+
+To run tests locally:
+
+```bash
+npm test
+```
+
+### Results
+
+PASS src/index.test.tsx (8.613s)
+- ✓ SfButton: Basic Render Primary Filled (232ms)
+- ✓ SfButton: Basic Render Secondary Filled (208ms)
+- ✓ SfButton: Basic Render Danger Filled (208ms)
+- ✓ SfButton: Basic Render Warning Filled (208ms)
+- ✓ SfButton: Basic Render Success Filled (208ms)
+- ✓ SfButton: Basic Render Info Filled (206ms)
+- ✓ SfButton: Basic Render Dark Filled (207ms)
+- ✓ SfButton: Basic Render Light Filled (207ms)
+- ✓ SfButton: Basic Render Primary Outlined (207ms)
+- ✓ SfButton: Basic Render Secondary Outlined (205ms)
+- ✓ SfButton: Basic Render Danger Outlined (206ms)
+- ✓ SfButton: Basic Render Warning Outlined (207ms)
+- ✓ SfButton: Basic Render Success Outlined (206ms)
+- ✓ SfButton: Basic Render Info Outlined (205ms)
+- ✓ SfButton: Basic Render Dark Outlined (205ms)
+- ✓ SfButton: Basic Render Light Outlined (205ms)
+- ✓ SfButton: Basic Render Light Outlined (205ms)
+- ✓ SfButton: Color inversion mouseevents (1315ms)
+- ✓ SfButton: Color inversion mouseevents (1313ms)
+- ✓ SfButton: onClick (308ms)
+
+--------------|----------|----------|----------|----------|-------------------|
+File          |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+--------------|----------|----------|----------|----------|-------------------|
+All files     |      100 |    80.38 |      100 |      100 |                   |
+ SfButton.tsx |      100 |    71.43 |      100 |      100 |       34,35,36,69 |
+ Util.tsx     |      100 |    81.25 |      100 |      100 |... 56,162,165,168 |
+ index.tsx    |        0 |        0 |        0 |        0 |                   |
+--------------|----------|----------|----------|----------|-------------------|
+Test Suites: 1 passed, 1 total
+Tests:       20 passed, 20 total
+Snapshots:   0 total
+Time:        9.912s
+Ran all test suites.
+
+<br />
+
+
+## License
+
+MIT © [superflows-dev](https://github.com/superflows-dev)
