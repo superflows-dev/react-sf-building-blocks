@@ -16,21 +16,35 @@
 
 ## Introduction
 
-Use this package to access the primary building blocks of the Superflows component system. This package provides the following components:
+This package assumes that you have understood the basic philosophy of Superflows and are ready to explore further. Use this package to access the primary building blocks of the Superflows component system. This package provides the following components:
+
 - Button
 
 ## Quickstart
 
-### Dependencies
+### Before You Begin
+
+#### Bootstrap
+
+Superflows is designed using Bootstrap hence it is important to install the necessary dependencies first.
 
 ```bash
 npm install --save bootstrap
 npm install --save react-bootstrap
 npm install --save react-bootstrap-icons
+```
+
+#### Superflows Customization
+
+For customizing the building blocks, react-sf-themes package is used. Install it.
+
+```bash
 npm install --save react-sf-themes
 ```
 
 ### Installation
+
+Install the react-sf-building-blocks package to gain access to the building blocks.
 
 ```bash
 npm install --save react-sf-building-blocks
