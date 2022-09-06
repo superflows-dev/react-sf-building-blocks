@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from 'react-bootstrap';
 import Themes from 'react-sf-themes';
 import Util from './Util';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface Props {
   variant: string;

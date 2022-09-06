@@ -75,7 +75,6 @@ Button component supports the following props:
 import React from 'react'
 
 import { SfButton } from 'react-sf-building-blocks'
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
 
