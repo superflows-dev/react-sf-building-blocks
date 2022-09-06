@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1662447553822" clover="3.2.0">
-  <project timestamp="1662447553823" name="All files">
-    <metrics statements="149" coveredstatements="149" conditionals="159" coveredconditionals="128" methods="14" coveredmethods="14" elements="322" coveredelements="291" complexity="0" loc="149" ncloc="149" packages="1" files="3" classes="3"/>
+<coverage generated="1662465415326" clover="3.2.0">
+  <project timestamp="1662465415326" name="All files">
+    <metrics statements="149" coveredstatements="149" conditionals="161" coveredconditionals="130" methods="14" coveredmethods="14" elements="324" coveredelements="293" complexity="0" loc="149" ncloc="149" packages="1" files="3" classes="3"/>
     <file name="SfButton.tsx" path="/Users/admin/Documents/GitHub/react-sf-building-blocks/src/SfButton.tsx">
-      <metrics statements="22" coveredstatements="22" conditionals="15" coveredconditionals="11" methods="11" coveredmethods="11"/>
+      <metrics statements="22" coveredstatements="22" conditionals="17" coveredconditionals="13" methods="11" coveredmethods="11"/>
       <line num="18" count="1" type="cond" truecount="5" falsecount="0"/>
       <line num="21" count="48" type="stmt"/>
       <line num="22" count="48" type="stmt"/>
@@ -21,11 +21,11 @@
       <line num="51" count="48" type="stmt"/>
       <line num="52" count="20" type="stmt"/>
       <line num="55" count="48" type="stmt"/>
-      <line num="73" count="1" type="stmt"/>
       <line num="74" count="1" type="stmt"/>
       <line num="75" count="1" type="stmt"/>
       <line num="76" count="1" type="stmt"/>
       <line num="77" count="1" type="stmt"/>
+      <line num="78" count="1" type="stmt"/>
     </file>
     <file name="Util.tsx" path="/Users/admin/Documents/GitHub/react-sf-building-blocks/src/Util.tsx">
       <metrics statements="127" coveredstatements="127" conditionals="144" coveredconditionals="117" methods="3" coveredmethods="3"/>

@@ -66,7 +66,8 @@ const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = T
                 paddingRight: Themes.getTheme().spaces.ltl + 'px',
                 paddingTop: Themes.getTheme().spaces.min + 'px',
                 paddingBottom: Themes.getTheme().spaces.min + 'px',
-                borderRadius: Themes.getTheme().spaces.min + 'px',  
+                borderRadius: Themes.getTheme().spaces.min + 'px',
+                filter: disabled ? 'grayscale(70%)' : 'none',
                 ...styles
             }}
             disabled={disabled} 

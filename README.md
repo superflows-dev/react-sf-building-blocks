@@ -27,21 +27,10 @@ This package assumes that you have understood the basic philosophy of Superflows
 
 ### Before You Begin
 
-#### Bootstrap
-
-Superflows is designed using Bootstrap hence it is important to install the necessary dependencies first.
+Install the necessary dependencies first.
 
 ```bash
-npm install --save bootstrap
-npm install --save react-bootstrap
 npm install --save react-bootstrap-icons
-```
-
-#### Superflows Customization
-
-For customizing the building blocks, react-sf-themes package is used. Install it.
-
-```bash
 npm install --save react-sf-themes
 ```
 
