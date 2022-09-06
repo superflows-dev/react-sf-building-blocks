@@ -57,7 +57,7 @@ npm install --save react-sf-building-blocks
 
 ## Button
 
-Button component supports the following props:
+SfButton component supports the following props:
 
 | Prop          | Type           | Mandatory | Description 
 |---------------|----------------|-----------|---------------------------------
@@ -68,6 +68,8 @@ Button component supports the following props:
 | disabled      | boolean        | no        | flag to disable the button
 | theme         | object         | no        | superflows theme object
 | icon          | object         | no        | bootstrap icon to be shown after the text
+| className     | string         | no        | any classes that need to passed to the SfButton component
+| styles        | string         | no        | any styles that need to passed to the SfButton component
 
 ### Basic Usage
 

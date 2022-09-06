@@ -1,9 +1,7 @@
 import * as React from 'react'
 import { useState } from "react";
-import { Button } from 'react-bootstrap';
 import Themes from 'react-sf-themes';
 import Util from './Util';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface Props {
   variant: string;
@@ -14,9 +12,11 @@ interface Props {
   theme?: any;
   icon?: React.ReactNode;
   className?: string;
+  styles?: any;
 }
 
-const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = Themes.getTheme(), icon = null, className = ''}: Props) => {
+const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = Themes.getTheme(), icon = null, className = '', styles = {}}: Props) => {
+
 
     const [borderColor, setBorderColor] = useState('none');
     const [backgroundColor, setBackgroundColor] = useState('none');
@@ -53,12 +53,21 @@ const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = T
     }, [])
 
     return (
-        <Button 
-            className={`btn btn-secondary ${className}`} 
+        <button
+            className={`sf_btn ${className}`} 
             style={{ 
                 backgroundColor: backgroundColor,
                 color: textColor,
-                border: 'solid 1px ' + borderColor
+                border: 'solid 1px ' + borderColor,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                paddingLeft: Themes.getTheme().spaces.ltl + 'px',
+                paddingRight: Themes.getTheme().spaces.ltl + 'px',
+                paddingTop: Themes.getTheme().spaces.min + 'px',
+                paddingBottom: Themes.getTheme().spaces.min + 'px',
+                borderRadius: Themes.getTheme().spaces.min + 'px',  
+                ...styles
             }}
             disabled={disabled} 
             onTouchStart={() => {onTouchStart(true)}} 
@@ -67,8 +76,8 @@ const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = T
             onMouseUp={() => {onTouchStart(false)}} 
             onClick={(event) => {onClick(event)}}
             >
-            {caption}{icon != null && <span>&nbsp;{icon}</span>}   
-        </Button>
+            {caption}{icon != null && <span style={{paddingTop: '3px'}}>&nbsp;{icon}</span>}   
+        </button>
 
     )
 
