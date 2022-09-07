@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1662465587559" clover="3.2.0">
-  <project timestamp="1662465587560" name="All files">
+<coverage generated="1662524711704" clover="3.2.0">
+  <project timestamp="1662524711704" name="All files">
     <metrics statements="149" coveredstatements="149" conditionals="161" coveredconditionals="130" methods="14" coveredmethods="14" elements="324" coveredelements="293" complexity="0" loc="149" ncloc="149" packages="1" files="3" classes="3"/>
     <file name="SfButton.tsx" path="/Users/admin/Documents/GitHub/react-sf-building-blocks/src/SfButton.tsx">
       <metrics statements="22" coveredstatements="22" conditionals="17" coveredconditionals="13" methods="11" coveredmethods="11"/>

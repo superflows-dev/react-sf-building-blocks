@@ -4,6 +4,11 @@
 
 [![NPM](https://img.shields.io/npm/v/react-sf-themes.svg)](https://www.npmjs.com/package/react-sf-themes) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Node.js CI](https://github.com/superflows-dev/react-sf-themes/actions/workflows/node.js.yml/badge.svg)](https://github.com/superflows-dev/react-sf-themes/actions/workflows/node.js.yml)
 
+
+## Documentation
+
+[Read 📖](#http://superflows.dev/docs/category/building-blocks)
+
 <br />
 
 ## On This Page
@@ -17,9 +22,7 @@
 
 ## Introduction
 
-This package assumes that you have understood the basic philosophy of Superflows and are ready to explore further. Use this package to access the primary building blocks of the Superflows component system. This package provides the following components:
-
-- Button
+This package assumes that you have understood the basic philosophy of Superflows and are ready to explore further. Use this package to access the primary building blocks of the Superflows component system. Building blocks are atomic components with a simplistic functionality that are customizable. 
 
 <br />
 
@@ -46,7 +49,9 @@ npm install --save react-sf-building-blocks
 
 ## Button
 
-SfButton component supports the following props:
+The button component is **SfButton**.
+
+### Props
 
 | Prop          | Type           | Mandatory | Description 
 |---------------|----------------|-----------|---------------------------------
@@ -77,23 +82,9 @@ const App = () => {
 export default App
 ```
 
-### Disabled Button
+### Detailed Usage
 
-```tsx
-<SfButton variant={'danger'} type={'outlined'} caption={'Next'} onClick={(event) => {console.log('clicked', event);}} disabled={true}/>
-```
-
-### Icon Button
-
-Import the icon from bootstrap icons and then pass it in the props.
-
-```tsx
-import { ArrowRight } from 'react-bootstrap-icons';
-.
-.
-.
-<SfButton variant={'warning'} type={'filled'} caption={'Next'} onClick={(event) => {console.log('clicked', event);}} icon={<ArrowRight />}/>
-```
+For detailed usage please read the [documentation 📖](#http://superflows.dev/docs/building-blocks/button)
 
 ## Tests
 
@@ -108,26 +99,6 @@ npm test
 ### Results
 
 PASS src/index.test.tsx (8.613s)
-- ✓ SfButton: Basic Render Primary Filled (232ms)
-- ✓ SfButton: Basic Render Secondary Filled (208ms)
-- ✓ SfButton: Basic Render Danger Filled (208ms)
-- ✓ SfButton: Basic Render Warning Filled (208ms)
-- ✓ SfButton: Basic Render Success Filled (208ms)
-- ✓ SfButton: Basic Render Info Filled (206ms)
-- ✓ SfButton: Basic Render Dark Filled (207ms)
-- ✓ SfButton: Basic Render Light Filled (207ms)
-- ✓ SfButton: Basic Render Primary Outlined (207ms)
-- ✓ SfButton: Basic Render Secondary Outlined (205ms)
-- ✓ SfButton: Basic Render Danger Outlined (206ms)
-- ✓ SfButton: Basic Render Warning Outlined (207ms)
-- ✓ SfButton: Basic Render Success Outlined (206ms)
-- ✓ SfButton: Basic Render Info Outlined (205ms)
-- ✓ SfButton: Basic Render Dark Outlined (205ms)
-- ✓ SfButton: Basic Render Light Outlined (205ms)
-- ✓ SfButton: Basic Render Light Outlined (205ms)
-- ✓ SfButton: Color inversion mouseevents (1315ms)
-- ✓ SfButton: Color inversion mouseevents (1313ms)
-- ✓ SfButton: onClick (308ms)
 
 --------------|----------|----------|----------|----------|-------------------|
 File          |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |

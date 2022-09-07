@@ -1,6 +1,6 @@
 {
   "name": "react-sf-building-blocks",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Basic building blocks of the superflows component system",
   "author": "superflows-dev",
   "license": "MIT",
@@ -59,7 +59,7 @@
   },
   "dependencies": {
     "react-bootstrap-icons": "^1.8.4",
-    "react-sf-themes": "^1.0.7"
+    "react-sf-themes": "^1.0.10"
   },
   "files": [
     "dist"
