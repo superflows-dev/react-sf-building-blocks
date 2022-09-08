@@ -94,6 +94,12 @@ it('SfInput: Basic Render Primary Name > correct value entered > enter pressed',
   act(() => {
     fireEvent.change(input, { target: { value: 'Hrushi M' } })
     fireEvent.keyUp(input, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(input, {
       key: "Enter",
       code: "Enter",
       keyCode: 35,
@@ -136,6 +142,7 @@ it('SfInput: Basic Render Primary Name > test onclick', async () => {
   console.log(container.querySelector(":focus"));
 
 }) 
+
 
 it('SfButton: Basic Render Primary Filled', async () => {
 

@@ -109,7 +109,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                     onKeyUp={onKeyUp}
                     placeholder={hint}
                     disabled={disabled}
-                    value={value} />
+                    defaultValue={value} />
         </div>
     )
 
