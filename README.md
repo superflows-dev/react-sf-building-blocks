@@ -7,7 +7,7 @@
 
 ## Documentation
 
-[Read 📖](#http://superflows.dev/docs/category/building-blocks)
+<a href="http://superflows.dev/docs/category/building-blocks">Read 📖</a>
 
 <br />
 
@@ -85,7 +85,7 @@ export default App
 
 ### Detailed Usage
 
-For detailed usage please read the [documentation 📖](#http://superflows.dev/docs/building-blocks/button)
+For detailed usage please read the<a href="http://superflows.dev/docs/building-blocks/button">documentation 📖</a>
 
 ## Input
 
@@ -129,7 +129,7 @@ export default App
 
 ### Detailed Usage
 
-For detailed usage please read the [documentation 📖](#http://superflows.dev/docs/building-blocks/input)
+For detailed usage please read the<a href="http://superflows.dev/docs/building-blocks/input">documentation 📖</a>
 
 ## Tests
 
@@ -143,20 +143,19 @@ npm test
 
 ### Results
 
-PASS src/index.test.tsx (8.613s)
-
 --------------|----------|----------|----------|----------|-------------------|
 File          |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
 --------------|----------|----------|----------|----------|-------------------|
-All files     |      100 |    80.38 |      100 |      100 |                   |
- SfButton.tsx |      100 |    71.43 |      100 |      100 |       34,35,36,69 |
- Util.tsx     |      100 |    81.25 |      100 |      100 |... 56,162,165,168 |
+All files     |      100 |    80.95 |    96.15 |      100 |                   |
+ SfButton.tsx |      100 |    76.47 |      100 |      100 |       35,36,37,81 |
+ SfInput.tsx  |      100 |    82.14 |    88.89 |      100 |    45,63,94,98,99 |
+ Util.tsx     |      100 |    81.25 |      100 |      100 |... 68,174,177,180 |
  index.tsx    |        0 |        0 |        0 |        0 |                   |
 --------------|----------|----------|----------|----------|-------------------|
 Test Suites: 1 passed, 1 total
-Tests:       20 passed, 20 total
+Tests:       25 passed, 25 total
 Snapshots:   0 total
-Time:        9.912s
+Time:        15.585s
 Ran all test suites.
 
 <br />
