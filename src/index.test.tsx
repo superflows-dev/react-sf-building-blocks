@@ -3,6 +3,7 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import {fireEvent, screen} from '@testing-library/react'
 import { SfButton } from '.'
+import { SfInput } from '.'
 
 import '@testing-library/jest-dom/extend-expect';
 
@@ -19,6 +20,122 @@ afterEach(() => {
   container.remove();
   container = null;
 });
+
+it('SfInput: Basic Render Primary Name', async () => {
+
+  act(() => {
+    render(<SfInput inputType="name" variant={'primary'} caption={'Next'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_name');
+
+})
+
+it('SfInput: Basic Render Primary Name', async () => {
+
+  act(() => {
+    render(<SfInput inputType="name" variant={'primary'} caption={'Next'} onComplete={(event: any) => {console.log('clicked', event);}} autoFocus={true}/>, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_name');
+
+})
+
+it('SfInput: Basic Render Primary Name > correct value entered', async () => {
+
+  act(() => {
+    render(<SfInput inputType="name" variant={'primary'} caption={'Next'} onComplete={(event: any) => {console.log('clicked', event);}} autoFocus={true}/>, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_name');
+
+  let input = container.getElementsByClassName('sf_input_name')[0];
+  let div = container.getElementsByClassName('sf_input')[0];
+
+  act(() => {
+    fireEvent.change(input, { target: { value: 'Hrushi M' } })
+    fireEvent.keyUp(input, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+  await new Promise((r) => setTimeout(r, 1000));
+  expect(div.style.borderColor).toBe('#99faff');
+
+  act(() => {
+    fireEvent.change(input, { target: { value: 'Hrushi 122' } })
+    fireEvent.keyUp(input, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+  await new Promise((r) => setTimeout(r, 1000));
+  expect(div.style.borderColor).toBe('#dc3545');
+
+}) 
+
+it('SfInput: Basic Render Primary Name > correct value entered > enter pressed', async () => {
+
+  const onEnterPressedMock = jest.fn();
+
+  act(() => {
+    render(<SfInput inputType="name" variant={'primary'} caption={'Next'} onComplete={(event: any) => {console.log('clicked', event);}} onEnterPressed={() => {onEnterPressedMock()}} autoFocus={true} />, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_name');
+
+  let input = container.getElementsByClassName('sf_input_name')[0];
+  let div = container.getElementsByClassName('sf_input')[0];
+
+  act(() => {
+    fireEvent.change(input, { target: { value: 'Hrushi M' } })
+    fireEvent.keyUp(input, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+  await new Promise((r) => setTimeout(r, 1000));
+  expect(div.style.borderColor).toBe('#99faff');
+  expect(onEnterPressedMock).toHaveBeenCalled();
+
+}) 
+
+it('SfInput: Basic Render Primary Name > test onclick', async () => {
+
+  const onEnterPressedMock = jest.fn();
+
+  act(() => {
+    render(<SfInput inputType="name" variant={'primary'} caption={'Next'} onComplete={(event: any) => {console.log('clicked', event);}} onEnterPressed={() => {onEnterPressedMock()}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_name');
+
+  expect(container.querySelector(":focus")).toBe(null);
+
+  let div = container.getElementsByClassName('sf_input')[0];
+
+  console.log(div);
+
+  act(() => {
+    fireEvent(
+      div,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, 1000));
+  console.log(container.querySelector(":focus"));
+
+}) 
 
 it('SfButton: Basic Render Primary Filled', async () => {
 

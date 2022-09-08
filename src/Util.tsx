@@ -1,5 +1,17 @@
 const Util = {
 
+    validateName: function(value: string) {
+
+        return value.match(
+            /^([ \u00c0-\u01ffa-zA-Z'\-])+$/
+        );
+
+    },
+
+    shadeColor: function (color: string, amount: number) {
+        return '#' + color.replace(/^#/, '').replace(/../g, color => ('0'+Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2));
+    },
+
     getTextColor: function (theme: any, variant: string, type: string) {
         
         let ret = null;

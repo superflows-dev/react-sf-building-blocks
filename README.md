@@ -16,6 +16,7 @@
 - [Introduction](#introduction)
 - [Quickstart](#quickstart)
 - [Button](#button)
+- [Input](#input)
 - [Tests](#tests)
 
 <br />
@@ -85,6 +86,48 @@ export default App
 ### Detailed Usage
 
 For detailed usage please read the [documentation 📖](#http://superflows.dev/docs/building-blocks/button)
+
+## Input
+
+The input component is **SfInput**.
+
+### Props
+
+| Prop           | Type           | Mandatory | Description 
+|----------------|----------------|-----------|---------------------------------
+| variant        | string         | yes       | theme variant such as primary, secondary, danger, etc.
+| caption        | string         | yes       | button text
+| inputType      | string         | yes       | type of input - name
+| onComplete     | callback       | yes       | callback function when correct input is inserted
+| onEnterPressed | callback       | yes       | callback function when user presses enter key
+| hint           | string         | no        | placeholder value
+| disabled       | boolean        | no        | flag to disable the button
+| autoFocus      | boolean        | no        | flag, which sets autofocus on load
+| theme          | object         | no        | superflows theme object
+| icon           | object         | no        | bootstrap icon to be shown after the text
+| className      | string         | no        | any classes that need to passed to the SfButton component
+| styles         | string         | no        | any styles that need to passed to the SfButton component
+
+### Basic Usage
+
+```tsx
+import React from 'react'
+
+import {SfInput} from 'react-sf-building-blocks'
+
+const App = () => {
+
+  return <div>
+    <SfInput inputType="name" variant={'primary'} caption={'Next'} onComplete={(event: any) => {console.log('clicked', event);}}/>
+  </div>
+}
+
+export default App
+```
+
+### Detailed Usage
+
+For detailed usage please read the [documentation 📖](#http://superflows.dev/docs/building-blocks/input)
 
 ## Tests
 
