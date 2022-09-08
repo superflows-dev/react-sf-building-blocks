@@ -31,10 +31,10 @@ it('SfInput: Basic Render Primary Name', async () => {
 
 })
 
-it('SfInput: Basic Render Primary Name', async () => {
+it('SfInput: Basic Render Primary Name Night Mode', async () => {
 
   act(() => {
-    render(<SfInput inputType="name" variant={'primary'} caption={'Next'} onComplete={(event: any) => {console.log('clicked', event);}} autoFocus={true}/>, container);
+    render(<SfInput inputType="name" variant={'primary'} caption={'Next'} onComplete={(event: any) => {console.log('clicked', event);}} autoFocus={true} mode="night"/>, container);
   });
   await new Promise((r) => setTimeout(r, 200));
   expect(container.innerHTML).toContain('sf_input_name');

@@ -13,13 +13,14 @@ interface Props {
   hint?: string;
   disabled?: boolean;
   autoFocus?: boolean;
+  mode?: string;
   theme?: any;
   icon?: React.ReactNode;
   className?: string;
   styles?: any;
 }
 
-const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "", onEnterPressed = () => {}, disabled = false, autoFocus = false, theme = Themes.getTheme(), icon = null, className = '', styles = {}}: Props) => {
+const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "", onEnterPressed = () => {}, disabled = false, autoFocus = false, mode=Themes.getTheme().modes.day, theme = Themes.getTheme(), icon = null, className = '', styles = {}}: Props) => {
 
 
     const [borderColor, setBorderColor] = useState('none');
@@ -30,9 +31,14 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
 
     function resetColors() {
 
-        setBorderColor(Util.shadeColor(Util.getBorderColor(theme, variant, Themes.getTheme().types.outlined), 140));
-        setTextColor(Util.getTextColor(theme, variant, Themes.getTheme().types.outlined));
-
+        if(mode == Themes.getTheme().modes.day) {
+            setBorderColor(Util.shadeColor(Util.getBorderColor(theme, variant, Themes.getTheme().types.outlined), 140));
+            setTextColor(Util.getTextColor(theme, variant, Themes.getTheme().types.outlined));    
+        } else {
+            setBorderColor(Util.getBorderColor(theme, variant, Themes.getTheme().types.outlined));
+            setTextColor(Util.shadeColor(Util.getTextColor(theme, variant, Themes.getTheme().types.outlined), 140));    
+        }
+        
     }
 
     function resetType() {
