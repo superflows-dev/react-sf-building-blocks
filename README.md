@@ -99,7 +99,8 @@ The input component is **SfInput**.
 | caption        | string         | yes       | button text
 | inputType      | string         | yes       | type of input - name
 | onComplete     | callback       | yes       | callback function when correct input is inserted
-| onEnterPressed | callback       | yes       | callback function when user presses enter key
+| value          | string         | no        | value to pre-fill the inputwith
+| onEnterPressed | callback       | no        | callback function when user presses enter key
 | hint           | string         | no        | placeholder value
 | disabled       | boolean        | no        | flag to disable the button
 | autoFocus      | boolean        | no        | flag, which sets autofocus on load

@@ -8,6 +8,7 @@ interface Props {
   caption: string;
   inputType: string;
   onComplete: (value: string) => void;
+  value?: string;
   onEnterPressed?: () => void;
   hint?: string;
   disabled?: boolean;
@@ -18,7 +19,7 @@ interface Props {
   styles?: any;
 }
 
-const SfInput = ({ variant, caption, inputType, onComplete, hint = "", onEnterPressed = () => {}, disabled = false, autoFocus = false, theme = Themes.getTheme(), icon = null, className = '', styles = {}}: Props) => {
+const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "", onEnterPressed = () => {}, disabled = false, autoFocus = false, theme = Themes.getTheme(), icon = null, className = '', styles = {}}: Props) => {
 
 
     const [borderColor, setBorderColor] = useState('none');
@@ -107,7 +108,8 @@ const SfInput = ({ variant, caption, inputType, onComplete, hint = "", onEnterPr
                     type={ipType} 
                     onKeyUp={onKeyUp}
                     placeholder={hint}
-                    disabled={disabled} />
+                    disabled={disabled}
+                    value={value} />
         </div>
     )
 
