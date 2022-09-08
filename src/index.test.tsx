@@ -21,6 +21,64 @@ afterEach(() => {
   container = null;
 });
 
+it('SfInput: Basic Render Primary Email', async () => {
+
+  act(() => {
+    render(<SfInput inputType="email" variant={'primary'} caption={'Next'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_email');
+
+})
+
+
+it('SfInput: Basic Render Primary Email > correct value entered > enter pressed', async () => {
+
+  const onEnterPressedMock = jest.fn();
+
+  act(() => {
+    render(<SfInput inputType="email" variant={'primary'} caption={'Next'} onComplete={(event: any) => {console.log('clicked', event);}} onEnterPressed={() => {onEnterPressedMock()}} autoFocus={true} />, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_email');
+
+  let input = container.getElementsByClassName('sf_input_email')[0];
+  let div = container.getElementsByClassName('sf_input')[0];
+
+  act(() => {
+    fireEvent.change(input, { target: { value: 'hrushi@abc.com' } })
+    fireEvent.keyUp(input, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(input, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+  await new Promise((r) => setTimeout(r, 1000));
+  expect(div.style.borderColor).toBe('#99faff');
+  expect(onEnterPressedMock).toHaveBeenCalled();
+
+  act(() => {
+    fireEvent.change(input, { target: { value: 'Hrushi 122' } })
+    fireEvent.keyUp(input, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+  await new Promise((r) => setTimeout(r, 1000));
+  expect(div.style.borderColor).toBe('#dc3545');
+
+}) 
+
+
 it('SfInput: Basic Render Primary Name', async () => {
 
   act(() => {

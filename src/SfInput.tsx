@@ -60,9 +60,21 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
 
     const onKeyUp = (event: any) => {
 
-        if(inputType == "name") {
+        if(inputType == Themes.getTheme().inputTypes.name) {
             if(Util.validateName(event.target.value)) {
                 onComplete(event.target.value);
+                resetColors();
+                if(event.key == "Enter") onEnterPressed(); 
+            } else {
+                setBorderColor(Themes.getTheme().colors.dangerBgColor);
+                onComplete('');
+            }
+        }
+
+        if(inputType == Themes.getTheme().inputTypes.email) {
+            if(Util.validateEmail(event.target.value)) {
+                onComplete(event.target.value);
+                resetColors();
                 if(event.key == "Enter") onEnterPressed(); 
             } else {
                 setBorderColor(Themes.getTheme().colors.dangerBgColor);
