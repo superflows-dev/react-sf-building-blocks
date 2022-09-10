@@ -73,7 +73,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD', async () => {
     })
   });
 
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
   expect(container.innerHTML).toContain('India');
   expect(container.innerHTML).not.toContain('Brazil');
 
@@ -89,7 +89,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD', async () => {
     )
   });
 
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
   expect(container.innerHTML).not.toContain('India');
 
 })
@@ -131,7 +131,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > corner cases', async () 
     )
   });
 
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
   expect(container.innerHTML).toContain('India');
 
   let divAF = container.getElementsByClassName('div_AF')[0];
@@ -145,7 +145,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > corner cases', async () 
       }),
     )
   });
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
   expect(container.innerHTML).not.toContain('India');
 
   act(() => {
@@ -158,7 +158,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > corner cases', async () 
     )
   });
 
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
   expect(container.innerHTML).toContain('India');
 
   let divIN = container.getElementsByClassName('div_IN')[0];
@@ -172,7 +172,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > corner cases', async () 
       }),
     )
   });
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
   expect(container.innerHTML).not.toContain('India');
 
   let spanCaption = container.getElementsByClassName('sf_input_caption')[0];
@@ -220,7 +220,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
     )
   });
 
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
   expect(container.innerHTML).not.toContain('India');
 
   act(() => {
@@ -232,7 +232,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
       }),
     )
   });
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
   expect(container.innerHTML).toContain('India');
 
   let divAF = container.getElementsByClassName('div_AF')[0];
@@ -246,7 +246,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
       }),
     )
   });
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
   expect(container.innerHTML).not.toContain('India');
 
   let sfInputMobile = container.getElementsByClassName('sf_input_mobile')[0];
@@ -267,7 +267,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
     })
   });
 
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
 
   let divInput = container.getElementsByClassName('sf_input')[0];
   expect(divInput.style.borderColor).toBe('#dc3545');
@@ -288,7 +288,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
     })
   });
 
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
   expect(divInput.style.borderColor).toBe('#99faff');
 
 
