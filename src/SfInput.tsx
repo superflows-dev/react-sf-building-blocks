@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { useState, useRef } from "react";
 import Themes from 'react-sf-themes';
+import SfButton from './SfButton';
+import Services from './Services';
 import Util from './Util';
 
 interface Props {
@@ -25,9 +27,30 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
 
     const [borderColor, setBorderColor] = useState('none');
     const [textColor, setTextColor] = useState('none');
+    const [showCountryCodes, setShowCountryCodes] = useState(false);
     const [ipType, setIpType] = useState('text');
+    const [countryCodes, setCountryCodes] = useState('[]');
+    const [countryCodesSearchString, setCountryCodesSearchString] = useState('');
+    const [selectedCountryCode, setSelectedCountryCode] = useState('{}')
 
     const refInput = useRef<any>();
+
+    function setSelectedCountryCodeWrap(value: any) {
+        setSelectedCountryCode(JSON.stringify(value));
+    }
+
+    function getSelectedCountryCodeWrap() {
+        return JSON.parse(selectedCountryCode);
+    }
+
+    function setCountryCodesWrap(value: any) {
+        setCountryCodes(JSON.stringify(value))
+    }
+
+    function getCountryCodesWrap() {
+        return JSON.parse(countryCodes);
+    }
+
 
     function resetColors() {
 
@@ -53,9 +76,51 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
         }
     }
 
+    async function populateCountryCodes() {
+
+        const result = await Services.getCountryCodes();
+        const arr = [];
+
+        for(var i = 0; i < result.length; i++) {
+
+            if(result[i].name.toLowerCase().indexOf(countryCodesSearchString.toLowerCase()) >= 0) {
+                arr.push(result[i]);
+            }
+
+        }
+
+        setCountryCodesWrap(arr);
+    }
+
     function setFocus() {
 
         refInput.current!.focus();
+    }
+
+    function onClickIsd() {
+
+        if(showCountryCodes) {
+            setShowCountryCodes(false)
+        } else {
+            setShowCountryCodes(true)
+        }
+
+    }
+
+    function onChangeCountryCodesSearchString(e:any) {
+        setCountryCodesSearchString(e.target.value);
+    }
+
+    function onSubmitCountryCode() {
+
+        if(Util.validateMobile(refInput.current.value) && selectedCountryCode != "{}") {
+            onComplete(JSON.stringify({isd: getSelectedCountryCodeWrap().dialCode, number: refInput.current.value}));
+            resetColors();
+        } else {
+            setBorderColor(Themes.getTheme().colors.dangerBgColor);
+            onComplete('');
+        }
+
     }
 
     const onKeyUp = (event: any) => {
@@ -82,17 +147,52 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
             }
         }
 
+        if(inputType == Themes.getTheme().inputTypes.mobile) {
+            if(Util.validateMobile(event.target.value) && selectedCountryCode != "{}") {
+                onComplete(JSON.stringify({isd: getSelectedCountryCodeWrap().dialCode, number: event.target.value}));
+                resetColors();
+                if(event.key == "Enter") onEnterPressed(); 
+            } else {
+                setBorderColor(Themes.getTheme().colors.dangerBgColor);
+                onComplete('');
+            }
+        }
+
     }
 
     React.useEffect(() => {
+
         resetColors();
         resetType();    
         resetFocus();
+        if(inputType == Themes.getTheme().inputTypes.mobile) {
+            populateCountryCodes();
+        }
+
     }, [])
+
+    React.useEffect(() => {
+
+        if(selectedCountryCode == "{}") {
+
+        } else {
+
+            setCountryCodesSearchString('');
+            setShowCountryCodes(false);
+            onSubmitCountryCode();
+
+        }
+
+    }, [selectedCountryCode])
+
+    React.useEffect(() => {
+
+        populateCountryCodes();
+
+    }, [countryCodesSearchString])
 
     return (
         <div
-            onClick={() => {setFocus()}}
             className={`sf_input ${className}`}
             style={{ 
                 color: textColor,
@@ -109,15 +209,73 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
             }} >
                 {icon != null && icon}
                 {icon != null && <span>&nbsp;&nbsp;</span>}
-                {caption}
+                <span className='sf_input_caption' onClick={() => {setFocus()}}>{caption}</span>
                 <span>&nbsp;&nbsp;&nbsp;</span>
+                {inputType == Themes.getTheme().inputTypes.mobile && <div style={{
+                    display: 'flex',
+                    flexDirection: 'column'
+                }}>
+                    <SfButton variant={variant} type={'filled'} caption={selectedCountryCode == "{}" ? (showCountryCodes ? "ISD ▲" : "ISD ▼") : getSelectedCountryCodeWrap().dialCode + " " + getSelectedCountryCodeWrap().emoji  + " " + (showCountryCodes ? "▲" : "")} onClick={() => {onClickIsd()}} styles={{cursor: 'pointer', fontSize: '70%', marginRight: Themes.getTheme().spaces.min + 'px'}} />
+                    {showCountryCodes && <div style={{
+                        position: 'absolute',
+                        top: '35px',
+                        border: 'solid 1px gray',
+                        backgroundColor: mode == Themes.getTheme().modes.day ? 'white' : 'black',
+                        color: mode == Themes.getTheme().modes.day ? 'black' : 'white',
+                        borderRadius: Themes.getTheme().spaces.min + 'px',
+                        textAlign: 'center'
+                    }}>
+                        <input 
+                            className='input_search'
+                            type="text" 
+                            placeholder='Search' 
+                            onChange={(e: any) => {onChangeCountryCodesSearchString(e)}} 
+                            style={{
+                                width: '90%',
+                                border: 'none',
+                                marginTop: Themes.getTheme().spaces.min + 'px',
+                                marginBottom: Themes.getTheme().spaces.min + 'px',
+                                borderBottom: 'solid 1px ' + (Themes.getTheme().modes.day ? '#bbbbbb' : '#333333')
+                            }}/>
+                        <div style={{
+                            maxHeight: '150px',
+                            overflowY: 'auto',
+                            textAlign: 'left',
+                            paddingLeft: Themes.getTheme().spaces.ltl + 'px',
+                            paddingRight: Themes.getTheme().spaces.ltl + 'px',
+                        }}>
+                        {
+                            getCountryCodesWrap().map((element: any, key: any) => {
+
+                                return (
+                                    <div 
+                                    className={'div_' + element.code}
+                                    key={key}
+                                    style={{
+                                        fontSize: '80%',
+                                        fontWeight: '200',
+                                        cursor: 'pointer'
+                                    }}
+                                    onClick={() => {
+                                        setSelectedCountryCodeWrap(element);
+                                    }}
+                                    >{element.emoji}&nbsp;&nbsp;{element.name.substr(0, 20)}</div>
+                                );
+
+                            })
+                        }
+                        </div>
+                    </div>}
+                    
+                    
+                </div>}
                 <input 
                     className={`sf_input_${inputType}`}
                     ref={refInput} 
                     style={{
                         flexGrow: '1',
                         margin: '0',
-                        borderLeft: 'solid 1px ' + textColor,
+                        borderLeft: 'none',
                         borderTop: 'none',
                         borderRight: 'none',
                         borderBottom: 'none',

@@ -1,5 +1,13 @@
 const Util = {
 
+    validateMobile: function(value: string) {
+
+        return value.match(
+            /^[0-9]+$/
+        );
+
+    },
+    
     validateName: function(value: string) {
 
         return value.match(

@@ -21,6 +21,317 @@ afterEach(() => {
   container = null;
 });
 
+it('SfInput: Basic Render Primary Mobile', async () => {
+
+  act(() => {
+    render(<SfInput inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_mobile');
+
+})
+
+it('SfInput: Basic Render Primary Mobile > select ISD', async () => {
+
+  act(() => {
+    render(<SfInput inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_mobile');
+
+  let sfBtn = container.getElementsByClassName('sf_btn')[0];
+
+  act(() => {
+    fireEvent(
+      sfBtn,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, 500));
+  expect(container.innerHTML).toContain('India');
+  expect(container.innerHTML).toContain('Brazil');
+
+  let inputSearch = container.getElementsByClassName('input_search')[0];
+
+  act(() => {
+    fireEvent.change(inputSearch, { target: { value: 'ind' } })
+    fireEvent.keyUp(inputSearch, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(inputSearch, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, 500));
+  expect(container.innerHTML).toContain('India');
+  expect(container.innerHTML).not.toContain('Brazil');
+
+  let divIn = container.getElementsByClassName('div_IN')[0];
+
+  act(() => {
+    fireEvent(
+      divIn,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, 500));
+  expect(container.innerHTML).not.toContain('India');
+
+})
+
+it('SfInput: Basic Render Primary Mobile > select ISD > corner cases', async () => {
+
+  act(() => {
+    render(<SfInput inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_mobile');
+  
+  let sfInputMobile = container.getElementsByClassName('sf_input_mobile')[0];
+  act(() => {
+    fireEvent.change(sfInputMobile, { target: { value: '34545' } })
+    fireEvent.keyUp(sfInputMobile, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputMobile, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  let sfBtn = container.getElementsByClassName('sf_btn')[0];
+
+  act(() => {
+    fireEvent(
+      sfBtn,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, 500));
+  expect(container.innerHTML).toContain('India');
+
+  let divAF = container.getElementsByClassName('div_AF')[0];
+
+  act(() => {
+    fireEvent(
+      divAF,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+  await new Promise((r) => setTimeout(r, 500));
+  expect(container.innerHTML).not.toContain('India');
+
+  act(() => {
+    fireEvent(
+      sfBtn,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, 500));
+  expect(container.innerHTML).toContain('India');
+
+  let divIN = container.getElementsByClassName('div_IN')[0];
+
+  act(() => {
+    fireEvent(
+      divIN,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+  await new Promise((r) => setTimeout(r, 500));
+  expect(container.innerHTML).not.toContain('India');
+
+  let spanCaption = container.getElementsByClassName('sf_input_caption')[0];
+  act(() => {
+    fireEvent(
+      spanCaption,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+});
+
+it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async () => {
+
+  act(() => {
+    render(<SfInput inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_mobile');
+
+  let sfBtn = container.getElementsByClassName('sf_btn')[0];
+
+  act(() => {
+    fireEvent(
+      sfBtn,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  let divIn = container.getElementsByClassName('div_IN')[0];
+
+  act(() => {
+    fireEvent(
+      divIn,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, 500));
+  expect(container.innerHTML).not.toContain('India');
+
+  act(() => {
+    fireEvent(
+      sfBtn,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+  await new Promise((r) => setTimeout(r, 500));
+  expect(container.innerHTML).toContain('India');
+
+  let divAF = container.getElementsByClassName('div_AF')[0];
+
+  act(() => {
+    fireEvent(
+      divAF,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+  await new Promise((r) => setTimeout(r, 500));
+  expect(container.innerHTML).not.toContain('India');
+
+  let sfInputMobile = container.getElementsByClassName('sf_input_mobile')[0];
+
+  act(() => {
+    fireEvent.change(sfInputMobile, { target: { value: 'ind' } })
+    fireEvent.keyUp(sfInputMobile, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputMobile, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, 500));
+
+  let divInput = container.getElementsByClassName('sf_input')[0];
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+  act(() => {
+    fireEvent.change(sfInputMobile, { target: { value: '34545' } })
+    fireEvent.keyUp(sfInputMobile, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputMobile, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, 500));
+  expect(divInput.style.borderColor).toBe('#99faff');
+
+
+});
+
+it('SfInput: Basic Render Primary Mobile > country code button cases', async () => {
+
+  act(() => {
+    render(<SfInput inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_mobile');
+
+  let sfBtn = container.getElementsByClassName('sf_btn')[0];
+
+  act(() => {
+    fireEvent(
+      sfBtn,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  expect(container.innerHTML).toContain('India');
+
+
+  act(() => {
+    fireEvent(
+      sfBtn,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  expect(container.innerHTML).not.toContain('India');
+
+});
+
+
 it('SfInput: Basic Render Primary Email', async () => {
 
   act(() => {
