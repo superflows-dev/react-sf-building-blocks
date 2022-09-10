@@ -51,7 +51,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD', async () => {
     )
   });
 
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 1000));
   expect(container.innerHTML).toContain('India');
   expect(container.innerHTML).toContain('Brazil');
 
