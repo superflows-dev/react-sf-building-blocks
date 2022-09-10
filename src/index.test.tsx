@@ -73,7 +73,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD', async () => {
     })
   });
 
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).toContain('India');
   expect(container.innerHTML).not.toContain('Brazil');
 
@@ -314,6 +314,7 @@ it('SfInput: Basic Render Primary Mobile > country code button cases', async () 
     )
   });
 
+  await new Promise((r) => setTimeout(r, 1000));
   expect(container.innerHTML).toContain('India');
 
 

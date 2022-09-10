@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1662818101427" clover="3.2.0">
-  <project timestamp="1662818101427" name="All files">
+<coverage generated="1662818705583" clover="3.2.0">
+  <project timestamp="1662818705583" name="All files">
     <metrics statements="235" coveredstatements="235" conditionals="231" coveredconditionals="194" methods="43" coveredmethods="43" elements="509" coveredelements="472" complexity="0" loc="235" ncloc="235" packages="1" files="5" classes="5"/>
     <file name="Services.js" path="/Users/admin/Documents/GitHub/react-sf-building-blocks/src/Services.js">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -36,18 +36,18 @@
     <file name="SfInput.tsx" path="/Users/admin/Documents/GitHub/react-sf-building-blocks/src/SfInput.tsx">
       <metrics statements="79" coveredstatements="79" conditionals="70" coveredconditionals="64" methods="23" coveredmethods="23"/>
       <line num="25" count="1" type="cond" truecount="10" falsecount="0"/>
-      <line num="28" count="69" type="stmt"/>
-      <line num="29" count="69" type="stmt"/>
-      <line num="30" count="69" type="stmt"/>
-      <line num="31" count="69" type="stmt"/>
-      <line num="32" count="69" type="stmt"/>
-      <line num="33" count="69" type="stmt"/>
-      <line num="34" count="69" type="stmt"/>
-      <line num="36" count="69" type="stmt"/>
+      <line num="28" count="68" type="stmt"/>
+      <line num="29" count="68" type="stmt"/>
+      <line num="30" count="68" type="stmt"/>
+      <line num="31" count="68" type="stmt"/>
+      <line num="32" count="68" type="stmt"/>
+      <line num="33" count="68" type="stmt"/>
+      <line num="34" count="68" type="stmt"/>
+      <line num="36" count="68" type="stmt"/>
       <line num="39" count="5" type="stmt"/>
       <line num="43" count="34" type="stmt"/>
       <line num="47" count="19" type="stmt"/>
-      <line num="51" count="13" type="stmt"/>
+      <line num="51" count="15" type="stmt"/>
       <line num="57" count="21" type="cond" truecount="2" falsecount="0"/>
       <line num="58" count="20" type="stmt"/>
       <line num="59" count="20" type="stmt"/>
@@ -73,7 +73,7 @@
       <line num="118" count="2" type="stmt"/>
       <line num="120" count="3" type="stmt"/>
       <line num="121" count="3" type="stmt"/>
-      <line num="126" count="69" type="stmt"/>
+      <line num="126" count="68" type="stmt"/>
       <line num="128" count="13" type="cond" truecount="2" falsecount="0"/>
       <line num="129" count="4" type="cond" truecount="2" falsecount="0"/>
       <line num="130" count="3" type="stmt"/>
@@ -95,24 +95,24 @@
       <line num="154" count="2" type="cond" truecount="2" falsecount="0"/>
       <line num="156" count="4" type="stmt"/>
       <line num="157" count="4" type="stmt"/>
-      <line num="163" count="69" type="stmt"/>
+      <line num="163" count="68" type="stmt"/>
       <line num="165" count="12" type="stmt"/>
       <line num="166" count="12" type="stmt"/>
       <line num="167" count="12" type="stmt"/>
       <line num="168" count="12" type="cond" truecount="2" falsecount="0"/>
       <line num="169" count="5" type="stmt"/>
-      <line num="174" count="69" type="stmt"/>
+      <line num="174" count="68" type="stmt"/>
       <line num="176" count="17" type="cond" truecount="2" falsecount="0"/>
       <line num="180" count="5" type="stmt"/>
       <line num="181" count="5" type="stmt"/>
       <line num="182" count="5" type="stmt"/>
-      <line num="188" count="69" type="stmt"/>
+      <line num="188" count="68" type="stmt"/>
       <line num="190" count="14" type="stmt"/>
-      <line num="194" count="69" type="stmt"/>
+      <line num="194" count="68" type="stmt"/>
       <line num="212" count="1" type="stmt"/>
       <line num="218" count="7" type="cond" truecount="6" falsecount="0"/>
       <line num="232" count="1" type="stmt"/>
-      <line num="250" count="2657" type="stmt"/>
+      <line num="250" count="2898" type="stmt"/>
       <line num="260" count="5" type="stmt"/>
     </file>
     <file name="Util.tsx" path="/Users/admin/Documents/GitHub/react-sf-building-blocks/src/Util.tsx">
