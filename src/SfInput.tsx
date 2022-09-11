@@ -215,32 +215,52 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
-                    <SfButton variant={variant} type={'filled'} caption={selectedCountryCode == "{}" ? (showCountryCodes ? "ISD ▲" : "ISD ▼") : getSelectedCountryCodeWrap().dialCode + " " + getSelectedCountryCodeWrap().emoji  + " " + (showCountryCodes ? "▲" : "")} onClick={() => {onClickIsd()}} styles={{cursor: 'pointer', fontSize: '70%', marginRight: Themes.getTheme().spaces.min + 'px'}} />
+                    <SfButton variant={variant} type={'filled'} caption={selectedCountryCode == "{}" ? (showCountryCodes ? "ISD ▲" : "ISD ▼") : getSelectedCountryCodeWrap().dialCode + " " + getSelectedCountryCodeWrap().emoji  + " " + (showCountryCodes ? "▲" : "")} onClick={() => {onClickIsd()}} styles={{cursor: 'pointer', fontSize: '70%', marginRight: Themes.getTheme().spaces.ltl + 'px'}} />
                     {showCountryCodes && <div style={{
-                        position: 'absolute',
-                        top: '35px',
-                        border: 'solid 1px gray',
-                        backgroundColor: mode == Themes.getTheme().modes.day ? 'white' : 'black',
-                        color: mode == Themes.getTheme().modes.day ? 'black' : 'white',
-                        borderRadius: Themes.getTheme().spaces.min + 'px',
-                        textAlign: 'center'
+                        position: 'fixed',
+                        bottom: '0px',
+                        left: '0px',
+                        width: '100%',
+                        backgroundColor: mode == Themes.getTheme().modes.day ? '#efefef' : 'black',
+                        color: mode == Themes.getTheme().modes.day ? 'black' : '#ffffff',
+                        textAlign: 'left',
+                        boxShadow: '0px -2px 10px #dddddd'
                     }}>
-                        <input 
-                            className='input_search'
-                            type="text" 
-                            placeholder='Search' 
-                            onChange={(e: any) => {onChangeCountryCodesSearchString(e)}} 
-                            style={{
-                                width: '90%',
-                                border: 'none',
-                                marginTop: Themes.getTheme().spaces.min + 'px',
-                                marginBottom: Themes.getTheme().spaces.min + 'px',
-                                borderBottom: 'solid 1px ' + (Themes.getTheme().modes.day ? '#bbbbbb' : '#333333')
-                            }}/>
                         <div style={{
-                            maxHeight: '150px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                        }}>
+                            <input 
+                                className='input_search'
+                                type="text" 
+                                placeholder='Search' 
+                                onChange={(e: any) => {onChangeCountryCodesSearchString(e)}} 
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    border: 'none',
+                                    marginLeft: Themes.getTheme().spaces.ltl + 'px',
+                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
+                                    marginBottom: (parseInt(Themes.getTheme().spaces.ltl)*2) + 'px',
+                                    borderBottom: 'solid 1px ' + (Themes.getTheme().modes.day ? '#bbbbbb' : '#333333'),
+                                    flexGrow: '1'
+                                }}/>
+                            <SfButton className='sf_btn_countries_close' variant={variant} type={'filled'} caption={'Close ▲'} onClick={() => {onClickIsd()}} 
+                                styles={{
+                                    cursor: 'pointer', 
+                                    fontSize: '70%', 
+                                    marginRight: Themes.getTheme().spaces.ltl + 'px',
+                                    marginLeft: Themes.getTheme().spaces.ltl + 'px',
+                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
+                                    marginBottom: (parseInt(Themes.getTheme().spaces.ltl)*2) + 'px'}} />
+                        </div>
+                        <div style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            height: '200px',
                             overflowY: 'auto',
                             textAlign: 'left',
+                            alignItems: 'flex-start',
                             paddingLeft: Themes.getTheme().spaces.ltl + 'px',
                             paddingRight: Themes.getTheme().spaces.ltl + 'px',
                         }}>
@@ -254,7 +274,13 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                                     style={{
                                         fontSize: '80%',
                                         fontWeight: '200',
-                                        cursor: 'pointer'
+                                        cursor: 'pointer',
+                                        marginRight: Themes.getTheme().spaces.ltl + 'px',
+                                        marginBottom: Themes.getTheme().spaces.ltl + 'px',
+                                        backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : '#222222',
+                                        paddingLeft: Themes.getTheme().spaces.ltl + 'px',
+                                        paddingRight: Themes.getTheme().spaces.ltl + 'px',
+                                        borderRadius: Themes.getTheme().spaces.min + 'px'
                                     }}
                                     onClick={() => {
                                         setSelectedCountryCodeWrap(element);

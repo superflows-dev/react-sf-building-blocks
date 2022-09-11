@@ -342,6 +342,34 @@ it('SfInput: Basic Render Primary Mobile > country code button cases', async () 
 
   expect(container.innerHTML).not.toContain('India');
 
+  act(() => {
+    fireEvent(
+      sfBtn,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, 2000));
+  expect(container.innerHTML).toContain('India');
+
+
+  let sfBtnClose = container.getElementsByClassName('sf_btn_countries_close')[0];
+
+  act(() => {
+    fireEvent(
+      sfBtnClose,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  expect(container.innerHTML).not.toContain('India');
+
 });
 
 
