@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1662886797855" clover="3.2.0">
-  <project timestamp="1662886797856" name="All files">
+<coverage generated="1662887384116" clover="3.2.0">
+  <project timestamp="1662887384116" name="All files">
     <metrics statements="235" coveredstatements="235" conditionals="231" coveredconditionals="194" methods="43" coveredmethods="43" elements="509" coveredelements="472" complexity="0" loc="235" ncloc="235" packages="1" files="5" classes="5"/>
     <file name="Services.js" path="/Users/admin/Documents/GitHub/react-sf-building-blocks/src/Services.js">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>

@@ -23,6 +23,8 @@ afterEach(() => {
 
 it('SfInput: Basic Render Primary Mobile', async () => {
 
+  jest.setTimeout(30000);
+
   act(() => {
     render(<SfInput inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
   });
@@ -32,6 +34,8 @@ it('SfInput: Basic Render Primary Mobile', async () => {
 })
 
 it('SfInput: Basic Render Primary Mobile > select ISD', async () => {
+
+  jest.setTimeout(30000);
 
   act(() => {
     render(<SfInput inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
@@ -51,7 +55,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD', async () => {
     )
   });
 
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).toContain('India');
   expect(container.innerHTML).toContain('Brazil');
 
@@ -89,12 +93,14 @@ it('SfInput: Basic Render Primary Mobile > select ISD', async () => {
     )
   });
 
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).not.toContain('India');
 
 })
 
 it('SfInput: Basic Render Primary Mobile > select ISD > corner cases', async () => {
+
+  jest.setTimeout(30000);
 
   act(() => {
     render(<SfInput inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
@@ -131,7 +137,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > corner cases', async () 
     )
   });
 
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).toContain('India');
 
   let divAF = container.getElementsByClassName('div_AF')[0];
@@ -145,7 +151,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > corner cases', async () 
       }),
     )
   });
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).not.toContain('India');
 
   act(() => {
@@ -158,7 +164,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > corner cases', async () 
     )
   });
 
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).toContain('India');
 
   let divIN = container.getElementsByClassName('div_IN')[0];
@@ -172,7 +178,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > corner cases', async () 
       }),
     )
   });
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).not.toContain('India');
 
   let spanCaption = container.getElementsByClassName('sf_input_caption')[0];
@@ -189,7 +195,6 @@ it('SfInput: Basic Render Primary Mobile > select ISD > corner cases', async () 
 });
 
 it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async () => {
-
 
   jest.setTimeout(30000);
 
@@ -225,7 +230,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
     )
   });
 
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).not.toContain('India');
 
   act(() => {
@@ -272,7 +277,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
     })
   });
 
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
 
   let divInput = container.getElementsByClassName('sf_input')[0];
   expect(divInput.style.borderColor).toBe('#dc3545');
@@ -293,13 +298,15 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
     })
   });
 
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(divInput.style.borderColor).toBe('#99faff');
 
 
 });
 
 it('SfInput: Basic Render Primary Mobile > country code button cases', async () => {
+
+  jest.setTimeout(30000);
 
   act(() => {
     render(<SfInput inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
@@ -319,7 +326,7 @@ it('SfInput: Basic Render Primary Mobile > country code button cases', async () 
     )
   });
 
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).toContain('India');
 
 
@@ -377,7 +384,7 @@ it('SfInput: Basic Render Primary Email > correct value entered > enter pressed'
       charCode: 35
     })
   });
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(div.style.borderColor).toBe('#99faff');
   expect(onEnterPressedMock).toHaveBeenCalled();
 
@@ -390,7 +397,7 @@ it('SfInput: Basic Render Primary Email > correct value entered > enter pressed'
       charCode: 35
     })
   });
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(div.style.borderColor).toBe('#dc3545');
 
 }) 
@@ -436,7 +443,7 @@ it('SfInput: Basic Render Primary Name > correct value entered', async () => {
       charCode: 35
     })
   });
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(div.style.borderColor).toBe('#99faff');
 
   act(() => {
@@ -448,7 +455,7 @@ it('SfInput: Basic Render Primary Name > correct value entered', async () => {
       charCode: 35
     })
   });
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(div.style.borderColor).toBe('#dc3545');
 
 }) 
@@ -481,7 +488,7 @@ it('SfInput: Basic Render Primary Name > correct value entered > enter pressed',
       charCode: 35
     })
   });
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(div.style.borderColor).toBe('#99faff');
   expect(onEnterPressedMock).toHaveBeenCalled();
 
@@ -513,7 +520,7 @@ it('SfInput: Basic Render Primary Name > test onclick', async () => {
     )
   });
 
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   console.log(container.querySelector(":focus"));
 
 }) 
@@ -763,7 +770,7 @@ it('SfButton: Color inversion mouseevents', async () => {
       }),
     )
   });
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(button.style.color).toBe("rgb(248, 249, 250)")
 
 })
@@ -799,7 +806,7 @@ it('SfButton: Color inversion mouseevents', async () => {
       }),
     )
   });
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(button.style.color).toBe("rgb(248, 249, 250)")
 
 })
