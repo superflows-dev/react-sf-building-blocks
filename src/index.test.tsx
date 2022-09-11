@@ -190,6 +190,9 @@ it('SfInput: Basic Render Primary Mobile > select ISD > corner cases', async () 
 
 it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async () => {
 
+
+  jest.setTimeout(30000);
+
   act(() => {
     render(<SfInput inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
   });
@@ -234,7 +237,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
       }),
     )
   });
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).toContain('India');
 
   let divAF = container.getElementsByClassName('div_AF')[0];
@@ -248,7 +251,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
       }),
     )
   });
-  await new Promise((r) => setTimeout(r, 1000));
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).not.toContain('India');
 
   let sfInputMobile = container.getElementsByClassName('sf_input_mobile')[0];
