@@ -208,6 +208,8 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
     )
   });
 
+  await new Promise((r) => setTimeout(r, 2000));
+
   let divIn = container.getElementsByClassName('div_IN')[0];
 
   act(() => {
