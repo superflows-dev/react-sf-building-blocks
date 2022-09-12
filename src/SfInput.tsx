@@ -224,7 +224,8 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                         backgroundColor: mode == Themes.getTheme().modes.day ? '#efefef' : 'black',
                         color: mode == Themes.getTheme().modes.day ? 'black' : '#ffffff',
                         textAlign: 'left',
-                        boxShadow: '0px -2px 10px #dddddd'
+                        boxShadow: '0px -2px 10px #dddddd',
+                        zIndex: 1999
                     }}>
                         <div style={{
                             display: 'flex',
