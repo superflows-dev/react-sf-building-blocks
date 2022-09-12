@@ -33,6 +33,24 @@ it('SfInput: Basic Render Primary Mobile', async () => {
 
 })
 
+it('SfInput: Basic Render Primary Mobile > prefill', async () => {
+
+  jest.setTimeout(30000);
+
+  act(() => {
+    render(<SfInput inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}}  value={{isd: "+91", number: '8411995588'}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, 200));
+  expect(container.innerHTML).toContain('sf_input_mobile');
+
+  await new Promise((r) => setTimeout(r, 2000));
+  let sfInputMobile = container.getElementsByClassName('sf_input_mobile')[0];
+  expect(sfInputMobile.value).toBe('8411995588');
+
+})
+
+
+
 it('SfInput: Basic Render Primary Mobile > select ISD', async () => {
 
   jest.setTimeout(30000);

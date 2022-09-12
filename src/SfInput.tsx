@@ -10,7 +10,7 @@ interface Props {
   caption: string;
   inputType: string;
   onComplete: (value: string) => void;
-  value?: string;
+  value?: any;
   onEnterPressed?: () => void;
   hint?: string;
   disabled?: boolean;
@@ -32,6 +32,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
     const [countryCodes, setCountryCodes] = useState('[]');
     const [countryCodesSearchString, setCountryCodesSearchString] = useState('');
     const [selectedCountryCode, setSelectedCountryCode] = useState('{}')
+    const [prefillLoaded, setPrefillLoaded] = useState(false);
 
     const refInput = useRef<any>();
 
@@ -166,6 +167,23 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
 
     React.useEffect(() => {
 
+        if(!prefillLoaded) {
+            if(value.isd != null) {
+                for(var i = 0; i < getCountryCodesWrap().length; i++) {
+                    if(value.isd == getCountryCodesWrap()[i].dialCode) {
+                        setSelectedCountryCodeWrap(getCountryCodesWrap()[i]);
+                        setPrefillLoaded(true);
+                        break;
+                    }
+                }
+            }
+        }
+
+
+    }, [countryCodes])
+
+    React.useEffect(() => {
+
         resetColors();
         resetType();    
         resetFocus();
@@ -192,7 +210,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
     React.useEffect(() => {
 
         populateCountryCodes();
-
+        
     }, [countryCodesSearchString])
 
     return (
@@ -316,7 +334,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                     onKeyUp={onKeyUp}
                     placeholder={hint}
                     disabled={disabled}
-                    defaultValue={value} />
+                    defaultValue={inputType != Themes.getTheme().inputTypes.mobile ? value : value.number} />
         </div>
     )
 
