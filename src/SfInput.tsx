@@ -35,6 +35,10 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
 
     const refInput = useRef<any>();
 
+    function setShowCountryCodesWrap(value: boolean) {
+        setTimeout(() => { setShowCountryCodes(value) }, 200);
+    }
+
     function setSelectedCountryCodeWrap(value: any) {
         setSelectedCountryCode(JSON.stringify(value));
     }
@@ -100,9 +104,9 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
     function onClickIsd() {
 
         if(showCountryCodes) {
-            setShowCountryCodes(false)
+            setShowCountryCodesWrap(false)
         } else {
-            setShowCountryCodes(true)
+            setShowCountryCodesWrap(true)
         }
 
     }
@@ -178,7 +182,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
         } else {
 
             setCountryCodesSearchString('');
-            setShowCountryCodes(false);
+            setShowCountryCodesWrap(false);
             onSubmitCountryCode();
 
         }
@@ -215,7 +219,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
-                    <SfButton variant={variant} type={'filled'} caption={selectedCountryCode == "{}" ? (showCountryCodes ? "ISD ▲" : "ISD ▼") : getSelectedCountryCodeWrap().dialCode + " " + getSelectedCountryCodeWrap().emoji  + " " + (showCountryCodes ? "▲" : "")} onClick={() => {onClickIsd()}} styles={{cursor: 'pointer', fontSize: '70%', marginRight: Themes.getTheme().spaces.ltl + 'px'}} />
+                    <SfButton variant={variant} type={'filled'} caption={selectedCountryCode == "{}" ? (showCountryCodes ? "ISD ▲" : "ISD ▼") : getSelectedCountryCodeWrap().dialCode + " " + getSelectedCountryCodeWrap().emoji  + " " + (showCountryCodes ? "▲" : "")} onClick={() => {onClickIsd()}} styles={{cursor: 'pointer', fontSize: '70%', marginRight: Themes.getTheme().spaces.ltl + 'px'}} disabled={disabled} />
                     {showCountryCodes && <div style={{
                         position: 'fixed',
                         bottom: '0px',
@@ -245,7 +249,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                                     marginBottom: (parseInt(Themes.getTheme().spaces.ltl)*2) + 'px',
                                     borderBottom: 'solid 1px ' + (Themes.getTheme().modes.day ? '#bbbbbb' : '#333333'),
                                     flexGrow: '1'
-                                }}/>
+                                }} disabled={disabled}/>
                             <SfButton className='sf_btn_countries_close' variant={variant} type={'filled'} caption={'Close ▲'} onClick={() => {onClickIsd()}} 
                                 styles={{
                                     cursor: 'pointer', 

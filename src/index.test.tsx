@@ -340,6 +340,7 @@ it('SfInput: Basic Render Primary Mobile > country code button cases', async () 
     )
   });
 
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).not.toContain('India');
 
   act(() => {
@@ -368,6 +369,7 @@ it('SfInput: Basic Render Primary Mobile > country code button cases', async () 
     )
   });
 
+  await new Promise((r) => setTimeout(r, 2000));
   expect(container.innerHTML).not.toContain('India');
 
 });
