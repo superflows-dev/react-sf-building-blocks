@@ -93,22 +93,24 @@ The input component is **SfInput**.
 
 ### Props
 
-| Prop           | Type           | Mandatory | Description 
-|----------------|----------------|-----------|---------------------------------
-| variant        | string         | yes       | theme variant such as primary, secondary, danger, etc.
-| caption        | string         | yes       | button text
-| inputType      | string         | yes       | type of input - "name"
-| onComplete     | callback       | yes       | callback function when correct input is inserted
-| value          | string         | no        | value to pre-fill the inputwith
-| onEnterPressed | callback       | no        | callback function when user presses enter key
-| hint           | string         | no        | placeholder value
-| disabled       | boolean        | no        | flag to disable the button
-| autoFocus      | boolean        | no        | flag, which sets autofocus on load
-| mode           | string         | no        | "day" / "night"
-| theme          | object         | no        | superflows theme object
-| icon           | object         | no        | bootstrap icon to be shown after the text
-| className      | string         | no        | any classes that need to passed to the SfButton component
-| styles         | string         | no        | any styles that need to passed to the SfButton component
+| Prop                 | Type           | Mandatory | Description 
+|----------------------|----------------|-----------|---------------------------------
+| variant              | string         | yes       | theme variant such as primary, secondary, danger, etc.
+| caption              | string         | yes       | button text
+| inputType            | string         | yes       | type of input - "name"
+| onComplete           | callback       | yes       | callback function when correct input is inserted
+| value                | string         | no        | value to pre-fill the inputwith
+| onEnterPressed       | callback       | no        | callback function when user presses enter key
+| hint                 | string         | no        | placeholder value
+| disabled             | boolean        | no        | flag to disable the button
+| autoFocus            | boolean        | no        | flag, which sets autofocus on load
+| mode                 | string         | no        | "day" / "night"
+| theme                | object         | no        | superflows theme object
+| icon                 | object         | no        | bootstrap icon to be shown after the text
+| classNameContainer   | string         | no        | any classes that need to passed to the container
+| classNameInput       | string         | no        | any classes that need to passed to the inputs
+| stylesContainer      | string         | no        | any styles that need to passed to the container
+| stylesInput          | string         | no        | any styles that need to passed to the inputs
 
 ### Basic Usage
 

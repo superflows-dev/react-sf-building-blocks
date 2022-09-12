@@ -1,5 +1,42 @@
 const Util = {
 
+    validateDDMMYYYY: function(dd: string, mm: string, yyyy: string) {
+
+        if (dd == "" || 
+            mm == "" || 
+            yyyy == "" || 
+            parseInt(dd) <= 0 ||
+            parseInt(dd) > 31 ||
+            parseInt(mm) < 0 ||
+            parseInt(mm) > 12 ||
+            parseInt(yyyy) < 1900 ||
+            parseInt(yyyy) > 3000
+            )  {
+
+                return false;
+
+        } else { 
+
+            if(mm == "2") {
+                if((parseInt(mm)%4 === 0 && parseInt(dd) > 29) ||
+                    (parseInt(mm)%4 > 0 && parseInt(dd) > 28)) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+            } else if (mm == "4" || mm == "6" || mm == "9" || mm == "11") {
+                if(parseInt(dd) > 30) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } 
+
+            return true;
+        }
+
+    },
+    
     validateMobile: function(value: string) {
 
         return value.match(

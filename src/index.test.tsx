@@ -7,6 +7,10 @@ import { SfInput } from '.'
 
 import '@testing-library/jest-dom/extend-expect';
 
+const TEST_TIMEOUT = 30000;
+const TIMEOUT = 2000;
+
+
 let container: any = null;
 beforeEach(() => {
   // setup a DOM element as a render target
@@ -20,6 +24,451 @@ afterEach(() => {
   container.remove();
   container = null;
 });
+
+it('SfInput: Basic Render Primary DateOfBirth', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="dateOfBirth" variant={'primary'} caption={'Date Of Birth'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_dateOfBirth');
+
+})
+
+it('SfInput: Basic Render Primary DateOfBirth > Prefill', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="dateOfBirth" variant={'primary'} caption={'Date Of Birth'} onComplete={(event: any) => {console.log('clicked', event);}} value={{dd: 10, mm: 12, yyyy: 1985}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_dateOfBirth');
+
+  let sfInputDobDD = container.getElementsByClassName('sf_input_dateOfBirth_dd')[0];
+  expect(sfInputDobDD.value).toContain('10');
+
+})
+
+
+it('SfInput: Basic Render Primary DateOfBirth > Prefill invalid date in feb', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="dateOfBirth" variant={'primary'} caption={'Date Of Birth'} onComplete={(event: any) => {console.log('clicked', event);}} value={{dd: 30, mm: 2, yyyy: 2000}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_dateOfBirth');
+
+  let sfInputDobDD = container.getElementsByClassName('sf_input_dateOfBirth_dd')[0];
+  expect(sfInputDobDD.value).toContain('30');
+
+})
+
+it('SfInput: Basic Render Primary DateOfBirth > Prefill invalid date in apr', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="dateOfBirth" variant={'primary'} caption={'Date Of Birth'} onComplete={(event: any) => {console.log('clicked', event);}} value={{dd: 31, mm: 4, yyyy: 2000}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_dateOfBirth');
+
+  let sfInputDobDD = container.getElementsByClassName('sf_input_dateOfBirth_dd')[0];
+  expect(sfInputDobDD.value).toContain('31');
+
+})
+
+it('SfInput: Basic Render Primary DateOfBirth > Prefill invalid date in apr', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="dateOfBirth" variant={'primary'} caption={'Date Of Birth'} onComplete={(event: any) => {console.log('clicked', event);}} value={{dd: 28, mm: 4, yyyy: 2000}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_dateOfBirth');
+
+  let sfInputDobDD = container.getElementsByClassName('sf_input_dateOfBirth_dd')[0];
+  expect(sfInputDobDD.value).toContain('28');
+
+})
+
+
+it('SfInput: Basic Render Primary DateOfBirth > Entry', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="dateOfBirth" variant={'primary'} caption={'Date Of Birth'} onComplete={(event: any) => {console.log('clicked', event);}} autoFocus={true} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_dateOfBirth');
+
+  let divInput = container.getElementsByClassName('sf_input')[0];
+  let sfInputDobDD = container.getElementsByClassName('sf_input_dateOfBirth_dd')[0];
+  let sfInputDobMM = container.getElementsByClassName('sf_input_dateOfBirth_mm')[0];
+  let sfInputDobYYYY = container.getElementsByClassName('sf_input_dateOfBirth_yyyy')[0];
+
+  act(() => {
+    fireEvent.change(sfInputDobDD, { target: { value: '10' } })
+    fireEvent.keyUp(sfInputDobDD, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobDD, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+  act(() => {
+    fireEvent.change(sfInputDobMM, { target: { value: '10' } })
+    fireEvent.keyUp(sfInputDobMM, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobMM, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+  act(() => {
+    fireEvent.change(sfInputDobYYYY, { target: { value: '1985' } })
+    fireEvent.keyUp(sfInputDobYYYY, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobYYYY, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+  
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).not.toBe('#dc3545');
+
+})
+
+it('SfInput: Basic Render Primary DateOfBirth > Entry > Invalid M = 2 D > 29', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="dateOfBirth" variant={'primary'} caption={'Date Of Birth'} onComplete={(event: any) => {console.log('clicked', event);}} autoFocus={true} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_dateOfBirth');
+
+  let divInput = container.getElementsByClassName('sf_input')[0];
+  let sfInputDobDD = container.getElementsByClassName('sf_input_dateOfBirth_dd')[0];
+  let sfInputDobMM = container.getElementsByClassName('sf_input_dateOfBirth_mm')[0];
+  let sfInputDobYYYY = container.getElementsByClassName('sf_input_dateOfBirth_yyyy')[0];
+
+  act(() => {
+    fireEvent.change(sfInputDobDD, { target: { value: '31' } })
+    fireEvent.keyUp(sfInputDobDD, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobDD, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+  act(() => {
+    fireEvent.change(sfInputDobMM, { target: { value: '2' } })
+    fireEvent.keyUp(sfInputDobMM, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobMM, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+  act(() => {
+    fireEvent.change(sfInputDobYYYY, { target: { value: '2000' } })
+    fireEvent.keyUp(sfInputDobYYYY, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobYYYY, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+  
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+})
+
+it('SfInput: Basic Render Primary DateOfBirth > Entry > Invalid M = 2 D > 29', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="dateOfBirth" variant={'primary'} caption={'Date Of Birth'} onComplete={(event: any) => {console.log('clicked', event);}} autoFocus={true} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_dateOfBirth');
+
+  let divInput = container.getElementsByClassName('sf_input')[0];
+  let sfInputDobDD = container.getElementsByClassName('sf_input_dateOfBirth_dd')[0];
+  let sfInputDobMM = container.getElementsByClassName('sf_input_dateOfBirth_mm')[0];
+  let sfInputDobYYYY = container.getElementsByClassName('sf_input_dateOfBirth_yyyy')[0];
+
+  act(() => {
+    fireEvent.change(sfInputDobDD, { target: { value: '25' } })
+    fireEvent.keyUp(sfInputDobDD, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobDD, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+  act(() => {
+    fireEvent.change(sfInputDobMM, { target: { value: '2' } })
+    fireEvent.keyUp(sfInputDobMM, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobMM, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+  act(() => {
+    fireEvent.change(sfInputDobYYYY, { target: { value: '2000' } })
+    fireEvent.keyUp(sfInputDobYYYY, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobYYYY, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+  
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).not.toBe('#dc3545');
+
+})
+
+it('SfInput: Basic Render Primary DateOfBirth > Entry > Invalid M = 4 D > 30', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="dateOfBirth" variant={'primary'} caption={'Date Of Birth'} onComplete={(event: any) => {console.log('clicked', event);}} autoFocus={true} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_dateOfBirth');
+
+  let divInput = container.getElementsByClassName('sf_input')[0];
+  let sfInputDobDD = container.getElementsByClassName('sf_input_dateOfBirth_dd')[0];
+  let sfInputDobMM = container.getElementsByClassName('sf_input_dateOfBirth_mm')[0];
+  let sfInputDobYYYY = container.getElementsByClassName('sf_input_dateOfBirth_yyyy')[0];
+
+  act(() => {
+    fireEvent.change(sfInputDobDD, { target: { value: '31' } })
+    fireEvent.keyUp(sfInputDobDD, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobDD, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+  act(() => {
+    fireEvent.change(sfInputDobMM, { target: { value: '4' } })
+    fireEvent.keyUp(sfInputDobMM, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobMM, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+  act(() => {
+    fireEvent.change(sfInputDobYYYY, { target: { value: '2000' } })
+    fireEvent.keyUp(sfInputDobYYYY, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobYYYY, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+  
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+})
+
+it('SfInput: Basic Render Primary DateOfBirth > Entry > Invalid M = 4 D < 30', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="dateOfBirth" variant={'primary'} caption={'Date Of Birth'} onComplete={(event: any) => {console.log('clicked', event);}} autoFocus={true} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_dateOfBirth');
+
+  let divInput = container.getElementsByClassName('sf_input')[0];
+  let sfInputDobDD = container.getElementsByClassName('sf_input_dateOfBirth_dd')[0];
+  let sfInputDobMM = container.getElementsByClassName('sf_input_dateOfBirth_mm')[0];
+  let sfInputDobYYYY = container.getElementsByClassName('sf_input_dateOfBirth_yyyy')[0];
+
+  act(() => {
+    fireEvent.change(sfInputDobDD, { target: { value: '25' } })
+    fireEvent.keyUp(sfInputDobDD, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobDD, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+  act(() => {
+    fireEvent.change(sfInputDobMM, { target: { value: '4' } })
+    fireEvent.keyUp(sfInputDobMM, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobMM, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).toBe('#dc3545');
+
+  act(() => {
+    fireEvent.change(sfInputDobYYYY, { target: { value: '2000' } })
+    fireEvent.keyUp(sfInputDobYYYY, {
+      key: "End",
+      code: "End",
+      keyCode: 35,
+      charCode: 35
+    })
+    fireEvent.keyUp(sfInputDobYYYY, {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 35,
+      charCode: 35
+    })
+  });
+  
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(divInput.style.borderColor).not.toBe('#dc3545');
+
+})
+
 
 it('SfInput: Basic Render Primary Mobile', async () => {
 

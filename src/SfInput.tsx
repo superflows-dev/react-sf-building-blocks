@@ -18,11 +18,13 @@ interface Props {
   mode?: string;
   theme?: any;
   icon?: React.ReactNode;
-  className?: string;
-  styles?: any;
+  classNameContainer?: string;
+  classNameInput?: string;
+  stylesContainer?: any;
+  stylesInput?: any;
 }
 
-const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "", onEnterPressed = () => {}, disabled = false, autoFocus = false, mode=Themes.getTheme().modes.day, theme = Themes.getTheme(), icon = null, className = '', styles = {}}: Props) => {
+const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "", onEnterPressed = () => {}, disabled = false, autoFocus = false, mode=Themes.getTheme().modes.day, theme = Themes.getTheme(), icon = null, classNameContainer = '', classNameInput = '', stylesContainer = {}, stylesInput = {}}: Props) => {
 
 
     const [borderColor, setBorderColor] = useState('none');
@@ -34,7 +36,15 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
     const [selectedCountryCode, setSelectedCountryCode] = useState('{}')
     const [prefillLoaded, setPrefillLoaded] = useState(false);
 
+    const [dd, setDD] = useState('');
+    const [mm, setMM] = useState('');
+    const [yyyy, setYYYY] = useState('');
+    const [lastKey, setLastKey] = useState('');
+
     const refInput = useRef<any>();
+    const refInputDD = useRef<any>();
+    const refInputMM = useRef<any>();
+    const refInputYYYY = useRef<any>();
 
     function setShowCountryCodesWrap(value: boolean) {
         setTimeout(() => { setShowCountryCodes(value) }, 200);
@@ -70,14 +80,27 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
     }
 
     function resetType() {
-        if(inputType == "name") {
+        if(inputType == Themes.getTheme().inputTypes.name) {
             setIpType("text");
+        }
+        if(inputType == Themes.getTheme().inputTypes.email) {
+            setIpType("email");
+        }
+        if(inputType == Themes.getTheme().inputTypes.mobile) {
+            setIpType("number");
+        }
+        if(inputType == Themes.getTheme().inputTypes.dateOfBirth) {
+            setIpType("number");
         }
     }
 
     function resetFocus() {
         if(autoFocus) {
-            refInput.current!.focus();
+            if(Themes.getTheme().inputTypes.dateOfBirth == inputType) {
+                refInputDD.current!.focus();
+            } else {
+                refInput.current!.focus();
+            }
         }
     }
 
@@ -163,7 +186,47 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
             }
         }
 
+        if(inputType == Themes.getTheme().inputTypes.dateOfBirth) {
+            if(Util.validateDDMMYYYY(dd, mm, yyyy)) {
+                const dateVal = parseInt((Date.parse(yyyy + "-" + mm + "-" + dd)/1000) + "");
+                onComplete(dateVal + "");
+                if(lastKey == "Enter") onEnterPressed(); 
+                resetColors();
+            } else {
+                if(dd == "" && mm == "" && yyyy == "") {
+                    resetColors();
+                } else {
+                    setBorderColor(Themes.getTheme().colors.dangerBgColor);
+                }
+                onComplete("");
+            }
+        }
+
     }
+
+    const onKeyUpDD = (event: any) => {
+        setLastKey(event.key);
+        setDD(event.target.value + "");
+        onKeyUp(event);
+    }
+
+    const onKeyUpMM = (event: any) => {
+        setLastKey(event.key);
+        setMM(event.target.value + "");
+        onKeyUp(event);
+    }
+
+    const onKeyUpYYYY = (event: any) => {
+        setLastKey(event.key);
+        setYYYY(event.target.value + "");
+        onKeyUp(event);
+    }
+
+    React.useEffect(() => {
+        if(inputType == Themes.getTheme().inputTypes.dateOfBirth) {
+            onKeyUp(null);
+        }
+    },[dd, mm, yyyy])
 
     React.useEffect(() => {
 
@@ -215,7 +278,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
 
     return (
         <div
-            className={`sf_input ${className}`}
+            className={`sf_input ${classNameContainer}`}
             style={{ 
                 color: textColor,
                 border: 'solid 1px ' + borderColor,
@@ -227,7 +290,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                 borderRadius: Themes.getTheme().spaces.min + 'px',
                 filter: disabled ? 'grayscale(70%)' : 'none',
                 fontWeight: '600',
-                ...styles
+                ...stylesContainer
             }} >
                 {icon != null && icon}
                 {icon != null && <span>&nbsp;&nbsp;</span>}
@@ -318,8 +381,70 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                     
                     
                 </div>}
-                <input 
-                    className={`sf_input_${inputType}`}
+                {inputType == Themes.getTheme().inputTypes.dateOfBirth && <div style={{
+                    flexGrow: "1",
+                    display: 'flex',
+                    justifyContent: 'flex-end'
+                }}>
+                    <input className={`sf_input_${inputType}_dd ${classNameInput}`} 
+                        ref={refInputDD} 
+                        style={{
+                            width: '50px',
+                            margin: '0',
+                            borderLeft: 'none',
+                            borderTop: 'none',
+                            borderRight: 'none',
+                            borderBottom: 'none',
+                            marginRight: Themes.getTheme().spaces.min + 'px',
+                            borderRadius: Themes.getTheme().spaces.min + 'px',
+                            textAlign: 'center',
+                            ...stylesInput
+                        }} 
+                        onKeyUp={onKeyUpDD} 
+                        type={ipType}
+                        placeholder={"DD"}
+                        disabled={disabled}
+                        defaultValue={value.dd} />
+                    <input className={`sf_input_${inputType}_mm ${classNameInput}`}
+                        ref={refInputMM}  
+                        style={{
+                            width: '50px',
+                            margin: '0',
+                            borderLeft: 'none',
+                            borderTop: 'none',
+                            borderRight: 'none',
+                            borderBottom: 'none',
+                            marginRight: Themes.getTheme().spaces.min + 'px',
+                            borderRadius: Themes.getTheme().spaces.min + 'px',
+                            textAlign: 'center',
+                            ...stylesInput
+                        }} 
+                        onKeyUp={onKeyUpMM} 
+                        type={ipType}
+                        placeholder={"MM"}
+                        disabled={disabled}
+                        defaultValue={value.mm} />
+                    <input className={`sf_input_${inputType}_yyyy ${classNameInput}`}
+                        ref={refInputYYYY} 
+                        style={{
+                            width: '80px',
+                            margin: '0',
+                            borderLeft: 'none',
+                            borderTop: 'none',
+                            borderRight: 'none',
+                            borderBottom: 'none',
+                            textAlign: 'center',
+                            borderRadius: Themes.getTheme().spaces.min + 'px',
+                            ...stylesInput
+                        }} 
+                        onKeyUp={onKeyUpYYYY} 
+                        type={ipType}
+                        placeholder={"YYYY"}
+                        disabled={disabled}
+                        defaultValue={value.yyyy} />
+                </div>}
+                {inputType != Themes.getTheme().inputTypes.dateOfBirth && <input 
+                    className={`sf_input_${inputType} ${classNameInput}`}
                     ref={refInput} 
                     style={{
                         flexGrow: '1',
@@ -328,13 +453,15 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                         borderTop: 'none',
                         borderRight: 'none',
                         borderBottom: 'none',
-                        paddingLeft: Themes.getTheme().spaces.ltl + 'px'
+                        paddingLeft: Themes.getTheme().spaces.ltl + 'px',
+                        borderRadius: Themes.getTheme().spaces.min + 'px',
+                        ...stylesInput
                         }} 
                     type={ipType} 
-                    onKeyUp={onKeyUp}
+                    onKeyUp={(event) => {onKeyUp(event)}}
                     placeholder={hint}
                     disabled={disabled}
-                    defaultValue={inputType != Themes.getTheme().inputTypes.mobile ? value : value.number} />
+                    defaultValue={inputType != Themes.getTheme().inputTypes.mobile ? value : value.number} />}
         </div>
     )
 
