@@ -590,6 +590,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                             </div>
                             <SfButton 
                                 styles={{
+                                    cursor: 'pointer',
                                     marginRight: Themes.getTheme().spaces.ltl + 'px',
                                     marginTop: Themes.getTheme().spaces.ltl + 'px',
                                 }}
@@ -613,6 +614,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                                             onClick={() => {setSelectedYYYYWrap(year)}}
                                             key={year} 
                                             style={{
+                                                cursor: 'pointer',
                                                 marginTop: Themes.getTheme().spaces.ltl + 'px',
                                                 marginLeft: Themes.getTheme().spaces.ltl + 'px',
                                                 marginRight: Themes.getTheme().spaces.ltl + 'px',
@@ -639,6 +641,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                                             onClick={() => {setSelectedMMWrap(month)}}
                                             key={month} 
                                             style={{
+                                                cursor: 'pointer',
                                                 width: '100px',
                                                 textAlign: 'center',
                                                 marginTop: Themes.getTheme().spaces.ltl + 'px',
@@ -669,6 +672,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                                             onClick={() => {setSelectedDDWrap(day.getDate())}}
                                             key={day.getDate()} 
                                             style={{
+                                                cursor: 'pointer',
                                                 width: '30px',
                                                 textAlign: 'center',
                                                 marginTop: Themes.getTheme().spaces.ltl + 'px',
