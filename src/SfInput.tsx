@@ -30,6 +30,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
     const [borderColor, setBorderColor] = useState('none');
     const [textColor, setTextColor] = useState('none');
     const [showCountryCodes, setShowCountryCodes] = useState(false);
+    const [showDatePicker, setShowDatePicker] = useState(false);
     const [ipType, setIpType] = useState('text');
     const [countryCodes, setCountryCodes] = useState('[]');
     const [countryCodesSearchString, setCountryCodesSearchString] = useState('');
@@ -41,10 +42,63 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
     const [yyyy, setYYYY] = useState('');
     const [lastKey, setLastKey] = useState('');
 
+    const [selectedYYYY, setSelectedYYYY] = useState(new Date().getFullYear());
+    const [selectedMM, setSelectedMM] = useState(1);
+    const [selectedDD, setSelectedDD] = useState(1);
+
     const refInput = useRef<any>();
     const refInputDD = useRef<any>();
     const refInputMM = useRef<any>();
     const refInputYYYY = useRef<any>();
+
+    const arrYears = [];
+    const arrMonths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+
+    function setShowDatePickerWrap(value: boolean) {
+        setTimeout(() => {
+            setShowDatePicker(value)
+        }, 500);
+    }
+
+    function setSelectedMMWrap(value: number) {
+        setSelectedMM(value);
+        setSelectedDDWrap(0);
+        if(value > 0) {
+            refInputMM.current.value = value;
+        } else {
+            refInputMM.current.value = "";
+        }
+        refInputYYYY.current.value = selectedYYYY;
+    }
+
+    function setSelectedYYYYWrap(value: number) {
+        setSelectedYYYY(value);
+        setSelectedMMWrap(0);
+        //setSelectedDDWrap(0);
+        if(value > 0) {
+            refInputYYYY.current.value = value;
+        }
+        
+    }
+
+    function setSelectedDDWrap(value: number) {
+        setSelectedDD(value);
+        if(value > 0) {
+            refInputDD.current.value = value;
+        } else {
+            refInputDD.current.value = "";
+        }
+        refInputMM.current.value = selectedMM;
+        refInputYYYY.current.value = selectedYYYY;
+        
+    }
+
+    for(let i = new Date().getFullYear(); i >= 1960; i--) {
+        arrYears.push(i);
+    }
+
+    console.log('selectedYYYY', selectedYYYY);
 
     function setShowCountryCodesWrap(value: boolean) {
         setTimeout(() => { setShowCountryCodes(value) }, 200);
@@ -92,11 +146,15 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
         if(inputType == Themes.getTheme().inputTypes.dateOfBirth) {
             setIpType("number");
         }
+        if(inputType == Themes.getTheme().inputTypes.date) {
+            setIpType("number");
+        }
     }
 
     function resetFocus() {
         if(autoFocus) {
-            if(Themes.getTheme().inputTypes.dateOfBirth == inputType) {
+            if(Themes.getTheme().inputTypes.dateOfBirth == inputType 
+            || Themes.getTheme().inputTypes.date == inputType) {
                 refInputDD.current!.focus();
             } else {
                 refInput.current!.focus();
@@ -250,8 +308,21 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
         resetColors();
         resetType();    
         resetFocus();
+
         if(inputType == Themes.getTheme().inputTypes.mobile) {
             populateCountryCodes();
+        }
+
+        if(inputType == Themes.getTheme().inputTypes.date) {
+            if(value.dd != null) {
+                setSelectedDD(parseInt(value.dd + ""));
+            }
+            if(value.mm != null) {
+                setSelectedMM(parseInt(value.mm + ""));
+            }
+            if(value.yyyy != null) {
+                setSelectedYYYY(parseInt(value.yyyy + ""));
+            }
         }
 
     }, [])
@@ -275,6 +346,8 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
         populateCountryCodes();
         
     }, [countryCodesSearchString])
+
+    
 
     return (
         <div
@@ -381,12 +454,13 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                     
                     
                 </div>}
-                {inputType == Themes.getTheme().inputTypes.dateOfBirth && <div style={{
+                {(inputType == Themes.getTheme().inputTypes.dateOfBirth || inputType == Themes.getTheme().inputTypes.date) && <div style={{
                     flexGrow: "1",
                     display: 'flex',
                     justifyContent: 'flex-end'
                 }}>
                     <input className={`sf_input_${inputType}_dd ${classNameInput}`} 
+                        onClick={() => {setShowDatePickerWrap(true)}}
                         ref={refInputDD} 
                         style={{
                             width: '50px',
@@ -404,8 +478,10 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                         type={ipType}
                         placeholder={"DD"}
                         disabled={disabled}
+                        readOnly={inputType == Themes.getTheme().inputTypes.date ? true : false}
                         defaultValue={value.dd} />
                     <input className={`sf_input_${inputType}_mm ${classNameInput}`}
+                        onClick={() => {setShowDatePickerWrap(true)}}
                         ref={refInputMM}  
                         style={{
                             width: '50px',
@@ -423,8 +499,10 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                         type={ipType}
                         placeholder={"MM"}
                         disabled={disabled}
+                        readOnly={inputType == Themes.getTheme().inputTypes.date ? true : false}
                         defaultValue={value.mm} />
                     <input className={`sf_input_${inputType}_yyyy ${classNameInput}`}
+                        onClick={() => {setShowDatePickerWrap(true)}}
                         ref={refInputYYYY} 
                         style={{
                             width: '80px',
@@ -441,9 +519,177 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                         type={ipType}
                         placeholder={"YYYY"}
                         disabled={disabled}
+                        readOnly={inputType == Themes.getTheme().inputTypes.date ? true : false}
                         defaultValue={value.yyyy} />
+                    {showDatePicker && <div className="sf_input_date_picker" style={{
+                        position: 'fixed',
+                        bottom: '0px',
+                        left: '0px',
+                        width: '100%',
+                        backgroundColor: mode == Themes.getTheme().modes.day ? '#efefef' : 'black',
+                        color: mode == Themes.getTheme().modes.day ? 'black' : '#ffffff',
+                        textAlign: 'left',
+                        boxShadow: '0px -2px 10px #dddddd',
+                        zIndex: 1999
+                    }}>
+                        <div style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            textAlign: 'center',
+                            alignItems: 'center',
+                            marginBottom: Themes.getTheme().spaces.ltl + 'px',
+                        }}>
+                            <SfButton 
+                                styles={{
+                                    visibility: 'hidden',
+                                    marginLeft: Themes.getTheme().spaces.ltl + 'px',
+                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
+                                }}
+                                className='sf_btn_date_close' variant={variant} type={'filled'} caption={'▲'} onClick={() => {}} />
+                            <div style={{
+                                display: 'flex'
+                            }}>
+                                <div style={{
+                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
+                                    marginLeft: Themes.getTheme().spaces.ltl + 'px',
+                                    marginRight: Themes.getTheme().spaces.ltl + 'px',
+                                    paddingLeft: Themes.getTheme().spaces.min + 'px',
+                                    paddingRight: Themes.getTheme().spaces.min + 'px',
+                                    paddingBottom: '2px',
+                                    border: 'solid 1px ' + (mode == Themes.getTheme().modes.day ? '#000000' : '#ffffff'),
+                                    backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : '#000000',
+                                    color: mode == Themes.getTheme().modes.day ? '#000000' : '#ffffff',
+                                    borderRadius: Themes.getTheme().spaces.min + 'px'
+                                }}><small>{selectedYYYY}</small></div>
+                                <div style={{
+                                    width: '97px',
+                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
+                                    marginLeft: Themes.getTheme().spaces.ltl + 'px',
+                                    marginRight: Themes.getTheme().spaces.ltl + 'px',
+                                    paddingLeft: Themes.getTheme().spaces.min + 'px',
+                                    paddingRight: Themes.getTheme().spaces.min + 'px',
+                                    paddingBottom: '2px',
+                                    border: 'solid 1px ' + (mode == Themes.getTheme().modes.day ? '#000000' : '#ffffff'),
+                                    backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : '#000000',
+                                    color: mode == Themes.getTheme().modes.day ? '#000000' : '#ffffff',
+                                    borderRadius: Themes.getTheme().spaces.min + 'px'
+                                }}><small>{selectedMM === 0 ? "" : Util.toMonthName(selectedMM)}</small></div>
+                                <div style={{
+                                    width: '16px',
+                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
+                                    marginLeft: Themes.getTheme().spaces.ltl + 'px',
+                                    marginRight: Themes.getTheme().spaces.ltl + 'px',
+                                    paddingLeft: Themes.getTheme().spaces.min + 'px',
+                                    paddingRight: Themes.getTheme().spaces.min + 'px',
+                                    paddingBottom: '2px',
+                                    border: 'solid 1px ' + (mode == Themes.getTheme().modes.day ? '#000000' : '#ffffff'),
+                                    backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : '#000000',
+                                    color: mode == Themes.getTheme().modes.day ? '#000000' : '#ffffff',
+                                    borderRadius: Themes.getTheme().spaces.min + 'px'
+                                }}><small>{selectedDD === 0 ? "" : selectedDD}</small></div>
+                            </div>
+                            <SfButton 
+                                styles={{
+                                    marginRight: Themes.getTheme().spaces.ltl + 'px',
+                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
+                                }}
+                                className='sf_btn_date_close' variant={variant} type={'filled'} caption={'▲'} onClick={() => {setShowDatePickerWrap(false)}} />
+                        </div>
+                        <div style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}>
+                            <div style={{
+                                height: '150px',
+                                overflowY: 'auto',
+                                // paddingLeft: Themes.getTheme().spaces.ltl + 'px',
+                                // paddingRight: Themes.getTheme().spaces.ltl + 'px',
+                            }}>
+                                {
+                                    arrYears.map((year) => {
+
+                                        return ( <div 
+                                            className={"year_" + year}
+                                            onClick={() => {setSelectedYYYYWrap(year)}}
+                                            key={year} 
+                                            style={{
+                                                marginTop: Themes.getTheme().spaces.ltl + 'px',
+                                                marginLeft: Themes.getTheme().spaces.ltl + 'px',
+                                                marginRight: Themes.getTheme().spaces.ltl + 'px',
+                                                paddingLeft: Themes.getTheme().spaces.min + 'px',
+                                                paddingRight: Themes.getTheme().spaces.min + 'px',
+                                                paddingBottom: '2px',
+                                                backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : (selectedYYYY == year ? '#ffffff' : '#444444'),
+                                                color: mode != Themes.getTheme().modes.day ? (selectedYYYY == year ? '#444444' : '#ffffff') : (selectedYYYY == year ? '#000000' : '#888888'),
+                                                borderRadius: Themes.getTheme().spaces.min + 'px'
+                                        }}><small>{year}</small></div>)
+                                    })
+                                }
+                            </div>
+                            <div style={{
+                                height: '150px',
+                                overflowY: 'auto',
+                                // paddingLeft: Themes.getTheme().spaces.ltl + 'px',
+                                // paddingRight: Themes.getTheme().spaces.ltl + 'px',
+                            }}>
+                                {
+                                    arrMonths.map((month) => {
+                                        return ( <div 
+                                            className={"month_" + month}
+                                            onClick={() => {setSelectedMMWrap(month)}}
+                                            key={month} 
+                                            style={{
+                                                width: '100px',
+                                                textAlign: 'center',
+                                                marginTop: Themes.getTheme().spaces.ltl + 'px',
+                                                marginLeft: Themes.getTheme().spaces.ltl + 'px',
+                                                marginRight: Themes.getTheme().spaces.ltl + 'px',
+                                                paddingLeft: Themes.getTheme().spaces.min + 'px',
+                                                paddingRight: Themes.getTheme().spaces.min + 'px',
+                                                paddingBottom: '2px',
+                                                backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : (selectedMM == month ? '#ffffff' : '#444444'),
+                                                color: mode != Themes.getTheme().modes.day ? (selectedMM == month ? '#444444' : '#ffffff') : (selectedMM == month ? '#000000' : '#888888'),
+                                                borderRadius: Themes.getTheme().spaces.min + 'px'
+                                        }}><small>{Util.toMonthName(month)}</small></div>)
+                                    })
+                                }
+
+                            </div>
+                            <div style={{
+                                height: '150px',
+                                overflowY: 'auto',
+                                // paddingLeft: Themes.getTheme().spaces.ltl + 'px',
+                                // paddingRight: Themes.getTheme().spaces.ltl + 'px',
+                            }}>
+                                {
+                                    Util.getDaysInMonthUTC(selectedMM-1, selectedYYYY).map((day) => {
+
+                                        return ( <div 
+                                            className={"date_" + day.getDate()}
+                                            onClick={() => {setSelectedDDWrap(day.getDate())}}
+                                            key={day.getDate()} 
+                                            style={{
+                                                width: '20px',
+                                                textAlign: 'center',
+                                                marginTop: Themes.getTheme().spaces.ltl + 'px',
+                                                marginLeft: Themes.getTheme().spaces.ltl + 'px',
+                                                marginRight: Themes.getTheme().spaces.ltl + 'px',
+                                                paddingLeft: Themes.getTheme().spaces.min + 'px',
+                                                paddingRight: Themes.getTheme().spaces.min + 'px',
+                                                paddingBottom: '2px',
+                                                backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : (selectedDD == day.getDate() ? '#ffffff' : '#444444'),
+                                                color: mode != Themes.getTheme().modes.day ? (selectedDD == day.getDate() ? '#444444' : '#ffffff') : (selectedDD == day.getDate() ? '#000000' : '#888888'),
+                                                borderRadius: Themes.getTheme().spaces.min + 'px'
+                                        }}><small>{day.getDate()}</small></div>)
+
+                                    })
+                                }
+                            </div>
+                        </div>
+                        
+                    </div>}
                 </div>}
-                {inputType != Themes.getTheme().inputTypes.dateOfBirth && <input 
+                {(inputType != Themes.getTheme().inputTypes.dateOfBirth && inputType != Themes.getTheme().inputTypes.date) && <input 
                     className={`sf_input_${inputType} ${classNameInput}`}
                     ref={refInput} 
                     style={{

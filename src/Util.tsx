@@ -1,5 +1,24 @@
 const Util = {
 
+    toMonthName: function(monthNumber: number) {
+        const date = new Date();
+        date.setMonth(monthNumber - 1);
+      
+        return date.toLocaleString('en-US', {
+          month: 'long',
+        });
+    },
+
+    getDaysInMonthUTC: function(month: number, year: number) {
+        var date = new Date(Date.UTC(year, month, 1));
+        var days = [];
+        while (date.getUTCMonth() === month) {
+          days.push(new Date(date));
+          date.setUTCDate(date.getUTCDate() + 1);
+        }
+        return days;
+    },
+
     validateDDMMYYYY: function(dd: string, mm: string, yyyy: string) {
 
         if (dd == "" || 

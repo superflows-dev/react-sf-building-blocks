@@ -25,6 +25,223 @@ afterEach(() => {
   container = null;
 });
 
+it('SfInput: Basic Render Primary Date', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="date" variant={'primary'} caption={'Date'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_date');
+
+})
+
+it('SfInput: Basic Render Primary Date > Prefill', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="date" variant={'primary'} caption={'Date'} onComplete={(event: any) => {console.log('clicked', event);}} value={{dd: 10, mm: 12, yyyy: 1985}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_date');
+
+  let sfInputDobDD = container.getElementsByClassName('sf_input_date_dd')[0];
+  expect(sfInputDobDD.value).toContain('10');
+
+})
+
+it('SfInput: Basic Render Primary Date > Prefill invalid date in feb', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="date" variant={'primary'} caption={'Date'} onComplete={(event: any) => {console.log('clicked', event);}} value={{dd: 30, mm: 2, yyyy: 2000}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_date');
+
+  let sfInputDobDD = container.getElementsByClassName('sf_input_date_dd')[0];
+  expect(sfInputDobDD.value).toContain('30');
+
+})
+
+it('SfInput: Basic Render Primary Date > Prefill invalid date in apr', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="date" variant={'primary'} caption={'Date'} onComplete={(event: any) => {console.log('clicked', event);}} value={{dd: 31, mm: 4, yyyy: 2000}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_date');
+
+  let sfInputDobDD = container.getElementsByClassName('sf_input_date_dd')[0];
+  expect(sfInputDobDD.value).toContain('31');
+
+})
+
+it('SfInput: Basic Render Primary Date > Prefill invalid date in apr', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="date" variant={'primary'} caption={'Date'} onComplete={(event: any) => {console.log('clicked', event);}} value={{dd: 28, mm: 4, yyyy: 2000}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_date');
+
+  let sfInputDobDD = container.getElementsByClassName('sf_input_date_dd')[0];
+  expect(sfInputDobDD.value).toContain('28');
+
+})
+
+it('SfInput: Basic Render Primary Date > Entry', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  act(() => {
+    render(<SfInput inputType="date" variant={'primary'} caption={'Date'} onComplete={(event: any) => {console.log('clicked', event);}} autoFocus={true} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_date');
+
+  let sfInputDobDD = container.getElementsByClassName('sf_input_date_dd')[0];
+
+  act(() => {
+    fireEvent(
+      sfInputDobDD,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_date_picker');
+
+  let year2020 = container.getElementsByClassName('year_2020')[0];
+
+  act(() => {
+    fireEvent(
+      year2020,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  let month1 = container.getElementsByClassName('month_1')[0];
+
+  act(() => {
+    fireEvent(
+      month1,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  let date1 = container.getElementsByClassName('date_1')[0];
+
+  act(() => {
+    fireEvent(
+      date1,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  sfInputDobDD = container.getElementsByClassName('sf_input_date_dd')[0];
+  expect(sfInputDobDD.value).toContain('1');
+
+  let btnClose = container.getElementsByClassName('sf_btn_date_close')[1];
+  act(() => {
+    fireEvent(
+      btnClose,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).not.toContain('sf_input_date_picker');
+
+  let sfInputDobMM = container.getElementsByClassName('sf_input_date_mm')[0];
+
+  act(() => {
+    fireEvent(
+      sfInputDobMM,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_date_picker');
+
+  btnClose = container.getElementsByClassName('sf_btn_date_close')[1];
+  act(() => {
+    fireEvent(
+      btnClose,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).not.toContain('sf_input_date_picker');
+
+  let sfInputDobYYYY = container.getElementsByClassName('sf_input_date_yyyy')[0];
+
+  act(() => {
+    fireEvent(
+      sfInputDobYYYY,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_date_picker');
+
+  btnClose = container.getElementsByClassName('sf_btn_date_close')[1];
+  act(() => {
+    fireEvent(
+      btnClose,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).not.toContain('sf_input_date_picker');
+
+})
+
+
 it('SfInput: Basic Render Primary DateOfBirth', async () => {
 
   jest.setTimeout(TEST_TIMEOUT);
