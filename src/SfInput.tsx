@@ -575,7 +575,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                                     borderRadius: Themes.getTheme().spaces.min + 'px'
                                 }}><small>{selectedMM === 0 ? "" : Util.toMonthName(selectedMM)}</small></div>
                                 <div style={{
-                                    width: '25px',
+                                    width: '30px',
                                     marginTop: Themes.getTheme().spaces.ltl + 'px',
                                     marginLeft: Themes.getTheme().spaces.ltl + 'px',
                                     marginRight: Themes.getTheme().spaces.ltl + 'px',
@@ -669,7 +669,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                                             onClick={() => {setSelectedDDWrap(day.getDate())}}
                                             key={day.getDate()} 
                                             style={{
-                                                width: '25px',
+                                                width: '30px',
                                                 textAlign: 'center',
                                                 marginTop: Themes.getTheme().spaces.ltl + 'px',
                                                 marginLeft: Themes.getTheme().spaces.ltl + 'px',
