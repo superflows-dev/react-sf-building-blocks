@@ -113,7 +113,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                             justifyContent: 'center',
                             fontWeight: '800'
                         }}>
-                            {brandLogo != null && <img 
+                            {(brandLogo != null && brandLogo != "") && <img 
                             className='nav_brand_logo' 
                             src={brandLogo} 
                             onClick={() => {onHomePressed()}}
@@ -312,7 +312,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     display: 'flex',
                     alignItems: 'center'
                 }}>
-                     {brandLogo != null && <img 
+                     {(brandLogo != null && brandLogo != "") && <img 
                      className='nav_brand_logo'
                      src={brandLogo} 
                      onClick={() => {onHomePressed()}}
