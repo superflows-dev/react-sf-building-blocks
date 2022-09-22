@@ -1,6 +1,6 @@
 {
   "name": "react-sf-building-blocks",
-  "version": "1.0.27",
+  "version": "1.0.28",
   "description": "Basic building blocks of the superflows component system",
   "author": "superflows-dev",
   "license": "MIT",
@@ -68,6 +68,9 @@
     "superflows",
     "react",
     "serverless",
-    "buttons"
+    "buttons",
+    "input",
+    "navigation",
+    "building blocks"
   ]
 }
