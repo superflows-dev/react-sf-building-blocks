@@ -87,9 +87,10 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
         <div style={{
             color: Util.getTextColor(theme, variant, Themes.getTheme().types.outlined)
         }}>
-            {Util.getWindowDimensions().height > Util.getWindowDimensions().width && <div>
+            {Util.getWindowDimensions().height > Util.getWindowDimensions().width && <div style={{position: 'relative'}}>
                 
                 <div style={{
+                    position: 'relative',
                     height: Themes.getTheme().dimensions.navHeight + 'px',
                     display: 'flex',
                     alignItems: 'center',
