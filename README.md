@@ -160,6 +160,7 @@ The input component is **SfNav**.
 | stylesSearchInput          | json object    | no        | styles object to customize the search input
 | stylesContainerDesktop     | json object    | no        | styles object to customize the nav container for landscape view
 | stylesContainerMobile      | json object    | no        | styles object to customize the nav container for portrait view
+| stylesContainerRightMenu   | json object    | no        | styles object to customize the right menu container for portrait view
 | onHomePressed              | callback       | no        | callback after clicking on home button 
 | onSearchPressed            | callback       | no        | callback after search text is entered
 | onSignInPressed            | callback       | no        | callback after clicking on sign in button

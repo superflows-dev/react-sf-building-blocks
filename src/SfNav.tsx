@@ -30,13 +30,14 @@ interface Props {
     stylesSearchInput?: any;
     stylesContainerDesktop?: any;
     stylesContainerMobile?: any;
+    stylesContainerRightMenu?: any;
     onHomePressed?: () => void;
     onSearchPressed?: (value: string) => void;
     onSignInPressed?: () => void;
     onMenuClicked?: (value: string) => void;
 }
 
-const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, showSearch = true, showSignIn = true, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}}: Props) => {
+const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, showSearch = true, showSignIn = true, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}}: Props) => {
 
     const [searchString, setSearchString] = useState('');
     const [dropdownExpanded, setDropdownExpanded] = useState('[]');
@@ -287,9 +288,11 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         display: 'flex',
                         alignItems: 'stretch',
                         border: 'solid 1px' + Util.getBorderColor(theme, variant, "outlined"),
+                        backgroundColor: Util.getTextColor(theme, variant, "filled"),
                         borderRadius: parseInt(Themes.getTheme().spaces.min) + 'px',
                         padding: parseInt(Themes.getTheme().spaces.min) + 'px',
-                        zIndex: '1999'
+                        zIndex: '1999',
+                        ...stylesContainerRightMenu
                     }}>
 
                         {showSearch && <SfInput stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={Themes.getTheme().inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {toggleRightMenu(); onSearchPressed(searchString)}} />}
