@@ -98,7 +98,6 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
         arrYears.push(i);
     }
 
-    console.log('selectedYYYY', selectedYYYY);
 
     function setShowCountryCodesWrap(value: boolean) {
         setTimeout(() => { setShowCountryCodes(value) }, 200);

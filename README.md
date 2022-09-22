@@ -17,6 +17,7 @@
 - [Quickstart](#quickstart)
 - [Button](#button)
 - [Input](#input)
+- [Nav](#nav)
 - [Tests](#tests)
 
 <br />
@@ -133,6 +134,59 @@ export default App
 
 For detailed usage please read the<a href="http://superflows.dev/docs/building-blocks/input">documentation 📖</a>
 
+## Nav
+
+The input component is **SfNav**.
+
+### Props
+
+| Prop                       | Type           | Mandatory | Description 
+|----------------------------|----------------|-----------|---------------------------------
+| variant                    | string         | no        | theme variant such as primary, secondary, danger, etc.
+| theme                      | object         | no        | superflows theme object
+| brand                      | string         | no        | brand name 
+| brandLogo                  | img            | no        | brand logo image
+| menu                       | json object    | no        | json object which renders the menu
+| menuIcon                   | icon           | no        | icon for menu  in portrait view
+| optionsIcon                | icon           | no        | icon for options in portrait view
+| showSearch                 | boolean        | no        | flag, which shows / hides search input
+| showSignIn                 | boolean        | no        | flag, which shows / hides sign in button
+| searchCaption              | string         | no        | caption of the search input
+| searchIcon                 | object         | no        | icon for the search input
+| stylesBrand                | json object    | no        | styles object to customize the brand name
+| stylesBrandLogo            | json object    | no        | styles object to customize the brand logo
+| stylesSignIn               | json object    | no        | styles object to customize the sign in button
+| stylesSearchContainer      | json object    | no        | styles object to customize the search input container
+| stylesSearchInput          | json object    | no        | styles object to customize the search input
+| stylesContainerDesktop     | json object    | no        | styles object to customize the nav container for landscape view
+| stylesContainerMobile      | json object    | no        | styles object to customize the nav container for portrait view
+| onHomePressed              | callback       | no        | callback after clicking on home button 
+| onSearchPressed            | callback       | no        | callback after search text is entered
+| onSignInPressed            | callback       | no        | callback after clicking on sign in button
+| onMenuClicked              | callback       | no        | callback after clicking on any menu
+
+### Usage
+
+```tsx
+import React from 'react'
+
+import {SfNav} from 'react-sf-building-blocks'
+
+const App = () => {
+
+  return <div>
+    <SfNav brand='Superflows' brandLogo="https://superflows.dev/img/superflows_gray_transparent_200.png" menu={[{caption: "About", link: "about"}, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services"}, {caption: "Resources", link: "resources"}], {caption: "Team", link: "team"}, [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}, {caption: "Facebook", link: "facebook"}]]} onSearchPressed={(value) => {console.log('search pressed = ' + value);}} onMenuClicked={(link) => {console.log(link);}} onSignInPressed={() => {console.log('sign in pressed');}} onHomePressed={() => {console.log('home pressed')}} />
+  </div>
+}
+
+export default App
+```
+
+### Detailed Usage
+
+For detailed usage please read the<a href="http://superflows.dev/docs/building-blocks/nav">documentation 📖</a>
+
+
 ## Tests
 
 ### How To Run
@@ -148,17 +202,18 @@ npm test
 --------------|----------|----------|----------|----------|-------------------|
 File          |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
 --------------|----------|----------|----------|----------|-------------------|
-All files     |      100 |    81.27 |    98.59 |      100 |                   |
+All files     |      100 |    82.25 |    96.36 |      100 |                   |
  Services.js  |      100 |      100 |      100 |      100 |                   |
- SfButton.tsx |      100 |    76.47 |      100 |      100 |       35,36,37,81 |
- SfInput.tsx  |      100 |    79.58 |    97.92 |      100 |... 50,651,680,681 |
- Util.tsx     |      100 |    83.63 |      100 |      100 |... 40,246,249,252 |
+ SfButton.tsx |      100 |    71.43 |      100 |      100 | 28,38,39,40,41,94 |
+ SfInput.tsx  |      100 |    80.63 |    97.92 |      100 |... 52,653,683,684 |
+ SfNav.tsx    |      100 |    84.68 |    91.67 |      100 |... 47,248,293,417 |
+ Util.tsx     |      100 |    83.63 |      100 |      100 |... 48,254,257,260 |
  index.tsx    |        0 |        0 |        0 |        0 |                   |
 --------------|----------|----------|----------|----------|-------------------|
 Test Suites: 1 passed, 1 total
-Tests:       49 passed, 49 total
+Tests:       55 passed, 55 total
 Snapshots:   0 total
-Time:        143.796s
+Time:        231.431s
 Ran all test suites.
 
 <br />

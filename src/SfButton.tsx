@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Themes from 'react-sf-themes';
 import Util from './Util';
 
@@ -21,20 +21,25 @@ const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = T
     const [borderColor, setBorderColor] = useState('none');
     const [backgroundColor, setBackgroundColor] = useState('none');
     const [textColor, setTextColor] = useState('none');
+    const mounted = useRef(false);
 
     function resetColors() {
 
-        setTextColor(Util.getTextColor(theme, variant, type));
-        setBackgroundColor(Util.getBackgroundColor(theme, variant, type));
-        setBorderColor(Util.getBorderColor(theme, variant, type));
+        if(mounted.current) {
+            setTextColor(Util.getTextColor(theme, variant, type));
+            setBackgroundColor(Util.getBackgroundColor(theme, variant, type));
+            setBorderColor(Util.getBorderColor(theme, variant, type));
+        }
 
     }
 
     function invertColors() {
     
-        setTextColor(Util.getTextColor(theme, variant, type == theme.types.filled? theme.types.outlined: theme.types.filled));
-        setBackgroundColor(Util.getBackgroundColor(theme, variant, type == theme.types.filled? theme.types.outlined: theme.types.filled));
-        setBorderColor(Util.getBorderColor(theme, variant, type == theme.types.filled? theme.types.outlined: theme.types.filled));
+        if(mounted.current) {
+            setTextColor(Util.getTextColor(theme, variant, type == theme.types.filled? theme.types.outlined: theme.types.filled));
+            setBackgroundColor(Util.getBackgroundColor(theme, variant, type == theme.types.filled? theme.types.outlined: theme.types.filled));
+            setBorderColor(Util.getBorderColor(theme, variant, type == theme.types.filled? theme.types.outlined: theme.types.filled));
+        }
 
     }
 
@@ -47,6 +52,14 @@ const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = T
         }
         
     }
+
+    React.useEffect(() => {
+        mounted.current = true;
+
+        return () => {
+            mounted.current = false;
+        };
+    }, []);
 
     React.useEffect(() => {
         resetColors();        
