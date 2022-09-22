@@ -3,6 +3,7 @@ import { useState } from "react";
 import Themes from 'react-sf-themes';
 import SfButton from './SfButton';
 import SfInput from './SfInput';
+import { Constants } from './Constants';
 // import SfButton from './SfButton';
 // import Services from './Services';
 // import Util from './Util';
@@ -35,7 +36,7 @@ interface Props {
     onMenuClicked?: (value: string) => void;
 }
 
-const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = "Brand", stylesBrand = {}, brandLogo = null, stylesBrandLogo = {}, menu = [], showSearch = true, showSignIn = true, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}}: Props) => {
+const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, showSearch = true, showSignIn = true, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}}: Props) => {
 
     const [searchString, setSearchString] = useState('');
     const [dropdownExpanded, setDropdownExpanded] = useState('[]');
