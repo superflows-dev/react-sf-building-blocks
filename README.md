@@ -86,7 +86,7 @@ export default App
 
 ### Detailed Usage
 
-For detailed usage please read the<a href="http://superflows.dev/docs/building-blocks/button">documentation 📖</a>
+For detailed usage please read the <a href="http://superflows.dev/docs/building-blocks/button">documentation 📖</a>
 
 ## Input
 
@@ -132,7 +132,7 @@ export default App
 
 ### Detailed Usage
 
-For detailed usage please read the<a href="http://superflows.dev/docs/building-blocks/input">documentation 📖</a>
+For detailed usage please read the <a href="http://superflows.dev/docs/building-blocks/input">documentation 📖</a>
 
 ## Nav
 
@@ -184,7 +184,7 @@ export default App
 
 ### Detailed Usage
 
-For detailed usage please read the<a href="http://superflows.dev/docs/building-blocks/nav">documentation 📖</a>
+For detailed usage please read the <a href="http://superflows.dev/docs/building-blocks/nav">documentation 📖</a>
 
 
 ## Tests
