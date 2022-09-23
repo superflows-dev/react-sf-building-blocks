@@ -156,6 +156,11 @@ The input component is **SfNav**.
 | searchIcon                    | object         | no        | icon for the search input
 | stylesBrand                   | json object    | no        | styles object to customize the brand name
 | stylesBrandLogo               | json object    | no        | styles object to customize the brand logo
+| stylesMenu                    | json object    | no        | styles object to customize the menu
+| stylesSubMenu                 | json object    | no        | styles object to customize the sub menu
+| stylesMenuMobile              | json object    | no        | styles object to customize the mobile menu
+| stylesSubMenuMobile           | json object    | no        | styles object to customize the mobile sub menu
+| stylesMenuMobileSelected      | json object    | no        | styles object to customize the selected mobile menu
 | stylesSignIn                  | json object    | no        | styles object to customize the sign in button
 | stylesSearchContainer         | json object    | no        | styles object to customize the search input container
 | stylesSearchInput             | json object    | no        | styles object to customize the search input
@@ -165,6 +170,11 @@ The input component is **SfNav**.
 | classNameBrand                | json object    | no        | class names string to customize the brand name
 | classNameBrandLogo            | json object    | no        | class names string to customize the brand logo
 | classNameSignIn               | json object    | no        | class names string to customize the sign in button
+| classNameMenu                 | json object    | no        | class names string to customize the menu
+| classNameSubMenu              | json object    | no        | class names string to customize the sub menu
+| classNameMenuMobile           | json object    | no        | class names string to customize the mobile menu
+| classNameSubMenuMobile        | json object    | no        | class names string to customize the mobile sub menu
+| classNameMenuMobileSelected   | json object    | no        | class names string to customize the selected mobile menu
 | classNameSearchContainer      | json object    | no        | class names string to customize the search input container
 | classNameSearchInput          | json object    | no        | class names string to customize the search input
 | classNameContainerDesktop     | json object    | no        | class names string to customize the nav container for landscape view
