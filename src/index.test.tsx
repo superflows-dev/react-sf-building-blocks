@@ -36,7 +36,7 @@ it('SfNav: Landscape Menus', async () => {
 
   jest.setTimeout(TEST_TIMEOUT);
 
-  window = Object.assign(window, { innerWidth: 1024, innerHeight: 800 });
+  window = Object.assign(window, { innerWidth: 1280, innerHeight: 800 });
   await new Promise((r) => setTimeout(r, TIMEOUT));
 
   act(() => {
@@ -249,7 +249,7 @@ it('SfNav: Basic Render Landscape', async () => {
 
   jest.setTimeout(TEST_TIMEOUT);
 
-  window = Object.assign(window, { innerWidth: 1024, innerHeight: 800 });
+  window = Object.assign(window, { innerWidth: 1280, innerHeight: 800 });
   await new Promise((r) => setTimeout(r, TIMEOUT));
 
   act(() => {
@@ -266,7 +266,7 @@ it('SfNav: Basic Render Potrait', async () => {
 
   jest.setTimeout(TEST_TIMEOUT);
 
-  window = Object.assign(window, { innerWidth: 500, innerHeight: 800 });
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
   await new Promise((r) => setTimeout(r, TIMEOUT));
 
   act(() => {
@@ -301,7 +301,7 @@ it('SfNav: Search / Sign In Portrait', async () => {
 
   jest.setTimeout(TEST_TIMEOUT);
 
-  window = Object.assign(window, { innerWidth: 500, innerHeight: 800 });
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
   await new Promise((r) => setTimeout(r, TIMEOUT));
 
   const onSearchPressedMock = jest.fn();
@@ -421,7 +421,7 @@ it('SfNav: Right Menu Click Portrait', async () => {
 
   jest.setTimeout(TEST_TIMEOUT);
 
-  window = Object.assign(window, { innerWidth: 500, innerHeight: 800 });
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
   await new Promise((r) => setTimeout(r, TIMEOUT));
 
   act(() => {
@@ -474,7 +474,7 @@ it('SfNav: Left Menu Click Portrait', async () => {
 
   jest.setTimeout(TEST_TIMEOUT);
 
-  window = Object.assign(window, { innerWidth: 500, innerHeight: 800 });
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
   await new Promise((r) => setTimeout(r, TIMEOUT));
 
   act(() => {

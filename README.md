@@ -140,31 +140,40 @@ The input component is **SfNav**.
 
 ### Props
 
-| Prop                       | Type           | Mandatory | Description 
-|----------------------------|----------------|-----------|---------------------------------
-| variant                    | string         | no        | theme variant such as primary, secondary, danger, etc.
-| theme                      | object         | no        | superflows theme object
-| brand                      | string         | no        | brand name 
-| brandLogo                  | img            | no        | brand logo image
-| menu                       | json object    | no        | json object which renders the menu
-| menuIcon                   | icon           | no        | icon for menu  in portrait view
-| optionsIcon                | icon           | no        | icon for options in portrait view
-| showSearch                 | boolean        | no        | flag, which shows / hides search input
-| showSignIn                 | boolean        | no        | flag, which shows / hides sign in button
-| searchCaption              | string         | no        | caption of the search input
-| searchIcon                 | object         | no        | icon for the search input
-| stylesBrand                | json object    | no        | styles object to customize the brand name
-| stylesBrandLogo            | json object    | no        | styles object to customize the brand logo
-| stylesSignIn               | json object    | no        | styles object to customize the sign in button
-| stylesSearchContainer      | json object    | no        | styles object to customize the search input container
-| stylesSearchInput          | json object    | no        | styles object to customize the search input
-| stylesContainerDesktop     | json object    | no        | styles object to customize the nav container for landscape view
-| stylesContainerMobile      | json object    | no        | styles object to customize the nav container for portrait view
-| stylesContainerRightMenu   | json object    | no        | styles object to customize the right menu container for portrait view
-| onHomePressed              | callback       | no        | callback after clicking on home button 
-| onSearchPressed            | callback       | no        | callback after search text is entered
-| onSignInPressed            | callback       | no        | callback after clicking on sign in button
-| onMenuClicked              | callback       | no        | callback after clicking on any menu
+| Prop                          | Type           | Mandatory | Description 
+|-------------------------------|----------------|-----------|---------------------------------
+| variant                       | string         | no        | theme variant such as primary, secondary, danger, etc.
+| theme                         | object         | no        | superflows theme object
+| brand                         | string         | no        | brand name 
+| brandLogo                     | img            | no        | brand logo image
+| menu                          | json object    | no        | json object which renders the menu
+| menuIcon                      | icon           | no        | icon for menu  in portrait view
+| optionsIcon                   | icon           | no        | icon for options in portrait view
+| showSearch                    | boolean        | no        | flag, which shows / hides search input
+| showSignIn                    | boolean        | no        | flag, which shows / hides sign in button
+| searchCaption                 | string         | no        | caption of the search input
+| signInCaption                 | string         | no        | caption of the sign in button
+| searchIcon                    | object         | no        | icon for the search input
+| stylesBrand                   | json object    | no        | styles object to customize the brand name
+| stylesBrandLogo               | json object    | no        | styles object to customize the brand logo
+| stylesSignIn                  | json object    | no        | styles object to customize the sign in button
+| stylesSearchContainer         | json object    | no        | styles object to customize the search input container
+| stylesSearchInput             | json object    | no        | styles object to customize the search input
+| stylesContainerDesktop        | json object    | no        | styles object to customize the nav container for landscape view
+| stylesContainerMobile         | json object    | no        | styles object to customize the nav container for portrait view
+| stylesContainerRightMenu      | json object    | no        | styles object to customize the right menu container for portrait view
+| classNameBrand                | json object    | no        | class names string to customize the brand name
+| classNameBrandLogo            | json object    | no        | class names string to customize the brand logo
+| classNameSignIn               | json object    | no        | class names string to customize the sign in button
+| classNameSearchContainer      | json object    | no        | class names string to customize the search input container
+| classNameSearchInput          | json object    | no        | class names string to customize the search input
+| classNameContainerDesktop     | json object    | no        | class names string to customize the nav container for landscape view
+| classNameContainerMobile      | json object    | no        | class names string to customize the nav container for portrait view
+| classNameContainerRightMenu   | json object    | no        | class names string to customize the right menu container for portrait view
+| onHomePressed                 | callback       | no        | callback after clicking on home button 
+| onSearchPressed               | callback       | no        | callback after search text is entered
+| onSignInPressed               | callback       | no        | callback after clicking on sign in button
+| onMenuClicked                 | callback       | no        | callback after clicking on any menu
 
 ### Usage
 

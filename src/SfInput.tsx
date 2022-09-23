@@ -459,7 +459,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                     justifyContent: 'flex-end'
                 }}>
                     <input className={`sf_input_${inputType}_dd ${classNameInput}`} 
-                        onClick={() => {setShowDatePickerWrap(true)}}
+                        onClick={() => {if(inputType == Themes.getTheme().inputTypes.date) {setShowDatePickerWrap(true)}}}
                         ref={refInputDD} 
                         style={{
                             width: '50px',
@@ -480,7 +480,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                         readOnly={inputType == Themes.getTheme().inputTypes.date ? true : false}
                         defaultValue={value.dd} />
                     <input className={`sf_input_${inputType}_mm ${classNameInput}`}
-                        onClick={() => {setShowDatePickerWrap(true)}}
+                        onClick={() => {if(inputType == Themes.getTheme().inputTypes.date) {setShowDatePickerWrap(true)}}}
                         ref={refInputMM}  
                         style={{
                             width: '50px',
@@ -501,7 +501,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                         readOnly={inputType == Themes.getTheme().inputTypes.date ? true : false}
                         defaultValue={value.mm} />
                     <input className={`sf_input_${inputType}_yyyy ${classNameInput}`}
-                        onClick={() => {setShowDatePickerWrap(true)}}
+                        onClick={() => {if(inputType == Themes.getTheme().inputTypes.date) {setShowDatePickerWrap(true)}}}
                         ref={refInputYYYY} 
                         style={{
                             width: '80px',

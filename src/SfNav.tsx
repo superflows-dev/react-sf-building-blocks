@@ -22,6 +22,7 @@ interface Props {
     showSearch?: boolean;
     showSignIn?: boolean;
     searchCaption?: string;
+    signInCaption?: string;
     searchIcon?: any;
     stylesBrand? : any;
     stylesBrandLogo? : any;
@@ -31,13 +32,21 @@ interface Props {
     stylesContainerDesktop?: any;
     stylesContainerMobile?: any;
     stylesContainerRightMenu?: any;
+    classNameBrand?: any;
+    classNameBrandLogo?: any;
+    classNameSignIn?: any;
+    classNameSearchContainer?: any;
+    classNameSearchInput?: any;
+    classNameContainerDesktop?: any;
+    classNameContainerMobile?: any;
+    classNameContainerRightMenu?: any;
     onHomePressed?: () => void;
     onSearchPressed?: (value: string) => void;
     onSignInPressed?: () => void;
     onMenuClicked?: (value: string) => void;
 }
 
-const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, showSearch = true, showSignIn = true, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}}: Props) => {
+const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, showSearch = true, showSignIn = true, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, classNameBrand = "", classNameBrandLogo = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}}: Props) => {
 
     const [searchString, setSearchString] = useState('');
     const [dropdownExpanded, setDropdownExpanded] = useState('[]');
@@ -88,9 +97,11 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
         <div style={{
             color: Util.getTextColor(theme, variant, Themes.getTheme().types.outlined)
         }}>
-            {Util.getWindowDimensions().height > Util.getWindowDimensions().width && <div style={{position: 'relative'}}>
+            {Util.getWindowDimensions().width <= Themes.getTheme().breakpoints.tablet && <div style={{position: 'relative'}}>
                 
-                <div style={{
+                <div 
+                className={classNameContainerMobile}
+                style={{
                     position: 'relative',
                     height: Themes.getTheme().dimensions.navHeight + 'px',
                     display: 'flex',
@@ -116,7 +127,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                             fontWeight: '800'
                         }}>
                             {(brandLogo != null && brandLogo != "") && <img 
-                            className='nav_brand_logo' 
+                            className={`nav_brand_logo ` + classNameBrandLogo}
                             src={brandLogo} 
                             onClick={() => {onHomePressed()}}
                             style={{
@@ -127,7 +138,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                             }}/>}
                             {brand != "" && <div 
                             onClick={() => {onHomePressed()}}
-                            className='nav_brand' 
+                            className={'nav_brand ' + classNameBrand}
                             style={{
                                 cursor: 'pointer',
                                 fontSize: '120%',
@@ -214,14 +225,14 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                             zIndex: '1999'
                                         }}>
                                             {
-                                                element.map((item: any, key1: any) => {
+                                                element.slice(1).map((item: any, key1: any) => {
 
                                                     return (
                                                         <SfButton  className={'nav_left_menu_' + key + '_' + key1} styles={{
                                                             borderTopLeftRadius: key1 === 0 ? '5px' : '0px',
                                                             borderTopRightRadius: key1 === 0 ? '5px' : '0px',
-                                                            borderBottomLeftRadius: key1 === element.length - 1 ? '5px' : '0px',
-                                                            borderBottomRightRadius: key1 === element.length - 1 ? '5px' : '0px',
+                                                            borderBottomLeftRadius: key1 === element.length - 2 ? '5px' : '0px',
+                                                            borderBottomRightRadius: key1 === element.length - 2 ? '5px' : '0px',
                                                             fontWeight: '400',
                                                             marginTop: '-2px',
                                                             cursor:  'pointer',
@@ -264,7 +275,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     }
                 </div>} 
 
-                {showRightMenu && <div className='nav_div_right_menu' style={{
+                {showRightMenu && <div 
+                className={'nav_div_right_menu '} style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'stretch',
@@ -272,7 +284,9 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     right: Themes.getTheme().spaces.ltl + 'px',
                     top: (parseInt(Themes.getTheme().dimensions.navHeight)) + 'px',
                 }}>
-                    <div className='nav_div_right_menu_overlay' style={{
+                    <div 
+                    className='nav_div_right_menu_overlay' 
+                    style={{
                         position: 'fixed',
                         left: '0px',
                         top: '0px',
@@ -283,7 +297,9 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     }} onClick={() => {toggleRightMenu()}}>
                     </div>
 
-                    <div style={{
+                    <div 
+                    className={classNameContainerRightMenu}
+                    style={{
                         flexDirection: 'column',
                         display: 'flex',
                         alignItems: 'stretch',
@@ -295,15 +311,17 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         ...stylesContainerRightMenu
                     }}>
 
-                        {showSearch && <SfInput stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={Themes.getTheme().inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {toggleRightMenu(); onSearchPressed(searchString)}} />}
-                        {showSignIn && <SfButton className='btn_signin_portrait' styles={{height: '40px', fontSize: '90%', marginTop: Themes.getTheme().spaces.min + 'px', ...stylesSignIn}} variant={variant} type={Themes.getTheme().types.filled} caption="Sign In" onClick={() => {toggleRightMenu(); onSignInPressed();}} />}
+                        {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={Themes.getTheme().inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {toggleRightMenu(); onSearchPressed(searchString)}} />}
+                        {showSignIn && <SfButton className={'btn_signin_portrait ' + classNameSignIn} styles={{height: '40px', fontSize: '90%',  ...stylesSignIn}} variant={variant} type={Themes.getTheme().types.filled} caption={signInCaption} onClick={() => {toggleRightMenu(); onSignInPressed();}} />}
                         
                     </div>
 
                 </div>}
 
             </div>}
-            {Util.getWindowDimensions().height < Util.getWindowDimensions().width && <div style={{
+            {Util.getWindowDimensions().width > Themes.getTheme().breakpoints.tablet && <div 
+            className={classNameContainerDesktop}
+            style={{
                 height: Themes.getTheme().dimensions.navHeight + 'px',
                 display: 'flex',
                 alignItems: 'center',
@@ -317,7 +335,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     alignItems: 'center'
                 }}>
                      {(brandLogo != null && brandLogo != "") && <img 
-                     className='nav_brand_logo'
+                     className={'nav_brand_logo ' + classNameBrandLogo}
                      src={brandLogo} 
                      onClick={() => {onHomePressed()}}
                      style={{
@@ -326,7 +344,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         paddingRight: Themes.getTheme().spaces.ltl + 'px',
                         ...stylesBrandLogo
                     }}/>}
-                    {brand != "" && <div className='nav_brand' 
+                    {brand != "" && <div 
+                    className={'nav_brand ' + classNameBrand}
                     onClick={() => {onHomePressed()}}
                     style={{
                         cursor: 'pointer',
@@ -375,14 +394,14 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                                 }} onClick={() => {toggleDropdownExpandedWrap(key)}}>
                                                 </div>
                                                 {
-                                                    element.map((item: any, key1: any) => {
+                                                    element.slice(1).map((item: any, key1: any) => {
 
                                                         return (
                                                             <SfButton className={'nav_menu_' + key + '_' + key1} styles={{
                                                                 borderTopLeftRadius: key1 === 0 ? '5px' : '0px',
                                                                 borderTopRightRadius: key1 === 0 ? '5px' : '0px',
-                                                                borderBottomLeftRadius: key1 === element.length - 1 ? '5px' : '0px',
-                                                                borderBottomRightRadius: key1 === element.length - 1 ? '5px' : '0px',
+                                                                borderBottomLeftRadius: key1 === element.length - 2 ? '5px' : '0px',
+                                                                borderBottomRightRadius: key1 === element.length - 2 ? '5px' : '0px',
                                                                 fontWeight: '400',
                                                                 marginTop: '-2px',
                                                                 cursor:  'pointer',
@@ -419,8 +438,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     display: 'flex',
                     alignItems: 'center'
                 }}>
-                    {showSearch && <SfInput stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={Themes.getTheme().inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {onSearchPressed(searchString)}} />}
-                    {showSignIn && <SfButton className='nav_signin_button' styles={{height: '40px', fontSize: '90%', marginLeft: Themes.getTheme().spaces.mod + 'px', ...stylesSignIn}} variant={variant} type={Themes.getTheme().types.filled} caption="Sign In" onClick={() => {onSignInPressed()}} />}
+                    {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={Themes.getTheme().inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {onSearchPressed(searchString)}} />}
+                    {showSignIn && <SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '40px', fontSize: '90%', marginLeft: Themes.getTheme().spaces.mod + 'px', ...stylesSignIn}} variant={variant} type={Themes.getTheme().types.filled} caption={signInCaption} onClick={() => {onSignInPressed()}} />}
                 </div>
             </div>}
         </div>
