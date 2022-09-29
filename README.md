@@ -167,6 +167,9 @@ The input component is **SfNav**.
 | stylesContainerDesktop        | json object    | no        | styles object to customize the nav container for landscape view
 | stylesContainerMobile         | json object    | no        | styles object to customize the nav container for portrait view
 | stylesContainerRightMenu      | json object    | no        | styles object to customize the right menu container for portrait view
+| stylesProfilePicture          | json object    | no        | styles object to customize the profile picture
+| stylesProfilePreamble         | json object    | no        | styles object to customize the profile preamble
+| stylesProfileComponent        | json object    | no        | styles object to customize the profile component
 | classNameBrand                | json object    | no        | class names string to customize the brand name
 | classNameBrandLogo            | json object    | no        | class names string to customize the brand logo
 | classNameSignIn               | json object    | no        | class names string to customize the sign in button
@@ -180,6 +183,9 @@ The input component is **SfNav**.
 | classNameContainerDesktop     | json object    | no        | class names string to customize the nav container for landscape view
 | classNameContainerMobile      | json object    | no        | class names string to customize the nav container for portrait view
 | classNameContainerRightMenu   | json object    | no        | class names string to customize the right menu container for portrait view
+| classNameProfilePicture       | json object    | no        | class names string to customize the profile picture
+| classNameProfilePreamble      | json object    | no        | class names string to customize the profile preamble
+| classNameProfileComponent     | json object    | no        | class names string to customize the profile component
 | onHomePressed                 | callback       | no        | callback after clicking on home button 
 | onSearchPressed               | callback       | no        | callback after search text is entered
 | onSignInPressed               | callback       | no        | callback after clicking on sign in button
