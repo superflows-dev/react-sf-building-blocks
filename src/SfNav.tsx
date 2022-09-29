@@ -42,6 +42,7 @@ interface Props {
     stylesContainerDesktop?: any;
     stylesContainerMobile?: any;
     stylesContainerRightMenu?: any;
+    stylesProfilePicture?: any;
     stylesProfilePreamble?: any;
     stylesProfileComponent?: any;
     classNameBrand?: any;
@@ -57,6 +58,7 @@ interface Props {
     classNameContainerDesktop?: any;
     classNameContainerMobile?: any;
     classNameContainerRightMenu?: any;
+    classNameProfilePicture?: any;
     classNameProfilePreamble?: any;
     classNameProfileComponent?: any;
     onHomePressed?: () => void;
@@ -80,17 +82,19 @@ interface ProfileProps {
     profileMenu: any;
     classNameProfilePreamble: any;
     classNameProfileComponent: any;
+    classNameProfilePicture: any;
     classNameMenuMobileSelected: any;
     classNameMenuMobile: any;
     classNameSubMenuMobile: any;
     stylesProfilePreamble: any;
     stylesProfileComponent: any;
+    stylesProfilePicture: any;
     stylesMenuMobileSelected: any;
     stylesMenuMobile: any;
     stylesSubMenuMobile: any;
 }
 
-const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpandedWrap, getProfileDropdownExpandedWrap, setExpandProfile, theme, variant, profilePicture, expandProfile, profilePreamble, profileComponent, profileMenu, classNameProfileComponent, classNameSubMenuMobile, classNameMenuMobileSelected, classNameMenuMobile, classNameProfilePreamble, stylesProfileComponent, stylesProfilePreamble, stylesMenuMobileSelected, stylesMenuMobile, stylesSubMenuMobile}: ProfileProps) => {
+const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpandedWrap, getProfileDropdownExpandedWrap, setExpandProfile, theme, variant, profilePicture, expandProfile, profilePreamble, profileComponent, profileMenu, classNameProfileComponent, classNameSubMenuMobile, classNameMenuMobileSelected, classNameMenuMobile, classNameProfilePreamble, classNameProfilePicture, stylesProfileComponent, stylesProfilePreamble, stylesMenuMobileSelected, stylesMenuMobile, stylesSubMenuMobile, stylesProfilePicture}: ProfileProps) => {
 
     return (
 
@@ -105,11 +109,12 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                 alignItems: 'center',
                 cursor: 'pointer',
             }}>
-                {profilePicture.length > 0 && <img src={profilePicture} 
+                {profilePicture.length > 0 && <img className={classNameProfilePicture} src={profilePicture} 
                     style={{
                         height: (parseInt(Themes.getTheme().dimensions.navHeight) * 4)/5 + 'px',
                         marginRight: (Themes.getTheme().spaces.min) + 'px',
-                        borderRadius: (parseInt(Themes.getTheme().dimensions.navHeight) * 4)/10 + 'px'
+                        borderRadius: (parseInt(Themes.getTheme().dimensions.navHeight) * 4)/10 + 'px',
+                        ...stylesProfilePicture
                         }} 
                 /> }
                     <small>
@@ -279,7 +284,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
 
 }
 
-const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null,  showProfile = false, showSearch = true, showSignIn = true, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}}: Props) => {
+const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null,  showProfile = false, showSearch = true, showSignIn = true, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}}: Props) => {
 
     const [searchString, setSearchString] = useState('');
     const [dropdownExpanded, setDropdownExpanded] = useState('[]');
