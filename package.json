@@ -58,8 +58,8 @@
     "typescript": "^3.9.10"
   },
   "dependencies": {
-    "react-bootstrap-icons": "^1.8.4",
-    "react-sf-themes": "^1.0.17"
+    "react-bootstrap-icons": "^1.9.1",
+    "react-sf-themes": "^1.0.18"
   },
   "files": [
     "dist"

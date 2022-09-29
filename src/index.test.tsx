@@ -27,6 +27,242 @@ afterEach(() => {
   container = null;
 });
 
+it('SfNav: Render Profile Portrait', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav showProfile={true} profileMenu={[{caption: "Profile", link: "profile"}, [{caption: "Settings", link: "support"}, {caption: "Notifications", link: "notifications"}, {caption: "Privacy", link: "privacy"}], {caption: "Support", link: "support"}, [{name: "name1", link: "link1"}, {name: "name2", link: "link2"}]]} profilePreamble={<div style={{width: '100%', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '10px', paddingRight: '10px'}}><small>Hi Hrushi!</small><br /><small><small><i>Welcome to Superflows!</i></small></small></div>} profileComponent={<div style={{width: '100%', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '10px', paddingRight: '10px'}}><small>Sign Out</small></div>} profilePicture='https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png'/>, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('nav_profile_menu');
+
+  let menu = container.getElementsByClassName('nav_profile_toggle')[0];
+
+  // open menu
+
+  act(() => {
+    fireEvent(
+      menu,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  expect(container.innerHTML).toContain('nav_div_profile_menu_overlay');
+
+  let menuOverlay = container.getElementsByClassName('nav_div_profile_menu_overlay')[0];
+
+  // close menu
+
+  act(() => {
+    fireEvent(
+      menuOverlay,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  expect(container.innerHTML).not.toContain('nav_div_profile_menu_overlay');
+
+  // open menu
+
+  act(() => {
+    fireEvent(
+      menu,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  expect(container.innerHTML).toContain('nav_div_profile_menu_overlay');
+
+  let navProfileMenu0 = container.getElementsByClassName('nav_profile_menu_0')[0];
+
+  // click on nav
+
+  act(() => {
+    fireEvent(
+      navProfileMenu0,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).not.toContain('nav_div_profile_menu_overlay');
+
+  // open menu
+
+  act(() => {
+    fireEvent(
+      menu,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  expect(container.innerHTML).toContain('nav_div_profile_menu_overlay');
+
+  let navProfileMenu1 = container.getElementsByClassName('nav_profile_menu_1_collapsed')[0];
+
+  // click on nav
+
+  act(() => {
+    fireEvent(
+      navProfileMenu1,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('nav_div_profile_menu_overlay');
+
+  // click on sub nav
+
+  let navProfileMenu1_0 = container.getElementsByClassName('nav_profile_menu_1_0')[0];
+
+  act(() => {
+    fireEvent(
+      navProfileMenu1_0,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).not.toContain('nav_div_profile_menu_overlay');
+
+  // open menu
+
+  act(() => {
+    fireEvent(
+      menu,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  expect(container.innerHTML).toContain('nav_div_profile_menu_overlay');
+
+  navProfileMenu1 = container.getElementsByClassName('nav_profile_menu_1_collapsed')[0];
+
+  // click on nav
+
+  act(() => {
+    fireEvent(
+      navProfileMenu1,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('nav_div_profile_menu_overlay');
+
+  let navProfileMenu3 = container.getElementsByClassName('nav_profile_menu_3_collapsed')[0];
+
+  // click on nav
+
+  act(() => {
+    fireEvent(
+      navProfileMenu3,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('nav_profile_menu_3_expanded');
+
+  navProfileMenu3 = container.getElementsByClassName('nav_profile_menu_3_expanded')[0];
+
+  // click on nav
+
+  act(() => {
+    fireEvent(
+      navProfileMenu3,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).not.toContain('nav_profile_menu_3_expanded');
+
+})
+
+it('SfNav: Render Profile Landscape', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  window = Object.assign(window, { innerWidth: 1290, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav showProfile={true} profileMenu={[{caption: "Profile", link: "profile"}, [{caption: "Settings", link: "support"}, {caption: "Notifications", link: "notifications"}, {caption: "Privacy", link: "privacy"}], {caption: "Support", link: "support"}, {caption: 'Upgrade', link: "upgrade"}]} profilePreamble={<div style={{width: '100%', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '10px', paddingRight: '10px'}}><small>Hi Hrushi!</small><br /><small><small><i>Welcome to Superflows!</i></small></small></div>} profileComponent={<div style={{width: '100%', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '10px', paddingRight: '10px'}}><small>Sign Out</small></div>} profilePicture='https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png'/>, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('nav_profile_menu');
+
+  // let rightMenu = container.getElementsByClassName('nav_right_menu')[0];
+
+  // // open menu
+
+  // act(() => {
+  //   fireEvent(
+  //     rightMenu,
+  //     new MouseEvent('click', {
+  //       bubbles: true,
+  //       cancelable: true,
+  //     }),
+  //   )
+  // });
+
+  // await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  // expect(container.innerHTML).toContain('nav_div_right_menu');
+
+
+})
+
+
 it('SfNav: Landscape Menus', async () => {
 
   const onMenuClickedMock = jest.fn();
@@ -668,24 +904,6 @@ it('SfNav: Left Menu Click Portrait', async () => {
 
 
 })
-
-
-// it('SfNav: Basic Render Portrait', async () => {
-
-//   jest.setTimeout(TEST_TIMEOUT);
-
-//   window = Object.assign(window, { innerWidth: 500, innerHeight: 800 });
-
-//   act(() => {
-//     render(<SfNav brand="Brand" brandLogo="https://superflows.dev/img/superflows_gray_transparent_200.png" menu={[{caption: "About", link: "about"}, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services"}, {caption: "Resources", link: "resources"}], {caption: "Team", link: "team"}, [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}, {caption: "Facebook", link: "facebook"}]]}  showSearch={true} showSignIn={true}  searchIcon={<Search />} searchCaption="Search" />, container);
-//   });
-//   await new Promise((r) => setTimeout(r, TIMEOUT));
-//   expect(container.innerHTML).toContain('nav_brand');
-
-// })
-
-
-
 
 it('SfInput: Basic Render Primary Date', async () => {
 

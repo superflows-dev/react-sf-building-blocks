@@ -18,9 +18,14 @@ interface Props {
     brandLogo?: any;
     menu?: any;
     menuIcon?: any;
+    profilePicture?: string;
+    profileMenu?: any;
+    profilePreamble?: any;
+    profileComponent?: any;
     optionsIcon?: any;
     showSearch?: boolean;
     showSignIn?: boolean;
+    showProfile?: boolean;
     searchCaption?: string;
     signInCaption?: string;
     searchIcon?: any;
@@ -37,6 +42,8 @@ interface Props {
     stylesContainerDesktop?: any;
     stylesContainerMobile?: any;
     stylesContainerRightMenu?: any;
+    stylesProfilePreamble?: any;
+    stylesProfileComponent?: any;
     classNameBrand?: any;
     classNameBrandLogo?: any;
     classNameMenu?: any;
@@ -50,18 +57,240 @@ interface Props {
     classNameContainerDesktop?: any;
     classNameContainerMobile?: any;
     classNameContainerRightMenu?: any;
+    classNameProfilePreamble?: any;
+    classNameProfileComponent?: any;
     onHomePressed?: () => void;
     onSearchPressed?: (value: string) => void;
     onSignInPressed?: () => void;
     onMenuClicked?: (value: string) => void;
 }
 
-const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, showSearch = true, showSignIn = true, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}}: Props) => {
+interface ProfileProps {
+    clickMenu: (value: any) => void;
+    toggleExpandProfile: () => void;
+    toggleProfileDropdownExpandedWrap: (value: number) => void;
+    setExpandProfile: (value: boolean) => void;
+    getProfileDropdownExpandedWrap: () => any;
+    theme:  any;
+    variant: string;
+    profilePicture: string;
+    expandProfile: boolean;
+    profilePreamble: any;
+    profileComponent: any;
+    profileMenu: any;
+    classNameProfilePreamble: any;
+    classNameProfileComponent: any;
+    classNameMenuMobileSelected: any;
+    classNameMenuMobile: any;
+    classNameSubMenuMobile: any;
+    stylesProfilePreamble: any;
+    stylesProfileComponent: any;
+    stylesMenuMobileSelected: any;
+    stylesMenuMobile: any;
+    stylesSubMenuMobile: any;
+}
+
+const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpandedWrap, getProfileDropdownExpandedWrap, setExpandProfile, theme, variant, profilePicture, expandProfile, profilePreamble, profileComponent, profileMenu, classNameProfileComponent, classNameSubMenuMobile, classNameMenuMobileSelected, classNameMenuMobile, classNameProfilePreamble, stylesProfileComponent, stylesProfilePreamble, stylesMenuMobileSelected, stylesMenuMobile, stylesSubMenuMobile}: ProfileProps) => {
+
+    return (
+
+        <div className='nav_profile_menu' style={{
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            marginLeft: Themes.getTheme().spaces.mod + 'px'
+        }}>
+            <div className='nav_profile_toggle' onClick={(event) => {event.stopPropagation(); toggleExpandProfile()}} style={{
+                display: 'flex',
+                alignItems: 'center',
+                cursor: 'pointer',
+            }}>
+                {profilePicture.length > 0 && <img src={profilePicture} 
+                    style={{
+                        height: (parseInt(Themes.getTheme().dimensions.navHeight) * 4)/5 + 'px',
+                        marginRight: (Themes.getTheme().spaces.min) + 'px',
+                        borderRadius: (parseInt(Themes.getTheme().dimensions.navHeight) * 4)/10 + 'px'
+                        }} 
+                /> }
+                    <small>
+                        <small>
+                            {!expandProfile && '▼'}
+                            {expandProfile && '▲'}
+                        </small>
+                    </small>
+            </div>
+            {expandProfile && <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'stretch',
+                position: 'absolute',
+                top: Themes.getTheme().dimensions.navHeight + 'px',
+                right: '0px'
+            }}>
+                <div 
+                    className='nav_div_profile_menu_overlay' 
+                    style={{
+                        position: 'fixed',
+                        left: '0px',
+                        top: '0px',
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'transparent',
+                        zIndex: '1998'
+                    }} onClick={(event) => {event.stopPropagation(); toggleProfileDropdownExpandedWrap(-1); toggleExpandProfile()}}>
+                </div>
+
+                {profilePreamble != null && <div className={'' + classNameProfilePreamble} style={{
+                    borderTopLeftRadius: '5px',
+                    borderTopRightRadius: '5px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    zIndex: '1999',
+                    backgroundColor: '#efefef',
+                    ...stylesProfilePreamble
+                }}>
+                {profilePreamble} </div>}
+
+                {
+                    profileMenu.map((element: any, key: any) => {
+
+                        if(Object.prototype.toString.call(element) === '[object Array]') {
+                            
+                            return (
+                                <div key={key} style={{
+                                    position: 'relative',
+                                    zIndex: '1999',
+                                    width: theme.dimensions.menuWidth + 'px'
+
+                                }}>
+                                    {getProfileDropdownExpandedWrap()[key] && <SfButton className={'nav_profile_menu_' + key + '_expanded ' + classNameMenuMobileSelected} styles={{
+                                        width: '100%',
+                                        borderTopLeftRadius: profileComponent != null ? '0px' : key === 0 ? '5px' : '0px',
+                                        borderTopRightRadius: profileComponent != null ? '0px' : key === 0 ? '5px' : '0px',
+                                        borderBottomLeftRadius: profileComponent != null ? '0px' : key === profileMenu.length - 1 ? '5px' : '0px',
+                                        borderBottomRightRadius: profileComponent != null ? '0px' : key === profileMenu.length - 1 ? '5px' : '0px',
+                                        fontWeight: '400',
+                                        marginTop: '-2px',
+                                        cursor:  'pointer',
+                                        justifyContent: 'flex-start',
+                                        boxShadow: profileComponent != null ? 'none' : key === profileMenu.length - 1 ? '0px 2px 2px #aaa' : 'none',
+                                        ...stylesMenuMobileSelected
+                                        }} variant={variant} type="outlined" caption={(!getProfileDropdownExpandedWrap()[key] ? '◂ ' : '◂ ') + element[0].caption}  onClick={(event) => {event.stopPropagation(); toggleProfileDropdownExpandedWrap(key)}}/>}
+
+                                    {!getProfileDropdownExpandedWrap()[key] && <SfButton className={'nav_profile_menu_' + key + '_collapsed ' + classNameMenuMobile} styles={{
+                                        width: '100%',
+                                        borderTopLeftRadius: profileComponent != null ? '0px' : key === 0 ? '5px' : '0px',
+                                        borderTopRightRadius: profileComponent != null ? '0px' : key === 0 ? '5px' : '0px',
+                                        borderBottomLeftRadius: profileComponent != null ? '0px' : key === profileMenu.length - 1 ? '5px' : '0px',
+                                        borderBottomRightRadius: profileComponent != null ? '0px' : key === profileMenu.length - 1 ? '5px' : '0px',
+                                        fontWeight: '400',
+                                        marginTop: '-2px',
+                                        cursor:  'pointer',
+                                        justifyContent: 'flex-start',
+                                        boxShadow: profileComponent != null ? 'none' : key === profileMenu.length - 1 ? '0px 2px 2px #aaa' : 'none',
+                                        zIndex: '1999',
+                                        ...stylesMenuMobile
+                                        }} variant={variant} type="filled" caption={element[0].caption + (!getProfileDropdownExpandedWrap()[key] ? ' ▸' : ' ▸')}  onClick={(event) => {event.stopPropagation(); toggleProfileDropdownExpandedWrap(key)}}/>}
+
+                                    {getProfileDropdownExpandedWrap()[key] && <div style={{
+                                        flexDirection: 'column',
+                                        position: 'absolute',
+                                        right: '0px',
+                                        marginRight:  (parseInt(theme.dimensions.menuWidth) + parseInt(theme.spaces.min)) + 'px',
+                                        top: '0px',
+                                        display: 'flex',
+                                        alignItems: 'stretch',
+                                        zIndex: '1999'
+                                    }}>
+                                        {
+                                            element.slice(1).map((item: any, key1: any) => {
+
+                                                return (
+                                                    <SfButton  className={'nav_profile_menu_' + key + '_' + key1 + " " + classNameSubMenuMobile} styles={{
+                                                        borderTopLeftRadius: key1 === 0 ? '5px' : '0px',
+                                                        borderTopRightRadius: key1 === 0 ? '5px' : '0px',
+                                                        borderBottomLeftRadius: key1 === element.length - 2 ? '5px' : '0px',
+                                                        borderBottomRightRadius: key1 === element.length - 2 ? '5px' : '0px',
+                                                        fontWeight: '400',
+                                                        marginTop: '-2px',
+                                                        cursor:  'pointer',
+                                                        justifyContent: 'flex-start',
+                                                        width: theme.dimensions.menuWidth + 'px',
+                                                        boxShadow: key1 === element.length - 1 ? '0px 2px 2px #aaa' : 'none',
+                                                        ...stylesSubMenuMobile
+                                                    }} key={key1} variant={variant} type="filled" caption={item.caption} onClick={(event) => {event.stopPropagation();  toggleProfileDropdownExpandedWrap(-1); setExpandProfile(false); clickMenu(item.link)}}/>
+                                                )
+
+                                            })
+                                        }
+                                    </div>}
+
+                                </div>
+                            );
+
+                        } else {
+
+                            return (
+                                <div key={key} style={{
+                                    zIndex: '1999',
+                                    width: theme.dimensions.menuWidth + 'px',
+                                }}>
+                                    <SfButton  className={'nav_profile_menu_' + key + ' ' + classNameMenuMobile} styles={{
+                                        width: '100%',
+                                        borderTopLeftRadius: profileComponent != null ? '0px' : key === 0 ? '5px' : '0px',
+                                        borderTopRightRadius: profileComponent != null ? '0px' : key === 0 ? '5px' : '0px',
+                                        borderBottomLeftRadius: profileComponent != null ? '0px' : key === profileMenu.length - 1 ? '5px' : '0px',
+                                        borderBottomRightRadius: profileComponent != null ? '0px' : key === profileMenu.length - 1 ? '5px' : '0px',
+                                        fontWeight: '400',
+                                        marginTop: '-2px',
+                                        cursor:  'pointer',
+                                        justifyContent: 'flex-start',
+                                        zIndex: '1999',
+                                        boxShadow: profileComponent != null ? 'none' : key === profileMenu.length - 1 ? '0px 2px 2px #aaa' : 'none',
+                                        ...stylesMenuMobile
+                                        }} key={key} variant={variant} type="filled" caption={element.caption} onClick={(event) => {event.stopPropagation(); toggleProfileDropdownExpandedWrap(-1); setExpandProfile(false); clickMenu(element.link)}}/>
+                                </div>
+                            );
+
+                        }
+
+                    })
+                }
+
+                {profileComponent != null && <div className={'' + classNameProfileComponent} style={{
+                    boxShadow: '0px 0px 2px #aaa',
+                    borderBottomLeftRadius: '5px',
+                    borderBottomRightRadius: '5px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    zIndex: '1999',
+                    backgroundColor: '#efefef',
+                    ...stylesProfileComponent
+                    
+                }}>
+                {profileComponent} </div>}
+
+            </div>}
+
+            
+        </div>
+
+    );
+
+}
+
+const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null,  showProfile = false, showSearch = true, showSignIn = true, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}}: Props) => {
 
     const [searchString, setSearchString] = useState('');
     const [dropdownExpanded, setDropdownExpanded] = useState('[]');
+    const [profileDropdownExpanded, setProfileDropdownExpanded] = useState('[]');
     const [showLeftMenu, setShowLeftMenu] = useState(false);
     const [showRightMenu, setShowRightMenu] = useState(false);
+    const [expandProfile, setExpandProfile] = useState(false);
+
+    function toggleExpandProfile() {
+        setExpandProfile(!expandProfile);
+    }
 
     function toggleLeftMenu() {
         setShowLeftMenu(!showLeftMenu)
@@ -100,6 +329,33 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
 
     function getDropdownExpandedWrap() {
         return JSON.parse(dropdownExpanded);
+    }
+
+    function toggleProfileDropdownExpandedWrap(index: number) {
+        let arr = getProfileDropdownExpandedWrap();
+
+        if(index === -1) {
+            for(let i = 0; i < arr.length; i++) {
+                arr[i] = false;
+            }
+            setProfileDropdownExpanded(JSON.stringify(arr));
+        } else {
+            if(arr[index]) {
+                arr[index] = !arr[index];
+            } else {
+                for(let i = 0; i < arr.length; i++) {
+                    arr[i] = false;
+                }
+                arr[index] = true;
+            }
+            setProfileDropdownExpanded(JSON.stringify(arr));
+        }
+
+        
+    }
+
+    function getProfileDropdownExpandedWrap() {
+        return JSON.parse(profileDropdownExpanded);
     }
 
     
@@ -161,9 +417,15 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         className='nav_right_menu'
                         onClick={() => {toggleRightMenu()}} 
                         style={{
+                            display: 'flex',
+                            alignItems: 'center',
                             paddingLeft: Themes.getTheme().spaces.ltl + 'px',
-                            fontWeight: '800'
-                            }}><b>{optionsIcon == null ? '⋮' : optionsIcon}</b>
+                            }}>
+                        
+                        <span style={{fontWeight: '800'}}><b>{optionsIcon == null ? '⋮' : optionsIcon}</b></span>
+                    
+                        {showProfile && <Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} />}
+                    
                     </div>
 
                 </div>
@@ -196,7 +458,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                 return (
                                     <div key={key} style={{
                                         position: 'relative',
-                                        zIndex: '1999'
+                                        zIndex: '1999',
+                                        width: theme.dimensions.menuWidth + 'px'
                                     }}>
                                         {getDropdownExpandedWrap()[key] && <SfButton className={'nav_left_menu_' + key + '_expanded ' + classNameMenuMobileSelected} styles={{
                                             width: '100%',
@@ -265,7 +528,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
 
                                 return (
                                     <div key={key} style={{
-                                        zIndex: '1999'
+                                        zIndex: '1999',
+                                        width: theme.dimensions.menuWidth + 'px',
                                     }}>
                                         <SfButton  className={'nav_left_menu_' + key + ' ' + classNameMenuMobile} styles={{
                                             width: '100%',
@@ -420,6 +684,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                                                 marginTop: '-2px',
                                                                 cursor:  'pointer',
                                                                 zIndex: '1999',
+                                                                width: theme.dimensions.menuWidth + 'px',
                                                                 ...stylesSubMenu
                                                             }} key={key1} variant={variant} type="filled" caption={item.caption} onClick={() => {toggleDropdownExpandedWrap(key); clickMenu(item.link)}}/>
                                                         )
@@ -456,6 +721,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                 }}>
                     {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={Themes.getTheme().inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {onSearchPressed(searchString)}} />}
                     {showSignIn && <SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '40px', fontSize: '90%', marginLeft: Themes.getTheme().spaces.mod + 'px', ...stylesSignIn}} variant={variant} type={Themes.getTheme().types.filled} caption={signInCaption} onClick={() => {onSignInPressed()}} />}
+                    {showProfile && <Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} />}
                 </div>
             </div>}
         </div>
