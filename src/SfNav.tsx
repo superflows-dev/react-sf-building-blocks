@@ -170,8 +170,8 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                                 }}>
                                     {getProfileDropdownExpandedWrap()[key] && <SfButton className={'nav_profile_menu_' + key + '_expanded ' + classNameMenuMobileSelected} styles={{
                                         width: '100%',
-                                        borderTopLeftRadius: profileComponent != null ? '0px' : key === 0 ? '5px' : '0px',
-                                        borderTopRightRadius: profileComponent != null ? '0px' : key === 0 ? '5px' : '0px',
+                                        borderTopLeftRadius: profilePreamble != null ? '0px' : key === 0 ? '5px' : '0px',
+                                        borderTopRightRadius: profilePreamble != null ? '0px' : key === 0 ? '5px' : '0px',
                                         borderBottomLeftRadius: profileComponent != null ? '0px' : key === profileMenu.length - 1 ? '5px' : '0px',
                                         borderBottomRightRadius: profileComponent != null ? '0px' : key === profileMenu.length - 1 ? '5px' : '0px',
                                         fontWeight: '400',
@@ -184,8 +184,8 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
 
                                     {!getProfileDropdownExpandedWrap()[key] && <SfButton className={'nav_profile_menu_' + key + '_collapsed ' + classNameMenuMobile} styles={{
                                         width: '100%',
-                                        borderTopLeftRadius: profileComponent != null ? '0px' : key === 0 ? '5px' : '0px',
-                                        borderTopRightRadius: profileComponent != null ? '0px' : key === 0 ? '5px' : '0px',
+                                        borderTopLeftRadius: profilePreamble != null ? '0px' : key === 0 ? '5px' : '0px',
+                                        borderTopRightRadius: profilePreamble != null ? '0px' : key === 0 ? '5px' : '0px',
                                         borderBottomLeftRadius: profileComponent != null ? '0px' : key === profileMenu.length - 1 ? '5px' : '0px',
                                         borderBottomRightRadius: profileComponent != null ? '0px' : key === profileMenu.length - 1 ? '5px' : '0px',
                                         fontWeight: '400',
@@ -242,8 +242,8 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                                 }}>
                                     <SfButton  className={'nav_profile_menu_' + key + ' ' + classNameMenuMobile} styles={{
                                         width: '100%',
-                                        borderTopLeftRadius: profileComponent != null ? '0px' : key === 0 ? '5px' : '0px',
-                                        borderTopRightRadius: profileComponent != null ? '0px' : key === 0 ? '5px' : '0px',
+                                        borderTopLeftRadius: profilePreamble != null ? '0px' : key === 0 ? '5px' : '0px',
+                                        borderTopRightRadius: profilePreamble != null ? '0px' : key === 0 ? '5px' : '0px',
                                         borderBottomLeftRadius: profileComponent != null ? '0px' : key === profileMenu.length - 1 ? '5px' : '0px',
                                         borderBottomRightRadius: profileComponent != null ? '0px' : key === profileMenu.length - 1 ? '5px' : '0px',
                                         fontWeight: '400',
