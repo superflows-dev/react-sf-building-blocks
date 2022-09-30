@@ -29,9 +29,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.65% </span>
+                <span class="strong">77.01% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>197/257</span>
+                <span class='fraction'>201/261</span>
             </div>
         
             
@@ -788,7 +788,25 @@
 <a name='L730'></a><a href='#L730'>730</a>
 <a name='L731'></a><a href='#L731'>731</a>
 <a name='L732'></a><a href='#L732'>732</a>
-<a name='L733'></a><a href='#L733'>733</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L733'></a><a href='#L733'>733</a>
+<a name='L734'></a><a href='#L734'>734</a>
+<a name='L735'></a><a href='#L735'>735</a>
+<a name='L736'></a><a href='#L736'>736</a>
+<a name='L737'></a><a href='#L737'>737</a>
+<a name='L738'></a><a href='#L738'>738</a>
+<a name='L739'></a><a href='#L739'>739</a>
+<a name='L740'></a><a href='#L740'>740</a>
+<a name='L741'></a><a href='#L741'>741</a>
+<a name='L742'></a><a href='#L742'>742</a>
+<a name='L743'></a><a href='#L743'>743</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -891,6 +909,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1564,6 +1584,8 @@ interface Props {
     stylesContainerDesktop?: any;
     stylesContainerMobile?: any;
     stylesContainerRightMenu?: any;
+    stylesProfilePicture?: any;
+    stylesProfilePictureContainer?: any;
     stylesProfilePreamble?: any;
     stylesProfileComponent?: any;
     classNameBrand?: any;
@@ -1579,6 +1601,8 @@ interface Props {
     classNameContainerDesktop?: any;
     classNameContainerMobile?: any;
     classNameContainerRightMenu?: any;
+    classNameProfilePicture?: any;
+    classNameProfilePictureContainer?: any;
     classNameProfilePreamble?: any;
     classNameProfileComponent?: any;
     onHomePressed?: () =&gt; void;
@@ -1602,17 +1626,21 @@ interface ProfileProps {
     profileMenu: any;
     classNameProfilePreamble: any;
     classNameProfileComponent: any;
+    classNameProfilePicture: any;
+    classNameProfilePictureContainer: any;
     classNameMenuMobileSelected: any;
     classNameMenuMobile: any;
     classNameSubMenuMobile: any;
     stylesProfilePreamble: any;
     stylesProfileComponent: any;
+    stylesProfilePicture: any;
+    stylesProfilePictureContainer: any;
     stylesMenuMobileSelected: any;
     stylesMenuMobile: any;
     stylesSubMenuMobile: any;
 }
 &nbsp;
-const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpandedWrap, getProfileDropdownExpandedWrap, setExpandProfile, theme, variant, profilePicture, expandProfile, profilePreamble, profileComponent, profileMenu, classNameProfileComponent, classNameSubMenuMobile, classNameMenuMobileSelected, classNameMenuMobile, classNameProfilePreamble, stylesProfileComponent, stylesProfilePreamble, stylesMenuMobileSelected, stylesMenuMobile, stylesSubMenuMobile}: ProfileProps) =&gt; {
+const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpandedWrap, getProfileDropdownExpandedWrap, setExpandProfile, theme, variant, profilePicture, expandProfile, profilePreamble, profileComponent, profileMenu, classNameProfileComponent, classNameSubMenuMobile, classNameMenuMobileSelected, classNameMenuMobile, classNameProfilePreamble, classNameProfilePicture, classNameProfilePictureContainer, stylesProfileComponent, stylesProfilePreamble, stylesMenuMobileSelected, stylesMenuMobile, stylesSubMenuMobile, stylesProfilePicture, stylesProfilePictureContainer}: ProfileProps) =&gt; {
 &nbsp;
     return (
 &nbsp;
@@ -1622,16 +1650,18 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
             alignItems: 'center',
             marginLeft: Themes.getTheme().spaces.mod + 'px'
         }}&gt;
-            &lt;div className='nav_profile_toggle' onClick={(event) =&gt; {event.stopPropagation(); toggleExpandProfile()}} style={{
+            &lt;div className={'nav_profile_toggle ' + classNameProfilePictureContainer} onClick={(event) =&gt; {event.stopPropagation(); toggleExpandProfile()}} style={{
                 display: 'flex',
                 alignItems: 'center',
                 cursor: 'pointer',
+                ...stylesProfilePictureContainer
             }}&gt;
-                {profilePicture.length &gt; 0 &amp;&amp; &lt;img src={profilePicture} 
+                {profilePicture.length &gt; 0 &amp;&amp; &lt;img className={classNameProfilePicture} src={profilePicture} 
                     style={{
                         height: (parseInt(Themes.getTheme().dimensions.navHeight) * 4)/5 + 'px',
                         marginRight: (Themes.getTheme().spaces.min) + 'px',
-                        borderRadius: (parseInt(Themes.getTheme().dimensions.navHeight) * 4)/10 + 'px'
+                        borderRadius: (parseInt(Themes.getTheme().dimensions.navHeight) * 4)/10 + 'px',
+                        ...stylesProfilePicture
                         }} 
                 /&gt; }
                     &lt;small&gt;
@@ -1687,8 +1717,8 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                                 }}&gt;
                                     {getProfileDropdownExpandedWrap()[key] &amp;&amp; &lt;SfButton className={'nav_profile_menu_' + key + '_expanded ' + classNameMenuMobileSelected} styles={{
                                         width: '100%',
-                                        borderTopLeftRadius: profileComponent != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === 0 ? '5px' : '0px',</span>
-                                        borderTopRightRadius: profileComponent != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === 0 ? '5px' : '0px',</span>
+                                        borderTopLeftRadius: profilePreamble != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === 0 ? '5px' : '0px',</span>
+                                        borderTopRightRadius: profilePreamble != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === 0 ? '5px' : '0px',</span>
                                         borderBottomLeftRadius: profileComponent != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === profileMenu.length - 1 ? '5px' : '0px',</span>
                                         borderBottomRightRadius: profileComponent != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === profileMenu.length - 1 ? '5px' : '0px',</span>
                                         fontWeight: '400',
@@ -1701,8 +1731,8 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
 &nbsp;
                                     {!getProfileDropdownExpandedWrap()[key] &amp;&amp; &lt;SfButton className={'nav_profile_menu_' + key + '_collapsed ' + classNameMenuMobile} styles={{
                                         width: '100%',
-                                        borderTopLeftRadius: profileComponent != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === 0 ? '5px' : '0px',</span>
-                                        borderTopRightRadius: profileComponent != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === 0 ? '5px' : '0px',</span>
+                                        borderTopLeftRadius: profilePreamble != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === 0 ? '5px' : '0px',</span>
+                                        borderTopRightRadius: profilePreamble != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === 0 ? '5px' : '0px',</span>
                                         borderBottomLeftRadius: profileComponent != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === profileMenu.length - 1 ? '5px' : '0px',</span>
                                         borderBottomRightRadius: profileComponent != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === profileMenu.length - 1 ? '5px' : '0px',</span>
                                         fontWeight: '400',
@@ -1759,8 +1789,8 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                                 }}&gt;
                                     &lt;SfButton  className={'nav_profile_menu_' + key + ' ' + classNameMenuMobile} styles={{
                                         width: '100%',
-                                        borderTopLeftRadius: profileComponent != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === 0 ? '5px' : '0px',</span>
-                                        borderTopRightRadius: profileComponent != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === 0 ? '5px' : '0px',</span>
+                                        borderTopLeftRadius: profilePreamble != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === 0 ? '5px' : '0px',</span>
+                                        borderTopRightRadius: profilePreamble != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === 0 ? '5px' : '0px',</span>
                                         borderBottomLeftRadius: profileComponent != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === profileMenu.length - 1 ? '5px' : '0px',</span>
                                         borderBottomRightRadius: profileComponent != null ? '0px' : <span class="branch-1 cbranch-no" title="branch not covered" >key === profileMenu.length - 1 ? '5px' : '0px',</span>
                                         fontWeight: '400',
@@ -1780,7 +1810,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                 }
 &nbsp;
                 {profileComponent != null &amp;&amp; &lt;div className={'' + classNameProfileComponent} style={{
-                    boxShadow: '0px 0px 2px #aaa',
+                    boxShadow: '0px 2px 2px #aaa',
                     borderBottomLeftRadius: '5px',
                     borderBottomRightRadius: '5px',
                     display: 'flex',
@@ -1801,7 +1831,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
 &nbsp;
 }
 &nbsp;
-const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null,  showProfile = false, showSearch = true, showSignIn = true, onMenuClicked = () =&gt; {}, onHomePressed = <span class="fstat-no" title="function not covered" >()</span> =&gt; {}, onSearchPressed = <span class="fstat-no" title="function not covered" >()</span> =&gt; {}, onSignInPressed = <span class="fstat-no" title="function not covered" >()</span> =&gt; {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}}: Props) =&gt; {
+const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null,  showProfile = false, showSearch = true, showSignIn = true, onMenuClicked = () =&gt; {}, onHomePressed = <span class="fstat-no" title="function not covered" >()</span> =&gt; {}, onSearchPressed = <span class="fstat-no" title="function not covered" >()</span> =&gt; {}, onSignInPressed = <span class="fstat-no" title="function not covered" >()</span> =&gt; {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", classNameProfilePictureContainer = {}, stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}, stylesProfilePictureContainer = {}}: Props) =&gt; {
 &nbsp;
     const [searchString, setSearchString] = useState('');
     const [dropdownExpanded, setDropdownExpanded] = useState('[]');
@@ -1946,7 +1976,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         
                         &lt;span style={{fontWeight: '800'}}&gt;&lt;b&gt;{optionsIcon == null ? '⋮' : <span class="branch-1 cbranch-no" title="branch not covered" >optionsIcon}</span>&lt;/b&gt;&lt;/span&gt;
                     
-                        {showProfile &amp;&amp; &lt;Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} /&gt;}
+                        {showProfile &amp;&amp; &lt;Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePicture={classNameProfilePicture} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/&gt;}
                     
                     &lt;/div&gt;
 &nbsp;
@@ -2243,7 +2273,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                 }}&gt;
                     {showSearch &amp;&amp; &lt;SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={Themes.getTheme().inputTypes.name} onComplete={(value) =&gt; {setSearchString(value)}} onEnterPressed={() =&gt; {onSearchPressed(searchString)}} /&gt;}
                     {showSignIn &amp;&amp; &lt;SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '40px', fontSize: '90%', marginLeft: Themes.getTheme().spaces.mod + 'px', ...stylesSignIn}} variant={variant} type={Themes.getTheme().types.filled} caption={signInCaption} onClick={() =&gt; {onSignInPressed()}} /&gt;}
-                    {showProfile &amp;&amp; &lt;Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} /&gt;}
+                    {showProfile &amp;&amp; &lt;Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePicture={classNameProfilePicture} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/&gt;}
                 &lt;/div&gt;
             &lt;/div&gt;}
         &lt;/div&gt;
@@ -2259,7 +2289,7 @@ export default SfNav;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Sep 29 2022 10:54:17 GMT+0530 (India Standard Time)
+                at Fri Sep 30 2022 09:58:12 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>

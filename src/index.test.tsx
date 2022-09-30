@@ -27,6 +27,7 @@ afterEach(() => {
   container = null;
 });
 
+
 it('SfNav: Render Profile Portrait', async () => {
 
   jest.setTimeout(TEST_TIMEOUT);
@@ -905,12 +906,20 @@ it('SfNav: Left Menu Click Portrait', async () => {
 
 })
 
+
+
 it('SfInput: Basic Render Primary Date', async () => {
 
   jest.setTimeout(TEST_TIMEOUT);
 
   act(() => {
     render(<SfInput inputType="date" variant={'primary'} caption={'Date'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('sf_input_date');
+
+  act(() => {
+    render(<SfInput mode="night" inputType="date" variant={'primary'} caption={'Date'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
   });
   await new Promise((r) => setTimeout(r, TIMEOUT));
   expect(container.innerHTML).toContain('sf_input_date');
@@ -1763,7 +1772,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
   jest.setTimeout(30000);
 
   act(() => {
-    render(<SfInput inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
+    render(<SfInput mode="night" inputType="mobile" variant={'primary'} caption={'Mobile'} onComplete={(event: any) => {console.log('clicked', event);}} />, container);
   });
   await new Promise((r) => setTimeout(r, 200));
   expect(container.innerHTML).toContain('sf_input_mobile');

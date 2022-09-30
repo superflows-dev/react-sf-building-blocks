@@ -54,44 +54,52 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
     const arrYears = [];
     const arrMonths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
+    const mounted = useRef(false);
+
 
     function setShowDatePickerWrap(value: boolean) {
-        setTimeout(() => {
-            setShowDatePicker(value)
-        }, 500);
+        if(mounted.current) {
+            setTimeout(() => {
+                setShowDatePicker(value)
+            }, 500);
+        }
     }
 
     function setSelectedMMWrap(value: number) {
-        setSelectedMM(value);
-        setSelectedDDWrap(0);
-        if(value > 0) {
-            refInputMM.current.value = value;
-        } else {
-            refInputMM.current.value = "";
+        if(mounted.current) {
+            setSelectedMM(value);
+            setSelectedDDWrap(0);
+            if(value > 0) {
+                refInputMM.current.value = value;
+            } else {
+                refInputMM.current.value = "";
+            }
+            refInputYYYY.current.value = selectedYYYY;
         }
-        refInputYYYY.current.value = selectedYYYY;
     }
 
     function setSelectedYYYYWrap(value: number) {
-        setSelectedYYYY(value);
-        setSelectedMMWrap(0);
-        //setSelectedDDWrap(0);
-        if(value > 0) {
-            refInputYYYY.current.value = value;
+        if(mounted.current) {
+            setSelectedYYYY(value);
+            setSelectedMMWrap(0);
+            //setSelectedDDWrap(0);
+            if(value > 0) {
+                refInputYYYY.current.value = value;
+            }
         }
-        
     }
 
     function setSelectedDDWrap(value: number) {
-        setSelectedDD(value);
-        if(value > 0) {
-            refInputDD.current.value = value;
-        } else {
-            refInputDD.current.value = "";
+        if(mounted.current) {
+            setSelectedDD(value);
+            if(value > 0) {
+                refInputDD.current.value = value;
+            } else {
+                refInputDD.current.value = "";
+            }
+            refInputMM.current.value = selectedMM;
+            refInputYYYY.current.value = selectedYYYY;
         }
-        refInputMM.current.value = selectedMM;
-        refInputYYYY.current.value = selectedYYYY;
-        
     }
 
     for(let i = new Date().getFullYear(); i >= 1960; i--) {
@@ -100,11 +108,15 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
 
 
     function setShowCountryCodesWrap(value: boolean) {
-        setTimeout(() => { setShowCountryCodes(value) }, 200);
+        if(mounted.current) {
+            setTimeout(() => { setShowCountryCodes(value) }, 200);
+        }
     }
 
     function setSelectedCountryCodeWrap(value: any) {
-        setSelectedCountryCode(JSON.stringify(value));
+        if(mounted.current) {
+            setSelectedCountryCode(JSON.stringify(value));
+        }
     }
 
     function getSelectedCountryCodeWrap() {
@@ -112,7 +124,9 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
     }
 
     function setCountryCodesWrap(value: any) {
-        setCountryCodes(JSON.stringify(value))
+        if(mounted.current) {
+            setCountryCodes(JSON.stringify(value))
+        }
     }
 
     function getCountryCodesWrap() {
@@ -122,32 +136,32 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
 
     function resetColors() {
 
-        if(mode == Themes.getTheme().modes.day) {
-            setBorderColor(Util.shadeColor(Util.getBorderColor(theme, variant, Themes.getTheme().types.outlined), 140));
-            setTextColor(Util.getTextColor(theme, variant, Themes.getTheme().types.outlined));    
-        } else {
-            setBorderColor(Util.getBorderColor(theme, variant, Themes.getTheme().types.outlined));
-            setTextColor(Util.shadeColor(Util.getTextColor(theme, variant, Themes.getTheme().types.outlined), 140));    
-        }
+            if(mode == Themes.getTheme().modes.day) {
+                setBorderColor(Util.shadeColor(Util.getBorderColor(theme, variant, Themes.getTheme().types.outlined), 140));
+                setTextColor(Util.getTextColor(theme, variant, Themes.getTheme().types.outlined));    
+            } else {
+                setBorderColor(Util.getBorderColor(theme, variant, Themes.getTheme().types.outlined));
+                setTextColor(Util.shadeColor(Util.getTextColor(theme, variant, Themes.getTheme().types.outlined), 140));    
+            }
         
     }
 
     function resetType() {
-        if(inputType == Themes.getTheme().inputTypes.name) {
-            setIpType("text");
-        }
-        if(inputType == Themes.getTheme().inputTypes.email) {
-            setIpType("email");
-        }
-        if(inputType == Themes.getTheme().inputTypes.mobile) {
-            setIpType("number");
-        }
-        if(inputType == Themes.getTheme().inputTypes.dateOfBirth) {
-            setIpType("number");
-        }
-        if(inputType == Themes.getTheme().inputTypes.date) {
-            setIpType("number");
-        }
+            if(inputType == Themes.getTheme().inputTypes.name) {
+                setIpType("text");
+            }
+            if(inputType == Themes.getTheme().inputTypes.email) {
+                setIpType("email");
+            }
+            if(inputType == Themes.getTheme().inputTypes.mobile) {
+                setIpType("number");
+            }
+            if(inputType == Themes.getTheme().inputTypes.dateOfBirth) {
+                setIpType("number");
+            }
+            if(inputType == Themes.getTheme().inputTypes.date) {
+                setIpType("number");
+            }
     }
 
     function resetFocus() {
@@ -163,18 +177,21 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
 
     async function populateCountryCodes() {
 
-        const result = await Services.getCountryCodes();
-        const arr = [];
+        if(mounted.current) {
 
-        for(var i = 0; i < result.length; i++) {
+            const result = await Services.getCountryCodes();
+            const arr = [];
 
-            if(result[i].name.toLowerCase().indexOf(countryCodesSearchString.toLowerCase()) >= 0) {
-                arr.push(result[i]);
+            for(var i = 0; i < result.length; i++) {
+
+                if(result[i].name.toLowerCase().indexOf(countryCodesSearchString.toLowerCase()) >= 0) {
+                    arr.push(result[i]);
+                }
+
             }
 
+            setCountryCodesWrap(arr);
         }
-
-        setCountryCodesWrap(arr);
     }
 
     function setFocus() {
@@ -184,16 +201,19 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
 
     function onClickIsd() {
 
-        if(showCountryCodes) {
-            setShowCountryCodesWrap(false)
-        } else {
-            setShowCountryCodesWrap(true)
+        if(mounted.current) {
+            if(showCountryCodes) {
+                setShowCountryCodesWrap(false)
+            } else {
+                setShowCountryCodesWrap(true)
+            }
         }
-
     }
 
     function onChangeCountryCodesSearchString(e:any) {
-        setCountryCodesSearchString(e.target.value);
+        if(mounted.current) {
+            setCountryCodesSearchString(e.target.value);
+        }
     }
 
     function onSubmitCountryCode() {
@@ -210,73 +230,81 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
 
     const onKeyUp = (event: any) => {
 
-        if(inputType == Themes.getTheme().inputTypes.name) {
-            if(Util.validateName(event.target.value)) {
-                onComplete(event.target.value);
-                resetColors();
-                if(event.key == "Enter") onEnterPressed(); 
-            } else {
-                setBorderColor(Themes.getTheme().colors.dangerBgColor);
-                onComplete('');
-            }
-        }
-
-        if(inputType == Themes.getTheme().inputTypes.email) {
-            if(Util.validateEmail(event.target.value)) {
-                onComplete(event.target.value);
-                resetColors();
-                if(event.key == "Enter") onEnterPressed(); 
-            } else {
-                setBorderColor(Themes.getTheme().colors.dangerBgColor);
-                onComplete('');
-            }
-        }
-
-        if(inputType == Themes.getTheme().inputTypes.mobile) {
-            if(Util.validateMobile(event.target.value) && selectedCountryCode != "{}") {
-                onComplete(JSON.stringify({isd: getSelectedCountryCodeWrap().dialCode, number: event.target.value}));
-                resetColors();
-                if(event.key == "Enter") onEnterPressed(); 
-            } else {
-                setBorderColor(Themes.getTheme().colors.dangerBgColor);
-                onComplete('');
-            }
-        }
-
-        if(inputType == Themes.getTheme().inputTypes.dateOfBirth) {
-            if(Util.validateDDMMYYYY(dd, mm, yyyy)) {
-                const dateVal = parseInt((Date.parse(yyyy + "-" + mm + "-" + dd)/1000) + "");
-                onComplete(dateVal + "");
-                if(lastKey == "Enter") onEnterPressed(); 
-                resetColors();
-            } else {
-                if(dd == "" && mm == "" && yyyy == "") {
+        if(mounted.current) {
+            if(inputType == Themes.getTheme().inputTypes.name) {
+                if(Util.validateName(event.target.value)) {
+                    onComplete(event.target.value);
                     resetColors();
+                    if(event.key == "Enter") onEnterPressed(); 
                 } else {
                     setBorderColor(Themes.getTheme().colors.dangerBgColor);
+                    onComplete('');
                 }
-                onComplete("");
+            }
+
+            if(inputType == Themes.getTheme().inputTypes.email) {
+                if(Util.validateEmail(event.target.value)) {
+                    onComplete(event.target.value);
+                    resetColors();
+                    if(event.key == "Enter") onEnterPressed(); 
+                } else {
+                    setBorderColor(Themes.getTheme().colors.dangerBgColor);
+                    onComplete('');
+                }
+            }
+
+            if(inputType == Themes.getTheme().inputTypes.mobile) {
+                if(Util.validateMobile(event.target.value) && selectedCountryCode != "{}") {
+                    onComplete(JSON.stringify({isd: getSelectedCountryCodeWrap().dialCode, number: event.target.value}));
+                    resetColors();
+                    if(event.key == "Enter") onEnterPressed(); 
+                } else {
+                    setBorderColor(Themes.getTheme().colors.dangerBgColor);
+                    onComplete('');
+                }
+            }
+
+            if(inputType == Themes.getTheme().inputTypes.dateOfBirth) {
+                if(Util.validateDDMMYYYY(dd, mm, yyyy)) {
+                    const dateVal = parseInt((Date.parse(yyyy + "-" + mm + "-" + dd)/1000) + "");
+                    onComplete(dateVal + "");
+                    if(lastKey == "Enter") onEnterPressed(); 
+                    resetColors();
+                } else {
+                    if(dd == "" && mm == "" && yyyy == "") {
+                        resetColors();
+                    } else {
+                        setBorderColor(Themes.getTheme().colors.dangerBgColor);
+                    }
+                    onComplete("");
+                }
             }
         }
 
     }
 
     const onKeyUpDD = (event: any) => {
-        setLastKey(event.key);
-        setDD(event.target.value + "");
-        onKeyUp(event);
+        if(mounted.current) {
+            setLastKey(event.key);
+            setDD(event.target.value + "");
+            onKeyUp(event);
+        }
     }
 
     const onKeyUpMM = (event: any) => {
-        setLastKey(event.key);
-        setMM(event.target.value + "");
-        onKeyUp(event);
+        if(mounted.current) {
+            setLastKey(event.key);
+            setMM(event.target.value + "");
+            onKeyUp(event);
+        }
     }
 
     const onKeyUpYYYY = (event: any) => {
-        setLastKey(event.key);
-        setYYYY(event.target.value + "");
-        onKeyUp(event);
+        if(mounted.current) {
+            setLastKey(event.key);
+            setYYYY(event.target.value + "");
+            onKeyUp(event);
+        }
     }
 
     React.useEffect(() => {
@@ -325,6 +353,14 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
         }
 
     }, [])
+
+    React.useEffect(() => {
+        mounted.current = true;
+
+        return () => {
+            mounted.current = false;
+        };
+    }, []);
 
     React.useEffect(() => {
 
