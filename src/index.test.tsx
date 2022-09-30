@@ -1872,7 +1872,7 @@ it('SfInput: Basic Render Primary Mobile > select ISD > correct mobile', async (
   });
 
   await new Promise((r) => setTimeout(r, 2000));
-  expect(divInput.style.borderColor).toBe('#99faff');
+  expect(divInput.style.borderColor).toBe('#0d6efd');
 
 
 });
