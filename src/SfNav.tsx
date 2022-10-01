@@ -371,7 +371,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
     
     return (
         <div style={{
-            color: Util.getTextColor(theme, variant, theme.types.outlined)
+            color: Util.getTextColor(theme, variant == theme.variants.dark ? theme.variants.light :  variant == theme.variants.light ? theme.variants.dark : variant, theme.types.outlined)
         }}>
             {Util.getWindowDimensions().width <= theme.breakpoints.tablet && <div style={{position: 'relative'}}>
                 
@@ -599,8 +599,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         ...stylesContainerRightMenu
                     }}>
 
-                        {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {toggleRightMenu(); onSearchPressed(searchString)}} />}
-                        {showSignIn && <SfButton className={'btn_signin_portrait ' + classNameSignIn} styles={{height: '40px', fontSize: '90%',  ...stylesSignIn}} variant={variant} type={theme.types.filled} caption={signInCaption} onClick={() => {toggleRightMenu(); onSignInPressed();}} />}
+                        {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {toggleRightMenu(); onSearchPressed(searchString)}} />}
+                        {showSignIn && <SfButton className={'btn_signin_portrait ' + classNameSignIn} styles={{height: '40px', fontSize: '90%',  ...stylesSignIn}} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} type={theme.types.filled} caption={signInCaption} onClick={() => {toggleRightMenu(); onSignInPressed();}} />}
                         
                     </div>
 
@@ -729,8 +729,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     display: 'flex',
                     alignItems: 'center'
                 }}>
-                    {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {onSearchPressed(searchString)}} />}
-                    {showSignIn && <SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '40px', fontSize: '90%', marginLeft: theme.spaces.mod + 'px', ...stylesSignIn}} variant={variant} type={theme.types.filled} caption={signInCaption} onClick={() => {onSignInPressed()}} />}
+                    {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {onSearchPressed(searchString)}} />}
+                    {showSignIn && <SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '40px', fontSize: '90%', marginLeft: theme.spaces.mod + 'px', ...stylesSignIn}} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} type={theme.types.filled} caption={signInCaption} onClick={() => {onSignInPressed()}} />}
                     {showProfile && <Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePicture={classNameProfilePicture} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/>}
                 </div>
             </div>}

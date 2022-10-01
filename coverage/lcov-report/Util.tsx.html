@@ -326,7 +326,15 @@
 <a name='L268'></a><a href='#L268'>268</a>
 <a name='L269'></a><a href='#L269'>269</a>
 <a name='L270'></a><a href='#L270'>270</a>
-<a name='L271'></a><a href='#L271'>271</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">90x</span>
@@ -486,48 +494,56 @@
 <span class="cline-any cline-yes">95x</span>
 <span class="cline-any cline-yes">88x</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -756,49 +772,57 @@
             if(type == theme.types.filled) {
                 ret = theme.colors.primaryBgColor
             } else <span class="missing-if-branch" title="else path not taken" >E</span>if(type == theme.types.outlined) {
-                ret = theme.colors.primaryTextColor
+                //ret = theme.colors.primaryTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.secondary) {
             if(type == theme.types.filled) {
                 ret = theme.colors.secondaryBgColor
             } else <span class="missing-if-branch" title="else path not taken" >E</span>if(type == theme.types.outlined) {
-                ret = theme.colors.secondaryTextColor
+                //ret = theme.colors.secondaryTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.danger) {
             if(type == theme.types.filled) {
                 ret = theme.colors.dangerBgColor
             } else <span class="missing-if-branch" title="else path not taken" >E</span>if(type == theme.types.outlined) {
-                ret = theme.colors.dangerTextColor
+                //ret = theme.colors.dangerTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.success) {
             if(type == theme.types.filled) {
                 ret = theme.colors.successBgColor
             } else <span class="missing-if-branch" title="else path not taken" >E</span>if(type == theme.types.outlined) {
-                ret = theme.colors.successTextColor
+                //ret = theme.colors.successTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.warning) {
             if(type == theme.types.filled) {
                 ret = theme.colors.warningBgColor
             } else <span class="missing-if-branch" title="else path not taken" >E</span>if(type == theme.types.outlined) {
-                ret = theme.colors.warningTextColor
+                //ret = theme.colors.warningTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.info) {
             if(type == theme.types.filled) {
                 ret = theme.colors.infoBgColor
             } else <span class="missing-if-branch" title="else path not taken" >E</span>if(type == theme.types.outlined) {
-                ret = theme.colors.infoTextColor
+                //ret = theme.colors.infoTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.light) {
             if(type == theme.types.filled) {
                 ret = theme.colors.lightBgColor
             } else <span class="missing-if-branch" title="else path not taken" >E</span>if(type == theme.types.outlined) {
-                ret = theme.colors.lightTextColor
+                //ret = theme.colors.lightTextColor
+                ret = 'transparent';
             }
         } else <span class="missing-if-branch" title="else path not taken" >E</span>if(variant == theme.variants.dark) {
             if(type == theme.types.filled) {
                 ret = theme.colors.darkBgColor
             } else <span class="missing-if-branch" title="else path not taken" >E</span>if(type == theme.types.outlined) {
-                ret = theme.colors.darkTextColor
+                //ret = theme.colors.darkTextColor
+                ret = 'transparent';
             }
         }
 &nbsp;
@@ -873,7 +897,7 @@ export default Util;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Oct 01 2022 10:03:47 GMT+0530 (India Standard Time)
+                at Sat Oct 01 2022 14:52:52 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>

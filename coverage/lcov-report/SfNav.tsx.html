@@ -29,9 +29,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.01% </span>
+                <span class="strong">75.09% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>201/261</span>
+                <span class='fraction'>211/281</span>
             </div>
         
             
@@ -1913,7 +1913,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
     
     return (
         &lt;div style={{
-            color: Util.getTextColor(theme, variant, theme.types.outlined)
+            color: Util.getTextColor(theme, variant == theme.variants.dark ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.light </span>:  variant == theme.variants.light ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.dark </span>: variant, theme.types.outlined)
         }}&gt;
             {Util.getWindowDimensions().width &lt;= theme.breakpoints.tablet &amp;&amp; &lt;div style={{position: 'relative'}}&gt;
                 
@@ -2141,8 +2141,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         ...stylesContainerRightMenu
                     }}&gt;
 &nbsp;
-                        {showSearch &amp;&amp; &lt;SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : <span class="branch-1 cbranch-no" title="branch not covered" >null}</span> inputType={theme.inputTypes.name} onComplete={(value) =&gt; {setSearchString(value)}} onEnterPressed={() =&gt; {toggleRightMenu(); onSearchPressed(searchString)}} /&gt;}
-                        {showSignIn &amp;&amp; &lt;SfButton className={'btn_signin_portrait ' + classNameSignIn} styles={{height: '40px', fontSize: '90%',  ...stylesSignIn}} variant={variant} type={theme.types.filled} caption={signInCaption} onClick={() =&gt; {toggleRightMenu(); onSignInPressed();}} /&gt;}
+                        {showSearch &amp;&amp; &lt;SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant == theme.variants.dark ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.light </span>: variant == theme.variants.light ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.dark </span>: variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : <span class="branch-1 cbranch-no" title="branch not covered" >null}</span> inputType={theme.inputTypes.name} onComplete={(value) =&gt; {setSearchString(value)}} onEnterPressed={() =&gt; {toggleRightMenu(); onSearchPressed(searchString)}} /&gt;}
+                        {showSignIn &amp;&amp; &lt;SfButton className={'btn_signin_portrait ' + classNameSignIn} styles={{height: '40px', fontSize: '90%',  ...stylesSignIn}} variant={variant == theme.variants.dark ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.light </span>: variant == theme.variants.light ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.dark </span>: variant} type={theme.types.filled} caption={signInCaption} onClick={() =&gt; {toggleRightMenu(); onSignInPressed();}} /&gt;}
                         
                     &lt;/div&gt;
 &nbsp;
@@ -2271,8 +2271,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     display: 'flex',
                     alignItems: 'center'
                 }}&gt;
-                    {showSearch &amp;&amp; &lt;SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) =&gt; {setSearchString(value)}} onEnterPressed={() =&gt; {onSearchPressed(searchString)}} /&gt;}
-                    {showSignIn &amp;&amp; &lt;SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '40px', fontSize: '90%', marginLeft: theme.spaces.mod + 'px', ...stylesSignIn}} variant={variant} type={theme.types.filled} caption={signInCaption} onClick={() =&gt; {onSignInPressed()}} /&gt;}
+                    {showSearch &amp;&amp; &lt;SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant == theme.variants.dark ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.light </span>: variant == theme.variants.light ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.dark </span>: variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) =&gt; {setSearchString(value)}} onEnterPressed={() =&gt; {onSearchPressed(searchString)}} /&gt;}
+                    {showSignIn &amp;&amp; &lt;SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '40px', fontSize: '90%', marginLeft: theme.spaces.mod + 'px', ...stylesSignIn}} variant={variant == theme.variants.dark ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.light </span>: variant == theme.variants.light ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.dark </span>: variant} type={theme.types.filled} caption={signInCaption} onClick={() =&gt; {onSignInPressed()}} /&gt;}
                     {showProfile &amp;&amp; &lt;Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePicture={classNameProfilePicture} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/&gt;}
                 &lt;/div&gt;
             &lt;/div&gt;}
@@ -2289,7 +2289,7 @@ export default SfNav;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Oct 01 2022 10:03:47 GMT+0530 (India Standard Time)
+                at Sat Oct 01 2022 14:52:52 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>

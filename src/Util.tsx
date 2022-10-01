@@ -158,49 +158,57 @@ const Util = {
             if(type == theme.types.filled) {
                 ret = theme.colors.primaryBgColor
             } else if(type == theme.types.outlined) {
-                ret = theme.colors.primaryTextColor
+                //ret = theme.colors.primaryTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.secondary) {
             if(type == theme.types.filled) {
                 ret = theme.colors.secondaryBgColor
             } else if(type == theme.types.outlined) {
-                ret = theme.colors.secondaryTextColor
+                //ret = theme.colors.secondaryTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.danger) {
             if(type == theme.types.filled) {
                 ret = theme.colors.dangerBgColor
             } else if(type == theme.types.outlined) {
-                ret = theme.colors.dangerTextColor
+                //ret = theme.colors.dangerTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.success) {
             if(type == theme.types.filled) {
                 ret = theme.colors.successBgColor
             } else if(type == theme.types.outlined) {
-                ret = theme.colors.successTextColor
+                //ret = theme.colors.successTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.warning) {
             if(type == theme.types.filled) {
                 ret = theme.colors.warningBgColor
             } else if(type == theme.types.outlined) {
-                ret = theme.colors.warningTextColor
+                //ret = theme.colors.warningTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.info) {
             if(type == theme.types.filled) {
                 ret = theme.colors.infoBgColor
             } else if(type == theme.types.outlined) {
-                ret = theme.colors.infoTextColor
+                //ret = theme.colors.infoTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.light) {
             if(type == theme.types.filled) {
                 ret = theme.colors.lightBgColor
             } else if(type == theme.types.outlined) {
-                ret = theme.colors.lightTextColor
+                //ret = theme.colors.lightTextColor
+                ret = 'transparent';
             }
         } else if(variant == theme.variants.dark) {
             if(type == theme.types.filled) {
                 ret = theme.colors.darkBgColor
             } else if(type == theme.types.outlined) {
-                ret = theme.colors.darkTextColor
+                //ret = theme.colors.darkTextColor
+                ret = 'transparent';
             }
         }
 
