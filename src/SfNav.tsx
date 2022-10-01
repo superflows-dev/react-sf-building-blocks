@@ -106,7 +106,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
             position: 'relative',
             display: 'flex',
             alignItems: 'center',
-            marginLeft: Themes.getTheme().spaces.mod + 'px'
+            marginLeft: theme.spaces.mod + 'px'
         }}>
             <div className={'nav_profile_toggle ' + classNameProfilePictureContainer} onClick={(event) => {event.stopPropagation(); toggleExpandProfile()}} style={{
                 display: 'flex',
@@ -116,9 +116,9 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
             }}>
                 {profilePicture.length > 0 && <img className={classNameProfilePicture} src={profilePicture} 
                     style={{
-                        height: (parseInt(Themes.getTheme().dimensions.navHeight) * 4)/5 + 'px',
-                        marginRight: (Themes.getTheme().spaces.min) + 'px',
-                        borderRadius: (parseInt(Themes.getTheme().dimensions.navHeight) * 4)/10 + 'px',
+                        height: (parseInt(theme.dimensions.navHeight) * 4)/5 + 'px',
+                        marginRight: (theme.spaces.min) + 'px',
+                        borderRadius: (parseInt(theme.dimensions.navHeight) * 4)/10 + 'px',
                         ...stylesProfilePicture
                         }} 
                 /> }
@@ -134,7 +134,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                 flexDirection: 'column',
                 alignItems: 'stretch',
                 position: 'absolute',
-                top: Themes.getTheme().dimensions.navHeight + 'px',
+                top: theme.dimensions.navHeight + 'px',
                 right: '0px'
             }}>
                 <div 
@@ -146,7 +146,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                         width: '100%',
                         height: '100%',
                         backgroundColor: 'transparent',
-                        zIndex: '1998'
+                        zIndex: '300'
                     }} onClick={(event) => {event.stopPropagation(); toggleProfileDropdownExpandedWrap(-1); toggleExpandProfile()}}>
                 </div>
 
@@ -155,7 +155,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                     borderTopRightRadius: '5px',
                     display: 'flex',
                     justifyContent: 'center',
-                    zIndex: '1999',
+                    zIndex: '301',
                     backgroundColor: '#efefef',
                     ...stylesProfilePreamble
                 }}>
@@ -169,7 +169,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                             return (
                                 <div key={key} style={{
                                     position: 'relative',
-                                    zIndex: '1999',
+                                    zIndex: '301',
                                     width: theme.dimensions.menuWidth + 'px'
 
                                 }}>
@@ -198,7 +198,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                                         cursor:  'pointer',
                                         justifyContent: 'flex-start',
                                         boxShadow: profileComponent != null ? 'none' : key === profileMenu.length - 1 ? '0px 2px 2px #aaa' : 'none',
-                                        zIndex: '1999',
+                                        zIndex: '301',
                                         ...stylesMenuMobile
                                         }} variant={variant} type="filled" caption={element[0].caption + (!getProfileDropdownExpandedWrap()[key] ? ' ▸' : ' ▸')}  onClick={(event) => {event.stopPropagation(); toggleProfileDropdownExpandedWrap(key)}}/>}
 
@@ -210,7 +210,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                                         top: '0px',
                                         display: 'flex',
                                         alignItems: 'stretch',
-                                        zIndex: '1999'
+                                        zIndex: '301'
                                     }}>
                                         {
                                             element.slice(1).map((item: any, key1: any) => {
@@ -242,7 +242,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
 
                             return (
                                 <div key={key} style={{
-                                    zIndex: '1999',
+                                    zIndex: '301',
                                     width: theme.dimensions.menuWidth + 'px',
                                 }}>
                                     <SfButton  className={'nav_profile_menu_' + key + ' ' + classNameMenuMobile} styles={{
@@ -255,7 +255,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                                         marginTop: '-2px',
                                         cursor:  'pointer',
                                         justifyContent: 'flex-start',
-                                        zIndex: '1999',
+                                        zIndex: '301',
                                         boxShadow: profileComponent != null ? 'none' : key === profileMenu.length - 1 ? '0px 2px 2px #aaa' : 'none',
                                         ...stylesMenuMobile
                                         }} key={key} variant={variant} type="filled" caption={element.caption} onClick={(event) => {event.stopPropagation(); toggleProfileDropdownExpandedWrap(-1); setExpandProfile(false); clickMenu(element.link)}}/>
@@ -273,7 +273,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                     borderBottomRightRadius: '5px',
                     display: 'flex',
                     justifyContent: 'center',
-                    zIndex: '1999',
+                    zIndex: '301',
                     backgroundColor: '#efefef',
                     ...stylesProfileComponent
                     
@@ -371,20 +371,20 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
     
     return (
         <div style={{
-            color: Util.getTextColor(theme, variant, Themes.getTheme().types.outlined)
+            color: Util.getTextColor(theme, variant, theme.types.outlined)
         }}>
-            {Util.getWindowDimensions().width <= Themes.getTheme().breakpoints.tablet && <div style={{position: 'relative'}}>
+            {Util.getWindowDimensions().width <= theme.breakpoints.tablet && <div style={{position: 'relative'}}>
                 
                 <div 
                 className={classNameContainerMobile}
                 style={{
                     position: 'relative',
-                    height: Themes.getTheme().dimensions.navHeight + 'px',
+                    height: theme.dimensions.navHeight + 'px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    paddingLeft: Themes.getTheme().spaces.big + 'px',
-                    paddingRight: Themes.getTheme().spaces.big + 'px',
+                    paddingLeft: theme.spaces.big + 'px',
+                    paddingRight: theme.spaces.big + 'px',
                     ...stylesContainerMobile
                 }}>
                     <div style={{
@@ -392,7 +392,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         alignItems: 'center'
                     }}>
                         <div className='nav_left_menu' onClick={() => {toggleLeftMenu()}} style={{
-                            paddingRight: Themes.getTheme().spaces.ltl + 'px',
+                            paddingRight: theme.spaces.ltl + 'px',
                             fontWeight: '800'
                             }}><b>{menuIcon == null ? '☰' : menuIcon}</b></div>
                         
@@ -408,8 +408,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                             onClick={() => {onHomePressed()}}
                             style={{
                                 cursor: 'pointer',
-                                height: (parseInt(Themes.getTheme().dimensions.navHeight) * 8)/10 + 'px',
-                                paddingRight: Themes.getTheme().spaces.ltl + 'px',
+                                height: (parseInt(theme.dimensions.navHeight) * 8)/10 + 'px',
+                                paddingRight: theme.spaces.ltl + 'px',
                                 ...stylesBrandLogo
                             }}/>}
                             {brand != "" && <div 
@@ -429,7 +429,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         style={{
                             display: 'flex',
                             alignItems: 'center',
-                            paddingLeft: Themes.getTheme().spaces.ltl + 'px',
+                            paddingLeft: theme.spaces.ltl + 'px',
                             }}>
                         
                         <span style={{fontWeight: '800'}}><b>{optionsIcon == null ? '⋮' : optionsIcon}</b></span>
@@ -445,8 +445,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     flexDirection: 'column',
                     alignItems: 'stretch',
                     position: 'absolute',
-                    left: Themes.getTheme().spaces.ltl + 'px',
-                    top: (parseInt(Themes.getTheme().dimensions.navHeight)) + 'px',
+                    left: theme.spaces.ltl + 'px',
+                    top: (parseInt(theme.dimensions.navHeight)) + 'px',
                 }}>
                     
                     <div className='nav_div_left_menu_overlay' style={{
@@ -456,7 +456,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         width: '100%',
                         height: '100%',
                         backgroundColor: 'transparent',
-                        zIndex: '1998'
+                        zIndex: '300'
                     }} onClick={() => {toggleDropdownExpandedWrap(-1); toggleLeftMenu()}}>
                     </div>
 
@@ -496,7 +496,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                             cursor:  'pointer',
                                             justifyContent: 'flex-start',
                                             boxShadow: key === menu.length - 1 ? '0px 2px 2px #aaa' : 'none',
-                                            zIndex: '1999',
+                                            zIndex: '301',
                                             ...stylesMenuMobile
                                             }} variant={variant} type="filled" caption={element[0].caption + (!getDropdownExpandedWrap()[key] ? ' ▸' : ' ▸')}  onClick={() => {toggleDropdownExpandedWrap(key)}}/>}
 
@@ -507,7 +507,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                             top: '0px',
                                             display: 'flex',
                                             alignItems: 'stretch',
-                                            zIndex: '1999'
+                                            zIndex: '301'
                                         }}>
                                             {
                                                 element.slice(1).map((item: any, key1: any) => {
@@ -538,7 +538,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
 
                                 return (
                                     <div key={key} style={{
-                                        zIndex: '1999',
+                                        zIndex: '301',
                                         width: theme.dimensions.menuWidth + 'px',
                                     }}>
                                         <SfButton  className={'nav_left_menu_' + key + ' ' + classNameMenuMobile} styles={{
@@ -551,7 +551,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                             marginTop: '-2px',
                                             cursor:  'pointer',
                                             justifyContent: 'flex-start',
-                                            zIndex: '1999',
+                                            zIndex: '301',
                                             ...stylesMenuMobile
                                             }} key={key} variant={variant} type="filled" caption={element.caption} onClick={() => {toggleDropdownExpandedWrap(-1); setShowLeftMenu(false); clickMenu(element.link)}}/>
                                     </div>
@@ -569,8 +569,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     flexDirection: 'column',
                     alignItems: 'stretch',
                     position: 'absolute',
-                    right: Themes.getTheme().spaces.ltl + 'px',
-                    top: (parseInt(Themes.getTheme().dimensions.navHeight)) + 'px',
+                    right: theme.spaces.ltl + 'px',
+                    top: (parseInt(theme.dimensions.navHeight)) + 'px',
                 }}>
                     <div 
                     className='nav_div_right_menu_overlay' 
@@ -581,7 +581,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         width: '100%',
                         height: '100%',
                         backgroundColor: 'transparent',
-                        zIndex: '1998'
+                        zIndex: '300'
                     }} onClick={() => {toggleRightMenu()}}>
                     </div>
 
@@ -593,29 +593,29 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         alignItems: 'stretch',
                         border: 'solid 1px' + Util.getBorderColor(theme, variant, "outlined"),
                         backgroundColor: Util.getTextColor(theme, variant, "filled"),
-                        borderRadius: parseInt(Themes.getTheme().spaces.min) + 'px',
-                        padding: parseInt(Themes.getTheme().spaces.min) + 'px',
-                        zIndex: '1999',
+                        borderRadius: parseInt(theme.spaces.min) + 'px',
+                        padding: parseInt(theme.spaces.min) + 'px',
+                        zIndex: '301',
                         ...stylesContainerRightMenu
                     }}>
 
-                        {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={Themes.getTheme().inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {toggleRightMenu(); onSearchPressed(searchString)}} />}
-                        {showSignIn && <SfButton className={'btn_signin_portrait ' + classNameSignIn} styles={{height: '40px', fontSize: '90%',  ...stylesSignIn}} variant={variant} type={Themes.getTheme().types.filled} caption={signInCaption} onClick={() => {toggleRightMenu(); onSignInPressed();}} />}
+                        {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {toggleRightMenu(); onSearchPressed(searchString)}} />}
+                        {showSignIn && <SfButton className={'btn_signin_portrait ' + classNameSignIn} styles={{height: '40px', fontSize: '90%',  ...stylesSignIn}} variant={variant} type={theme.types.filled} caption={signInCaption} onClick={() => {toggleRightMenu(); onSignInPressed();}} />}
                         
                     </div>
 
                 </div>}
 
             </div>}
-            {Util.getWindowDimensions().width > Themes.getTheme().breakpoints.tablet && <div 
+            {Util.getWindowDimensions().width > theme.breakpoints.tablet && <div 
             className={classNameContainerDesktop}
             style={{
-                height: Themes.getTheme().dimensions.navHeight + 'px',
+                height: theme.dimensions.navHeight + 'px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingLeft: Themes.getTheme().spaces.big + 'px',
-                paddingRight: Themes.getTheme().spaces.big + 'px',
+                paddingLeft: theme.spaces.big + 'px',
+                paddingRight: theme.spaces.big + 'px',
                 ...stylesContainerDesktop
             }}>
                 <div style={{
@@ -628,8 +628,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                      onClick={() => {onHomePressed()}}
                      style={{
                         cursor: 'pointer',
-                        height: (parseInt(Themes.getTheme().dimensions.navHeight) * 10)/10 + 'px',
-                        paddingRight: Themes.getTheme().spaces.ltl + 'px',
+                        height: (parseInt(theme.dimensions.navHeight) * 10)/10 + 'px',
+                        paddingRight: theme.spaces.ltl + 'px',
                         ...stylesBrandLogo
                     }}/>}
                     {brand != "" && <div 
@@ -658,7 +658,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                     <div key={key} style={{
                                         position: 'relative',
                                         fontWeight: '500',
-                                        marginLeft: Themes.getTheme().spaces.big + 'px',
+                                        marginLeft: theme.spaces.big + 'px',
                                         cursor: 'pointer',
                                     }}>
                                         <div className={'nav_menu_'+key + ' ' + classNameMenu} style={{display: 'flex', alignItems: 'center', ...stylesMenu}} onClick={() => {toggleDropdownExpandedWrap(key)}}>{element[0].caption}&nbsp;<small><small>{!getDropdownExpandedWrap()[key] && '▼'}{getDropdownExpandedWrap()[key] && '▲'}</small></small></div>
@@ -678,7 +678,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                                     width: '100%',
                                                     height: '100%',
                                                     backgroundColor: 'transparent',
-                                                    zIndex: '1998'
+                                                    zIndex: '300'
                                                 }} onClick={() => {toggleDropdownExpandedWrap(key)}}>
                                                 </div>
                                                 {
@@ -693,7 +693,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                                                 fontWeight: '400',
                                                                 marginTop: '-2px',
                                                                 cursor:  'pointer',
-                                                                zIndex: '1999',
+                                                                zIndex: '301',
                                                                 width: theme.dimensions.menuWidth + 'px',
                                                                 ...stylesSubMenu
                                                             }} key={key1} variant={variant} type="filled" caption={item.caption} onClick={() => {toggleDropdownExpandedWrap(key); clickMenu(item.link)}}/>
@@ -714,7 +714,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                     <div className={'nav_menu_' + key + ' ' + classNameMenu} key={key} style={{
                                         cursor: 'pointer',
                                         fontWeight: '500',
-                                        marginLeft: Themes.getTheme().spaces.big + 'px',
+                                        marginLeft: theme.spaces.big + 'px',
                                         ...stylesMenu
                                     }} onClick={() => {
                                         clickMenu(element.link);
@@ -729,8 +729,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     display: 'flex',
                     alignItems: 'center'
                 }}>
-                    {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={Themes.getTheme().inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {onSearchPressed(searchString)}} />}
-                    {showSignIn && <SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '40px', fontSize: '90%', marginLeft: Themes.getTheme().spaces.mod + 'px', ...stylesSignIn}} variant={variant} type={Themes.getTheme().types.filled} caption={signInCaption} onClick={() => {onSignInPressed()}} />}
+                    {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {onSearchPressed(searchString)}} />}
+                    {showSignIn && <SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '40px', fontSize: '90%', marginLeft: theme.spaces.mod + 'px', ...stylesSignIn}} variant={variant} type={theme.types.filled} caption={signInCaption} onClick={() => {onSignInPressed()}} />}
                     {showProfile && <Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePicture={classNameProfilePicture} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/>}
                 </div>
             </div>}

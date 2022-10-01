@@ -136,38 +136,38 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
 
     function resetColors() {
 
-            if(mode == Themes.getTheme().modes.day) {
-                setBorderColor(Util.shadeColor(Util.getBorderColor(theme, variant, Themes.getTheme().types.outlined), 140));
-                setTextColor(Util.getTextColor(theme, variant, Themes.getTheme().types.outlined));    
+            if(mode == theme.modes.day) {
+                setBorderColor(Util.shadeColor(Util.getBorderColor(theme, variant, theme.types.outlined), 140));
+                setTextColor(Util.getTextColor(theme, variant, theme.types.outlined));    
             } else {
-                setBorderColor(Util.getBorderColor(theme, variant, Themes.getTheme().types.outlined));
-                setTextColor(Util.shadeColor(Util.getTextColor(theme, variant, Themes.getTheme().types.outlined), 140));    
+                setBorderColor(Util.getBorderColor(theme, variant, theme.types.outlined));
+                setTextColor(Util.shadeColor(Util.getTextColor(theme, variant, theme.types.outlined), 140));    
             }
         
     }
 
     function resetType() {
-            if(inputType == Themes.getTheme().inputTypes.name) {
+            if(inputType == theme.inputTypes.name) {
                 setIpType("text");
             }
-            if(inputType == Themes.getTheme().inputTypes.email) {
+            if(inputType == theme.inputTypes.email) {
                 setIpType("email");
             }
-            if(inputType == Themes.getTheme().inputTypes.mobile) {
+            if(inputType == theme.inputTypes.mobile) {
                 setIpType("number");
             }
-            if(inputType == Themes.getTheme().inputTypes.dateOfBirth) {
+            if(inputType == theme.inputTypes.dateOfBirth) {
                 setIpType("number");
             }
-            if(inputType == Themes.getTheme().inputTypes.date) {
+            if(inputType == theme.inputTypes.date) {
                 setIpType("number");
             }
     }
 
     function resetFocus() {
         if(autoFocus) {
-            if(Themes.getTheme().inputTypes.dateOfBirth == inputType 
-            || Themes.getTheme().inputTypes.date == inputType) {
+            if(theme.inputTypes.dateOfBirth == inputType 
+            || theme.inputTypes.date == inputType) {
                 refInputDD.current!.focus();
             } else {
                 refInput.current!.focus();
@@ -222,7 +222,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
             onComplete(JSON.stringify({isd: getSelectedCountryCodeWrap().dialCode, number: refInput.current.value}));
             resetColors();
         } else {
-            setBorderColor(Themes.getTheme().colors.dangerBgColor);
+            setBorderColor(theme.colors.dangerBgColor);
             onComplete('');
         }
 
@@ -231,40 +231,40 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
     const onKeyUp = (event: any) => {
 
         if(mounted.current) {
-            if(inputType == Themes.getTheme().inputTypes.name) {
+            if(inputType == theme.inputTypes.name) {
                 if(Util.validateName(event.target.value)) {
                     onComplete(event.target.value);
                     resetColors();
                     if(event.key == "Enter") onEnterPressed(); 
                 } else {
-                    setBorderColor(Themes.getTheme().colors.dangerBgColor);
+                    setBorderColor(theme.colors.dangerBgColor);
                     onComplete('');
                 }
             }
 
-            if(inputType == Themes.getTheme().inputTypes.email) {
+            if(inputType == theme.inputTypes.email) {
                 if(Util.validateEmail(event.target.value)) {
                     onComplete(event.target.value);
                     resetColors();
                     if(event.key == "Enter") onEnterPressed(); 
                 } else {
-                    setBorderColor(Themes.getTheme().colors.dangerBgColor);
+                    setBorderColor(theme.colors.dangerBgColor);
                     onComplete('');
                 }
             }
 
-            if(inputType == Themes.getTheme().inputTypes.mobile) {
+            if(inputType == theme.inputTypes.mobile) {
                 if(Util.validateMobile(event.target.value) && selectedCountryCode != "{}") {
                     onComplete(JSON.stringify({isd: getSelectedCountryCodeWrap().dialCode, number: event.target.value}));
                     resetColors();
                     if(event.key == "Enter") onEnterPressed(); 
                 } else {
-                    setBorderColor(Themes.getTheme().colors.dangerBgColor);
+                    setBorderColor(theme.colors.dangerBgColor);
                     onComplete('');
                 }
             }
 
-            if(inputType == Themes.getTheme().inputTypes.dateOfBirth) {
+            if(inputType == theme.inputTypes.dateOfBirth) {
                 if(Util.validateDDMMYYYY(dd, mm, yyyy)) {
                     const dateVal = parseInt((Date.parse(yyyy + "-" + mm + "-" + dd)/1000) + "");
                     onComplete(dateVal + "");
@@ -274,7 +274,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                     if(dd == "" && mm == "" && yyyy == "") {
                         resetColors();
                     } else {
-                        setBorderColor(Themes.getTheme().colors.dangerBgColor);
+                        setBorderColor(theme.colors.dangerBgColor);
                     }
                     onComplete("");
                 }
@@ -308,7 +308,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
     }
 
     React.useEffect(() => {
-        if(inputType == Themes.getTheme().inputTypes.dateOfBirth) {
+        if(inputType == theme.inputTypes.dateOfBirth) {
             onKeyUp(null);
         }
     },[dd, mm, yyyy])
@@ -336,11 +336,11 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
         resetType();    
         resetFocus();
 
-        if(inputType == Themes.getTheme().inputTypes.mobile) {
+        if(inputType == theme.inputTypes.mobile) {
             populateCountryCodes();
         }
 
-        if(inputType == Themes.getTheme().inputTypes.date) {
+        if(inputType == theme.inputTypes.date) {
             if(value.dd != null) {
                 setSelectedDD(parseInt(value.dd + ""));
             }
@@ -394,8 +394,8 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                 alignItems: 'center',
                 justifyContent: 'center',
                 maxWidth: '100%',
-                padding: Themes.getTheme().spaces.ltl + 'px',
-                borderRadius: Themes.getTheme().spaces.min + 'px',
+                padding: theme.spaces.ltl + 'px',
+                borderRadius: theme.spaces.min + 'px',
                 filter: disabled ? 'grayscale(70%)' : 'none',
                 fontWeight: '600',
                 ...stylesContainer
@@ -404,18 +404,18 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                 {icon != null && <span>&nbsp;&nbsp;</span>}
                 <span className='sf_input_caption' onClick={() => {setFocus()}}>{caption}</span>
                 <span>&nbsp;&nbsp;&nbsp;</span>
-                {inputType == Themes.getTheme().inputTypes.mobile && <div style={{
+                {inputType == theme.inputTypes.mobile && <div style={{
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
-                    <SfButton variant={variant} type={'filled'} caption={selectedCountryCode == "{}" ? (showCountryCodes ? "ISD ▲" : "ISD ▼") : getSelectedCountryCodeWrap().dialCode + " " + getSelectedCountryCodeWrap().emoji  + " " + (showCountryCodes ? "▲" : "")} onClick={() => {onClickIsd()}} styles={{cursor: 'pointer', fontSize: '70%', marginRight: Themes.getTheme().spaces.ltl + 'px'}} disabled={disabled} />
+                    <SfButton variant={variant} type={'filled'} caption={selectedCountryCode == "{}" ? (showCountryCodes ? "ISD ▲" : "ISD ▼") : getSelectedCountryCodeWrap().dialCode + " " + getSelectedCountryCodeWrap().emoji  + " " + (showCountryCodes ? "▲" : "")} onClick={() => {onClickIsd()}} styles={{cursor: 'pointer', fontSize: '70%', marginRight: theme.spaces.ltl + 'px'}} disabled={disabled} />
                     {showCountryCodes && <div style={{
                         position: 'fixed',
                         bottom: '0px',
                         left: '0px',
                         width: '100%',
-                        backgroundColor: mode == Themes.getTheme().modes.day ? '#efefef' : 'black',
-                        color: mode == Themes.getTheme().modes.day ? 'black' : '#ffffff',
+                        backgroundColor: mode == theme.modes.day ? '#efefef' : 'black',
+                        color: mode == theme.modes.day ? 'black' : '#ffffff',
                         textAlign: 'left',
                         boxShadow: '0px -2px 10px #dddddd',
                         zIndex: 1999
@@ -433,20 +433,20 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                                 style={{
                                     backgroundColor: 'transparent',
                                     border: 'none',
-                                    marginLeft: Themes.getTheme().spaces.ltl + 'px',
-                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
-                                    marginBottom: (parseInt(Themes.getTheme().spaces.ltl)*2) + 'px',
-                                    borderBottom: 'solid 1px ' + (Themes.getTheme().modes.day ? '#bbbbbb' : '#333333'),
+                                    marginLeft: theme.spaces.ltl + 'px',
+                                    marginTop: theme.spaces.ltl + 'px',
+                                    marginBottom: (parseInt(theme.spaces.ltl)*2) + 'px',
+                                    borderBottom: 'solid 1px ' + (theme.modes.day ? '#bbbbbb' : '#333333'),
                                     flexGrow: '1'
                                 }} disabled={disabled}/>
                             <SfButton className='sf_btn_countries_close' variant={variant} type={'filled'} caption={'Close ▲'} onClick={() => {onClickIsd()}} 
                                 styles={{
                                     cursor: 'pointer', 
                                     fontSize: '70%', 
-                                    marginRight: Themes.getTheme().spaces.ltl + 'px',
-                                    marginLeft: Themes.getTheme().spaces.ltl + 'px',
-                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
-                                    marginBottom: (parseInt(Themes.getTheme().spaces.ltl)*2) + 'px'}} />
+                                    marginRight: theme.spaces.ltl + 'px',
+                                    marginLeft: theme.spaces.ltl + 'px',
+                                    marginTop: theme.spaces.ltl + 'px',
+                                    marginBottom: (parseInt(theme.spaces.ltl)*2) + 'px'}} />
                         </div>
                         <div style={{
                             display: 'flex',
@@ -455,8 +455,8 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                             overflowY: 'auto',
                             textAlign: 'left',
                             alignItems: 'flex-start',
-                            paddingLeft: Themes.getTheme().spaces.ltl + 'px',
-                            paddingRight: Themes.getTheme().spaces.ltl + 'px',
+                            paddingLeft: theme.spaces.ltl + 'px',
+                            paddingRight: theme.spaces.ltl + 'px',
                         }}>
                         {
                             getCountryCodesWrap().map((element: any, key: any) => {
@@ -469,12 +469,12 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                                         fontSize: '80%',
                                         fontWeight: '200',
                                         cursor: 'pointer',
-                                        marginRight: Themes.getTheme().spaces.ltl + 'px',
-                                        marginBottom: Themes.getTheme().spaces.ltl + 'px',
-                                        backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : '#222222',
-                                        paddingLeft: Themes.getTheme().spaces.ltl + 'px',
-                                        paddingRight: Themes.getTheme().spaces.ltl + 'px',
-                                        borderRadius: Themes.getTheme().spaces.min + 'px'
+                                        marginRight: theme.spaces.ltl + 'px',
+                                        marginBottom: theme.spaces.ltl + 'px',
+                                        backgroundColor: mode == theme.modes.day ? '#ffffff' : '#222222',
+                                        paddingLeft: theme.spaces.ltl + 'px',
+                                        paddingRight: theme.spaces.ltl + 'px',
+                                        borderRadius: theme.spaces.min + 'px'
                                     }}
                                     onClick={() => {
                                         setSelectedCountryCodeWrap(element);
@@ -489,13 +489,13 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                     
                     
                 </div>}
-                {(inputType == Themes.getTheme().inputTypes.dateOfBirth || inputType == Themes.getTheme().inputTypes.date) && <div style={{
+                {(inputType == theme.inputTypes.dateOfBirth || inputType == theme.inputTypes.date) && <div style={{
                     flexGrow: "1",
                     display: 'flex',
                     justifyContent: 'flex-end'
                 }}>
                     <input className={`sf_input_${inputType}_dd ${classNameInput}`} 
-                        onClick={() => {if(inputType == Themes.getTheme().inputTypes.date) {setShowDatePickerWrap(true)}}}
+                        onClick={() => {if(inputType == theme.inputTypes.date) {setShowDatePickerWrap(true)}}}
                         ref={refInputDD} 
                         style={{
                             width: '50px',
@@ -504,8 +504,8 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                             borderTop: 'none',
                             borderRight: 'none',
                             borderBottom: 'none',
-                            marginRight: Themes.getTheme().spaces.min + 'px',
-                            borderRadius: Themes.getTheme().spaces.min + 'px',
+                            marginRight: theme.spaces.min + 'px',
+                            borderRadius: theme.spaces.min + 'px',
                             textAlign: 'center',
                             ...stylesInput
                         }} 
@@ -513,10 +513,10 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                         type={ipType}
                         placeholder={"DD"}
                         disabled={disabled}
-                        readOnly={inputType == Themes.getTheme().inputTypes.date ? true : false}
+                        readOnly={inputType == theme.inputTypes.date ? true : false}
                         defaultValue={value.dd} />
                     <input className={`sf_input_${inputType}_mm ${classNameInput}`}
-                        onClick={() => {if(inputType == Themes.getTheme().inputTypes.date) {setShowDatePickerWrap(true)}}}
+                        onClick={() => {if(inputType == theme.inputTypes.date) {setShowDatePickerWrap(true)}}}
                         ref={refInputMM}  
                         style={{
                             width: '50px',
@@ -525,8 +525,8 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                             borderTop: 'none',
                             borderRight: 'none',
                             borderBottom: 'none',
-                            marginRight: Themes.getTheme().spaces.min + 'px',
-                            borderRadius: Themes.getTheme().spaces.min + 'px',
+                            marginRight: theme.spaces.min + 'px',
+                            borderRadius: theme.spaces.min + 'px',
                             textAlign: 'center',
                             ...stylesInput
                         }} 
@@ -534,10 +534,10 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                         type={ipType}
                         placeholder={"MM"}
                         disabled={disabled}
-                        readOnly={inputType == Themes.getTheme().inputTypes.date ? true : false}
+                        readOnly={inputType == theme.inputTypes.date ? true : false}
                         defaultValue={value.mm} />
                     <input className={`sf_input_${inputType}_yyyy ${classNameInput}`}
-                        onClick={() => {if(inputType == Themes.getTheme().inputTypes.date) {setShowDatePickerWrap(true)}}}
+                        onClick={() => {if(inputType == theme.inputTypes.date) {setShowDatePickerWrap(true)}}}
                         ref={refInputYYYY} 
                         style={{
                             width: '80px',
@@ -547,22 +547,22 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                             borderRight: 'none',
                             borderBottom: 'none',
                             textAlign: 'center',
-                            borderRadius: Themes.getTheme().spaces.min + 'px',
+                            borderRadius: theme.spaces.min + 'px',
                             ...stylesInput
                         }} 
                         onKeyUp={onKeyUpYYYY} 
                         type={ipType}
                         placeholder={"YYYY"}
                         disabled={disabled}
-                        readOnly={inputType == Themes.getTheme().inputTypes.date ? true : false}
+                        readOnly={inputType == theme.inputTypes.date ? true : false}
                         defaultValue={value.yyyy} />
                     {showDatePicker && <div className="sf_input_date_picker" style={{
                         position: 'fixed',
                         bottom: '0px',
                         left: '0px',
                         width: '100%',
-                        backgroundColor: mode == Themes.getTheme().modes.day ? '#efefef' : 'black',
-                        color: mode == Themes.getTheme().modes.day ? 'black' : '#ffffff',
+                        backgroundColor: mode == theme.modes.day ? '#efefef' : 'black',
+                        color: mode == theme.modes.day ? 'black' : '#ffffff',
                         textAlign: 'left',
                         boxShadow: '0px -2px 10px #dddddd',
                         zIndex: 1999
@@ -572,62 +572,62 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                             justifyContent: 'space-between',
                             textAlign: 'center',
                             alignItems: 'center',
-                            marginBottom: Themes.getTheme().spaces.ltl + 'px',
+                            marginBottom: theme.spaces.ltl + 'px',
                         }}>
                             <SfButton 
                                 styles={{
                                     visibility: 'hidden',
-                                    marginLeft: Themes.getTheme().spaces.ltl + 'px',
-                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
+                                    marginLeft: theme.spaces.ltl + 'px',
+                                    marginTop: theme.spaces.ltl + 'px',
                                 }}
                                 className='sf_btn_date_close' variant={variant} type={'filled'} caption={'▲'} onClick={() => {}} />
                             <div style={{
                                 display: 'flex'
                             }}>
                                 <div style={{
-                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
-                                    marginLeft: Themes.getTheme().spaces.ltl + 'px',
-                                    marginRight: Themes.getTheme().spaces.ltl + 'px',
-                                    paddingLeft: Themes.getTheme().spaces.min + 'px',
-                                    paddingRight: Themes.getTheme().spaces.min + 'px',
+                                    marginTop: theme.spaces.ltl + 'px',
+                                    marginLeft: theme.spaces.ltl + 'px',
+                                    marginRight: theme.spaces.ltl + 'px',
+                                    paddingLeft: theme.spaces.min + 'px',
+                                    paddingRight: theme.spaces.min + 'px',
                                     paddingBottom: '2px',
-                                    border: 'solid 1px ' + (mode == Themes.getTheme().modes.day ? '#000000' : '#ffffff'),
-                                    backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : '#000000',
-                                    color: mode == Themes.getTheme().modes.day ? '#000000' : '#ffffff',
-                                    borderRadius: Themes.getTheme().spaces.min + 'px'
+                                    border: 'solid 1px ' + (mode == theme.modes.day ? '#000000' : '#ffffff'),
+                                    backgroundColor: mode == theme.modes.day ? '#ffffff' : '#000000',
+                                    color: mode == theme.modes.day ? '#000000' : '#ffffff',
+                                    borderRadius: theme.spaces.min + 'px'
                                 }}><small>{selectedYYYY}</small></div>
                                 <div style={{
                                     width: '97px',
-                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
-                                    marginLeft: Themes.getTheme().spaces.ltl + 'px',
-                                    marginRight: Themes.getTheme().spaces.ltl + 'px',
-                                    paddingLeft: Themes.getTheme().spaces.min + 'px',
-                                    paddingRight: Themes.getTheme().spaces.min + 'px',
+                                    marginTop: theme.spaces.ltl + 'px',
+                                    marginLeft: theme.spaces.ltl + 'px',
+                                    marginRight: theme.spaces.ltl + 'px',
+                                    paddingLeft: theme.spaces.min + 'px',
+                                    paddingRight: theme.spaces.min + 'px',
                                     paddingBottom: '2px',
-                                    border: 'solid 1px ' + (mode == Themes.getTheme().modes.day ? '#000000' : '#ffffff'),
-                                    backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : '#000000',
-                                    color: mode == Themes.getTheme().modes.day ? '#000000' : '#ffffff',
-                                    borderRadius: Themes.getTheme().spaces.min + 'px'
+                                    border: 'solid 1px ' + (mode == theme.modes.day ? '#000000' : '#ffffff'),
+                                    backgroundColor: mode == theme.modes.day ? '#ffffff' : '#000000',
+                                    color: mode == theme.modes.day ? '#000000' : '#ffffff',
+                                    borderRadius: theme.spaces.min + 'px'
                                 }}><small>{selectedMM === 0 ? "" : Util.toMonthName(selectedMM)}</small></div>
                                 <div style={{
                                     width: '30px',
-                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
-                                    marginLeft: Themes.getTheme().spaces.ltl + 'px',
-                                    marginRight: Themes.getTheme().spaces.ltl + 'px',
-                                    paddingLeft: Themes.getTheme().spaces.min + 'px',
-                                    paddingRight: Themes.getTheme().spaces.min + 'px',
+                                    marginTop: theme.spaces.ltl + 'px',
+                                    marginLeft: theme.spaces.ltl + 'px',
+                                    marginRight: theme.spaces.ltl + 'px',
+                                    paddingLeft: theme.spaces.min + 'px',
+                                    paddingRight: theme.spaces.min + 'px',
                                     paddingBottom: '2px',
-                                    border: 'solid 1px ' + (mode == Themes.getTheme().modes.day ? '#000000' : '#ffffff'),
-                                    backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : '#000000',
-                                    color: mode == Themes.getTheme().modes.day ? '#000000' : '#ffffff',
-                                    borderRadius: Themes.getTheme().spaces.min + 'px'
+                                    border: 'solid 1px ' + (mode == theme.modes.day ? '#000000' : '#ffffff'),
+                                    backgroundColor: mode == theme.modes.day ? '#ffffff' : '#000000',
+                                    color: mode == theme.modes.day ? '#000000' : '#ffffff',
+                                    borderRadius: theme.spaces.min + 'px'
                                 }}><small>{selectedDD === 0 ? "" : selectedDD}</small></div>
                             </div>
                             <SfButton 
                                 styles={{
                                     cursor: 'pointer',
-                                    marginRight: Themes.getTheme().spaces.ltl + 'px',
-                                    marginTop: Themes.getTheme().spaces.ltl + 'px',
+                                    marginRight: theme.spaces.ltl + 'px',
+                                    marginTop: theme.spaces.ltl + 'px',
                                 }}
                                 className='sf_btn_date_close' variant={variant} type={'filled'} caption={'▲'} onClick={() => {setShowDatePickerWrap(false)}} />
                         </div>
@@ -650,15 +650,15 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                                             key={year} 
                                             style={{
                                                 cursor: 'pointer',
-                                                marginTop: Themes.getTheme().spaces.ltl + 'px',
-                                                marginLeft: Themes.getTheme().spaces.ltl + 'px',
-                                                marginRight: Themes.getTheme().spaces.ltl + 'px',
-                                                paddingLeft: Themes.getTheme().spaces.min + 'px',
-                                                paddingRight: Themes.getTheme().spaces.min + 'px',
+                                                marginTop: theme.spaces.ltl + 'px',
+                                                marginLeft: theme.spaces.ltl + 'px',
+                                                marginRight: theme.spaces.ltl + 'px',
+                                                paddingLeft: theme.spaces.min + 'px',
+                                                paddingRight: theme.spaces.min + 'px',
                                                 paddingBottom: '2px',
-                                                backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : (selectedYYYY == year ? '#ffffff' : '#444444'),
-                                                color: mode != Themes.getTheme().modes.day ? (selectedYYYY == year ? '#444444' : '#ffffff') : (selectedYYYY == year ? '#000000' : '#888888'),
-                                                borderRadius: Themes.getTheme().spaces.min + 'px'
+                                                backgroundColor: mode == theme.modes.day ? '#ffffff' : (selectedYYYY == year ? '#ffffff' : '#444444'),
+                                                color: mode != theme.modes.day ? (selectedYYYY == year ? '#444444' : '#ffffff') : (selectedYYYY == year ? '#000000' : '#888888'),
+                                                borderRadius: theme.spaces.min + 'px'
                                         }}><small>{year}</small></div>)
                                     })
                                 }
@@ -679,15 +679,15 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                                                 cursor: 'pointer',
                                                 width: '100px',
                                                 textAlign: 'center',
-                                                marginTop: Themes.getTheme().spaces.ltl + 'px',
-                                                marginLeft: Themes.getTheme().spaces.ltl + 'px',
-                                                marginRight: Themes.getTheme().spaces.ltl + 'px',
-                                                paddingLeft: Themes.getTheme().spaces.min + 'px',
-                                                paddingRight: Themes.getTheme().spaces.min + 'px',
+                                                marginTop: theme.spaces.ltl + 'px',
+                                                marginLeft: theme.spaces.ltl + 'px',
+                                                marginRight: theme.spaces.ltl + 'px',
+                                                paddingLeft: theme.spaces.min + 'px',
+                                                paddingRight: theme.spaces.min + 'px',
                                                 paddingBottom: '2px',
-                                                backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : (selectedMM == month ? '#ffffff' : '#444444'),
-                                                color: mode != Themes.getTheme().modes.day ? (selectedMM == month ? '#444444' : '#ffffff') : (selectedMM == month ? '#000000' : '#888888'),
-                                                borderRadius: Themes.getTheme().spaces.min + 'px'
+                                                backgroundColor: mode == theme.modes.day ? '#ffffff' : (selectedMM == month ? '#ffffff' : '#444444'),
+                                                color: mode != theme.modes.day ? (selectedMM == month ? '#444444' : '#ffffff') : (selectedMM == month ? '#000000' : '#888888'),
+                                                borderRadius: theme.spaces.min + 'px'
                                         }}><small>{Util.toMonthName(month)}</small></div>)
                                     })
                                 }
@@ -710,15 +710,15 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                                                 cursor: 'pointer',
                                                 width: '30px',
                                                 textAlign: 'center',
-                                                marginTop: Themes.getTheme().spaces.ltl + 'px',
-                                                marginLeft: Themes.getTheme().spaces.ltl + 'px',
-                                                marginRight: Themes.getTheme().spaces.ltl + 'px',
-                                                paddingLeft: Themes.getTheme().spaces.min + 'px',
-                                                paddingRight: Themes.getTheme().spaces.min + 'px',
+                                                marginTop: theme.spaces.ltl + 'px',
+                                                marginLeft: theme.spaces.ltl + 'px',
+                                                marginRight: theme.spaces.ltl + 'px',
+                                                paddingLeft: theme.spaces.min + 'px',
+                                                paddingRight: theme.spaces.min + 'px',
                                                 paddingBottom: '2px',
-                                                backgroundColor: mode == Themes.getTheme().modes.day ? '#ffffff' : (selectedDD == day.getDate() ? '#ffffff' : '#444444'),
-                                                color: mode != Themes.getTheme().modes.day ? (selectedDD == day.getDate() ? '#444444' : '#ffffff') : (selectedDD == day.getDate() ? '#000000' : '#888888'),
-                                                borderRadius: Themes.getTheme().spaces.min + 'px'
+                                                backgroundColor: mode == theme.modes.day ? '#ffffff' : (selectedDD == day.getDate() ? '#ffffff' : '#444444'),
+                                                color: mode != theme.modes.day ? (selectedDD == day.getDate() ? '#444444' : '#ffffff') : (selectedDD == day.getDate() ? '#000000' : '#888888'),
+                                                borderRadius: theme.spaces.min + 'px'
                                         }}><small>{day.getDate()}</small></div>)
 
                                     })
@@ -728,7 +728,7 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                         
                     </div>}
                 </div>}
-                {(inputType != Themes.getTheme().inputTypes.dateOfBirth && inputType != Themes.getTheme().inputTypes.date) && <input 
+                {(inputType != theme.inputTypes.dateOfBirth && inputType != theme.inputTypes.date) && <input 
                     className={`sf_input_${inputType} ${classNameInput}`}
                     ref={refInput} 
                     style={{
@@ -738,15 +738,15 @@ const SfInput = ({ variant, caption, inputType, onComplete, value = "", hint = "
                         borderTop: 'none',
                         borderRight: 'none',
                         borderBottom: 'none',
-                        paddingLeft: Themes.getTheme().spaces.ltl + 'px',
-                        borderRadius: Themes.getTheme().spaces.min + 'px',
+                        paddingLeft: theme.spaces.ltl + 'px',
+                        borderRadius: theme.spaces.min + 'px',
                         ...stylesInput
                         }} 
                     type={ipType} 
                     onKeyUp={(event) => {onKeyUp(event)}}
                     placeholder={hint}
                     disabled={disabled}
-                    defaultValue={inputType != Themes.getTheme().inputTypes.mobile ? value : value.number} />}
+                    defaultValue={inputType != theme.inputTypes.mobile ? value : value.number} />}
         </div>
     )
 

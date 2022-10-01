@@ -69,17 +69,18 @@ const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = T
         <button
             className={`sf_btn ${className}`} 
             style={{ 
+                cursor: 'pointer',
                 backgroundColor: backgroundColor,
                 color: textColor,
                 border: 'solid 1px ' + borderColor,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                paddingLeft: Themes.getTheme().spaces.ltl + 'px',
-                paddingRight: Themes.getTheme().spaces.ltl + 'px',
-                paddingTop: Themes.getTheme().spaces.min + 'px',
-                paddingBottom: Themes.getTheme().spaces.min + 'px',
-                borderRadius: Themes.getTheme().spaces.min + 'px',
+                paddingLeft: theme.spaces.ltl + 'px',
+                paddingRight: theme.spaces.ltl + 'px',
+                paddingTop: theme.spaces.min + 'px',
+                paddingBottom: theme.spaces.min + 'px',
+                borderRadius: theme.spaces.min + 'px',
                 filter: disabled ? 'grayscale(70%)' : 'none',
                 fontWeight: '600',
                 ...styles
