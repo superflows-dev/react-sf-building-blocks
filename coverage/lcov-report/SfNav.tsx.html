@@ -810,7 +810,11 @@
 <a name='L752'></a><a href='#L752'>752</a>
 <a name='L753'></a><a href='#L753'>753</a>
 <a name='L754'></a><a href='#L754'>754</a>
-<a name='L755'></a><a href='#L755'>755</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L755'></a><a href='#L755'>755</a>
+<a name='L756'></a><a href='#L756'>756</a>
+<a name='L757'></a><a href='#L757'>757</a>
+<a name='L758'></a><a href='#L758'>758</a>
+<a name='L759'></a><a href='#L759'>759</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -982,6 +986,7 @@
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1277,7 +1282,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1287,6 +1291,7 @@
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1422,6 +1427,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1752,6 +1760,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                                         marginTop: '-2px',
                                         cursor:  'pointer',
                                         justifyContent: 'flex-start',
+                                        backgroundColor: Util.getTextColor(theme, "filled", variant),
                                         boxShadow: profileComponent != null ? 'none' : <span class="branch-1 cbranch-no" title="branch not covered" >key === profileMenu.length - 1 ? '0px 2px 2px #aaa' : 'none',</span>
                                         ...stylesMenuMobileSelected
                                         }} variant={variant} type="outlined" caption={(!getProfileDropdownExpandedWrap()[key] ? <span class="branch-0 cbranch-no" title="branch not covered" >'◂ ' </span>: '◂ ') + element[0].caption}  onClick={(event) =&gt; {event.stopPropagation(); toggleProfileDropdownExpandedWrap(key)}}/&gt;}
@@ -2013,8 +2022,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     
                     &lt;/div&gt;
 &nbsp;
-                &lt;/div&gt;
-&nbsp;
+                    
                 {showLeftMenu &amp;&amp; &lt;div className='nav_div_left_menu' style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -2057,6 +2065,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                             cursor:  'pointer',
                                             justifyContent: 'flex-start',
                                             boxShadow: key === menu.length - 1 ? '0px 2px 2px #aaa' : 'none',
+                                            backgroundColor: Util.getTextColor(theme, "filled", variant),
                                             ...stylesMenuMobileSelected
                                             }} variant={variant} type="outlined" caption={element[0].caption + (!getDropdownExpandedWrap()[key] ? <span class="branch-0 cbranch-no" title="branch not covered" >' ▸' </span>: ' ▸')}  onClick={() =&gt; {toggleDropdownExpandedWrap(key)}}/&gt;}
 &nbsp;
@@ -2180,6 +2189,9 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     &lt;/div&gt;
 &nbsp;
                 &lt;/div&gt;}
+&nbsp;
+&nbsp;
+                &lt;/div&gt;
 &nbsp;
             &lt;/div&gt;}
             {Util.getWindowDimensions().width &gt; theme.breakpoints.tablet &amp;&amp; &lt;div 
@@ -2325,7 +2337,7 @@ export default SfNav;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Oct 02 2022 11:11:15 GMT+0530 (India Standard Time)
+                at Sun Oct 02 2022 11:57:30 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>

@@ -448,8 +448,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     
                     </div>
 
-                </div>
-
+                    
                 {showLeftMenu && <div className='nav_div_left_menu' style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -616,6 +615,9 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     </div>
 
                 </div>}
+
+
+                </div>
 
             </div>}
             {Util.getWindowDimensions().width > theme.breakpoints.tablet && <div 
