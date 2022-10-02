@@ -189,6 +189,7 @@ The input component is **SfNav**.
 | classNameProfilePreamble      | json object    | no        | class names string to customize the profile preamble
 | classNameProfileComponent     | json object    | no        | class names string to customize the profile component
 | onHomePressed                 | callback       | no        | callback after clicking on home button 
+| onBackPressed                 | callback       | no        | callback after the back button is pressed
 | onSearchPressed               | callback       | no        | callback after search text is entered
 | onSignInPressed               | callback       | no        | callback after clicking on sign in button
 | onMenuClicked                 | callback       | no        | callback after clicking on any menu

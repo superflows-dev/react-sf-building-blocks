@@ -83,6 +83,7 @@ const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = T
                 borderRadius: theme.spaces.min + 'px',
                 filter: disabled ? 'grayscale(70%)' : 'none',
                 fontWeight: '600',
+                fontFamily: 'inherit',
                 ...styles
             }}
             disabled={disabled} 
