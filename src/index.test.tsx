@@ -907,6 +907,75 @@ it('SfNav: Left Menu Click Portrait', async () => {
 })
 
 
+it('SfNav: Back Click Landscape', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  const onBackPressedMock = jest.fn();
+
+  window = Object.assign(window, { innerWidth: 1380, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav showBack={true} onBackPressed={() => {onBackPressedMock()}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('nav_brand');
+
+  let backMenu = container.getElementsByClassName('nav_back_menu')[0];
+
+  // open menu
+
+  act(() => {
+    fireEvent(
+      backMenu,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(onBackPressedMock).toHaveBeenCalled();
+
+});
+
+
+it('SfNav: Back Click Portrait', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  const onBackPressedMock = jest.fn();
+
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav showBack={true} onBackPressed={() => {onBackPressedMock()}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('nav_brand');
+
+  let backMenu = container.getElementsByClassName('nav_back_menu')[0];
+
+  // open menu
+
+  act(() => {
+    fireEvent(
+      backMenu,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(onBackPressedMock).toHaveBeenCalled();
+
+});
+
 
 it('SfInput: Basic Render Primary Date', async () => {
 

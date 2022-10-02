@@ -18,11 +18,13 @@ interface Props {
     brandLogo?: any;
     menu?: any;
     menuIcon?: any;
+    backIcon?: any;
     profilePicture?: string;
     profileMenu?: any;
     profilePreamble?: any;
     profileComponent?: any;
     optionsIcon?: any;
+    showBack?: boolean;
     showSearch?: boolean;
     showSignIn?: boolean;
     showProfile?: boolean;
@@ -64,6 +66,7 @@ interface Props {
     classNameProfilePreamble?: any;
     classNameProfileComponent?: any;
     onHomePressed?: () => void;
+    onBackPressed?: () => void;
     onSearchPressed?: (value: string) => void;
     onSignInPressed?: () => void;
     onMenuClicked?: (value: string) => void;
@@ -183,6 +186,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                                         marginTop: '-2px',
                                         cursor:  'pointer',
                                         justifyContent: 'flex-start',
+                                        backgroundColor: Util.getTextColor(theme, "filled", variant),
                                         boxShadow: profileComponent != null ? 'none' : key === profileMenu.length - 1 ? '0px 2px 2px #aaa' : 'none',
                                         ...stylesMenuMobileSelected
                                         }} variant={variant} type="outlined" caption={(!getProfileDropdownExpandedWrap()[key] ? '◂ ' : '◂ ') + element[0].caption}  onClick={(event) => {event.stopPropagation(); toggleProfileDropdownExpandedWrap(key)}}/>}
@@ -289,7 +293,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
 
 }
 
-const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null,  showProfile = false, showSearch = true, showSignIn = true, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, optionsIcon = null, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", classNameProfilePictureContainer = {}, stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}, stylesProfilePictureContainer = {}}: Props) => {
+const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null,  showProfile = false, showSearch = true, showSignIn = true, showBack = false, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, onBackPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, backIcon = null, optionsIcon = null, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", classNameProfilePictureContainer = {}, stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}, stylesProfilePictureContainer = {}}: Props) => {
 
     const [searchString, setSearchString] = useState('');
     const [dropdownExpanded, setDropdownExpanded] = useState('[]');
@@ -368,7 +372,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
         return JSON.parse(profileDropdownExpanded);
     }
 
-    
+    console.log(theme);
     return (
         <div style={{
             color: Util.getTextColor(theme, variant == theme.variants.dark ? theme.variants.light :  variant == theme.variants.light ? theme.variants.dark : variant, theme.types.outlined)
@@ -391,10 +395,16 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         display: 'flex',
                         alignItems: 'center'
                     }}>
-                        <div className='nav_left_menu' onClick={() => {toggleLeftMenu()}} style={{
+
+                        {showBack && <div className='nav_back_menu' onClick={() => {onBackPressed()}} style={{
                             paddingRight: theme.spaces.ltl + 'px',
                             fontWeight: '800'
-                            }}><b>{menuIcon == null ? '☰' : menuIcon}</b></div>
+                            }}><b>{backIcon == null ? '‹' : backIcon}</b></div>}
+                        
+                        {!showBack && <div className='nav_left_menu' onClick={() => {toggleLeftMenu()}} style={{
+                            paddingRight: theme.spaces.ltl + 'px',
+                            fontWeight: '800'
+                            }}><b>{menuIcon == null ? '☰' : menuIcon}</b></div>}
                         
                         <div style={{
                             display: 'flex',
@@ -482,6 +492,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                             cursor:  'pointer',
                                             justifyContent: 'flex-start',
                                             boxShadow: key === menu.length - 1 ? '0px 2px 2px #aaa' : 'none',
+                                            backgroundColor: Util.getTextColor(theme, "filled", variant),
                                             ...stylesMenuMobileSelected
                                             }} variant={variant} type="outlined" caption={element[0].caption + (!getDropdownExpandedWrap()[key] ? ' ▸' : ' ▸')}  onClick={() => {toggleDropdownExpandedWrap(key)}}/>}
 
@@ -622,6 +633,9 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     display: 'flex',
                     alignItems: 'center'
                 }}>
+
+                    {showBack && <div className='nav_back_menu' onClick={() => {onBackPressed()}} style={{paddingRight: theme.spaces.ltl + 'px', cursor: 'pointer'}}><b>{backIcon == null ? '‹' : backIcon}</b></div>}
+
                      {(brandLogo != null && brandLogo != "") && <img 
                      className={'nav_brand_logo ' + classNameBrandLogo}
                      src={brandLogo} 

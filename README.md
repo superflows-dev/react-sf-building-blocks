@@ -148,9 +148,11 @@ The input component is **SfNav**.
 | brandLogo                     | img            | no        | brand logo image
 | menu                          | json object    | no        | json object which renders the menu
 | menuIcon                      | icon           | no        | icon for menu  in portrait view
+| backIcon                      | icon           | no        | icon for back button
 | optionsIcon                   | icon           | no        | icon for options in portrait view
 | showSearch                    | boolean        | no        | flag, which shows / hides search input
 | showSignIn                    | boolean        | no        | flag, which shows / hides sign in button
+| showBack                      | boolean        | no        | flag, which shows / hides back button
 | searchCaption                 | string         | no        | caption of the search input
 | signInCaption                 | string         | no        | caption of the sign in button
 | searchIcon                    | object         | no        | icon for the search input
