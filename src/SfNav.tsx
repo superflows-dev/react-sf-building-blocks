@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Themes from 'react-sf-themes';
 import SfButton from './SfButton';
 import SfInput from './SfInput';
@@ -100,6 +100,14 @@ interface ProfileProps {
     stylesMenuMobile: any;
     stylesSubMenuMobile: any;
 }
+
+function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height
+    };
+  }
 
 const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpandedWrap, getProfileDropdownExpandedWrap, setExpandProfile, theme, variant, profilePicture, expandProfile, profilePreamble, profileComponent, profileMenu, classNameProfileComponent, classNameSubMenuMobile, classNameMenuMobileSelected, classNameMenuMobile, classNameProfilePreamble, classNameProfilePicture, classNameProfilePictureContainer, stylesProfileComponent, stylesProfilePreamble, stylesMenuMobileSelected, stylesMenuMobile, stylesSubMenuMobile, stylesProfilePicture, stylesProfilePictureContainer}: ProfileProps) => {
 
@@ -295,6 +303,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
 
 const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null,  showProfile = false, showSearch = true, showSignIn = true, showBack = false, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, onBackPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, backIcon = null, optionsIcon = null, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", classNameProfilePictureContainer = {}, stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}, stylesProfilePictureContainer = {}}: Props) => {
 
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
     const [searchString, setSearchString] = useState('');
     const [dropdownExpanded, setDropdownExpanded] = useState('[]');
     const [profileDropdownExpanded, setProfileDropdownExpanded] = useState('[]');
@@ -372,12 +381,21 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
         return JSON.parse(profileDropdownExpanded);
     }
 
+    useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    
     console.log(theme);
     return (
         <div style={{
             color: Util.getTextColor(theme, variant == theme.variants.dark ? theme.variants.light :  variant == theme.variants.light ? theme.variants.dark : variant, theme.types.outlined)
         }}>
-            {Util.getWindowDimensions().width <= theme.breakpoints.tablet && <div style={{position: 'relative'}}>
+            {windowDimensions.width <= theme.breakpoints.tablet && <div style={{position: 'relative'}}>
                 
                 <div 
                 className={classNameContainerMobile}
@@ -620,7 +638,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                 </div>
 
             </div>}
-            {Util.getWindowDimensions().width > theme.breakpoints.tablet && <div 
+            {windowDimensions.width > theme.breakpoints.tablet && <div 
             className={classNameContainerDesktop}
             style={{
                 height: theme.dimensions.navHeight + 'px',

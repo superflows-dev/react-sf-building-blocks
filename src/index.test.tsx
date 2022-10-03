@@ -498,7 +498,6 @@ it('SfNav: Basic Render Landscape', async () => {
 })
 
 
-
 it('SfNav: Basic Render Potrait', async () => {
 
   jest.setTimeout(TEST_TIMEOUT);
@@ -530,6 +529,30 @@ it('SfNav: Basic Render Potrait', async () => {
 
   expect(container.innerHTML).toContain('nav_div_right_menu');
 
+
+})
+
+
+it('SfNav: Resize Check', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav brand="Brand" brandLogo="https://superflows.dev/img/superflows_gray_transparent_200.png" menu={[{caption: "About", link: "about"}, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services"}, {caption: "Resources", link: "resources"}], {caption: "Team", link: "team"}, [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}, {caption: "Facebook", link: "facebook"}]]}  showSearch={true} showSignIn={true}  searchIcon={<Search />} searchCaption="Search" />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('nav_right_menu');
+
+  // change to landscape 
+
+  window = Object.assign(window, { innerWidth: 1400, innerHeight: 844 });
+  window.dispatchEvent(new Event('resize'));
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  expect(container.innerHTML).not.toContain('nav_right_menu');
 
 })
 
