@@ -194,7 +194,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                                         marginTop: '-2px',
                                         cursor:  'pointer',
                                         justifyContent: 'flex-start',
-                                        backgroundColor: Util.getTextColor(theme, "filled", variant),
+                                        backgroundColor: Util.getTextColor(theme, variant, "filled"),
                                         boxShadow: profileComponent != null ? 'none' : key === profileMenu.length - 1 ? '0px 2px 2px #aaa' : 'none',
                                         ...stylesMenuMobileSelected
                                         }} variant={variant} type="outlined" caption={(!getProfileDropdownExpandedWrap()[key] ? '◂ ' : '◂ ') + element[0].caption}  onClick={(event) => {event.stopPropagation(); toggleProfileDropdownExpandedWrap(key)}}/>}
@@ -390,7 +390,6 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
         return () => window.removeEventListener('resize', handleResize);
     }, []);
     
-    console.log(theme);
     return (
         <div style={{
             color: Util.getTextColor(theme, variant == theme.variants.dark ? theme.variants.light :  variant == theme.variants.light ? theme.variants.dark : variant, theme.types.outlined)
@@ -509,7 +508,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                             cursor:  'pointer',
                                             justifyContent: 'flex-start',
                                             boxShadow: key === menu.length - 1 ? '0px 2px 2px #aaa' : 'none',
-                                            backgroundColor: Util.getTextColor(theme, "filled", variant),
+                                            backgroundColor: Util.getTextColor(theme, variant, "filled"),
                                             ...stylesMenuMobileSelected
                                             }} variant={variant} type="outlined" caption={element[0].caption + (!getDropdownExpandedWrap()[key] ? ' ▸' : ' ▸')}  onClick={() => {toggleDropdownExpandedWrap(key)}}/>}
 
@@ -529,6 +528,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                             }} variant={variant} type="filled" caption={element[0].caption + (!getDropdownExpandedWrap()[key] ? ' ▸' : ' ▸')}  onClick={() => {toggleDropdownExpandedWrap(key)}}/>}
 
                                         {getDropdownExpandedWrap()[key] && <div style={{
+                                            width: theme.dimensions.menuWidth + 'px',
                                             flexDirection: 'column',
                                             position: 'absolute',
                                             left: '105%',
@@ -542,6 +542,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
 
                                                     return (
                                                         <SfButton  className={'nav_left_menu_' + key + '_' + key1 + " " + classNameSubMenuMobile} styles={{
+                                                            width: '100%',
                                                             borderTopLeftRadius: key1 === 0 ? '5px' : '0px',
                                                             borderTopRightRadius: key1 === 0 ? '5px' : '0px',
                                                             borderBottomLeftRadius: key1 === element.length - 2 ? '5px' : '0px',

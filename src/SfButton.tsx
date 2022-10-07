@@ -70,7 +70,7 @@ const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = T
             className={`sf_btn ${className}`} 
             style={{ 
                 cursor: 'pointer',
-                backgroundColor: backgroundColor,
+                backgroundColor: styles.backgroundColor != null ? styles.backgroundColor : backgroundColor,
                 color: textColor,
                 border: 'solid 1px ' + borderColor,
                 display: 'flex',

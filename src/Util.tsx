@@ -1,12 +1,4 @@
 const Util = {
-    
-    getWindowDimensions: function () {
-        const { innerWidth: width, innerHeight: height } = window;
-        return {
-          width,
-          height
-        };
-    },
 
     toMonthName: function(monthNumber: number) {
         const date = new Date();
