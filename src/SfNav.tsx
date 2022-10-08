@@ -472,6 +472,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     alignItems: 'stretch',
                     position: 'absolute',
                     left: theme.spaces.ltl + 'px',
+                    backgroundColor: Util.getTextColor(theme, variant, "filled"),
                     top: (parseInt(theme.dimensions.navHeight)) + 'px',
                 }}>
                     
