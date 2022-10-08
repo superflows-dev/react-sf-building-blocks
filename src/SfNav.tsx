@@ -496,7 +496,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                     <div key={key} style={{
                                         position: 'relative',
                                         zIndex: '1999',
-                                        width: theme.dimensions.menuWidth + 'px'
+                                        width: theme.dimensions.menuWidth + 'px',
+                                        backgroundColor: Util.getTextColor(theme, variant, "filled"),
                                     }}>
                                         {getDropdownExpandedWrap()[key] && <SfButton className={'nav_left_menu_' + key + '_expanded ' + classNameMenuMobileSelected} styles={{
                                             width: '100%',
