@@ -497,7 +497,6 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                         position: 'relative',
                                         zIndex: '1999',
                                         width: theme.dimensions.menuWidth + 'px',
-                                        backgroundColor: Util.getTextColor(theme, variant, "filled"),
                                     }}>
                                         {getDropdownExpandedWrap()[key] && <SfButton className={'nav_left_menu_' + key + '_expanded ' + classNameMenuMobileSelected} styles={{
                                             width: '100%',
@@ -537,7 +536,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                             top: '0px',
                                             display: 'flex',
                                             alignItems: 'stretch',
-                                            zIndex: '301'
+                                            zIndex: '301',
+                                            backgroundColor: Util.getTextColor(theme, variant, "filled"),
                                         }}>
                                             {
                                                 element.slice(1).map((item: any, key1: any) => {
