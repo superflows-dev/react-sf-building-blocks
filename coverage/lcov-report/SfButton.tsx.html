@@ -29,9 +29,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.91% </span>
+                <span class="strong">68.97% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>17/23</span>
+                <span class='fraction'>20/29</span>
             </div>
         
             
@@ -159,7 +159,9 @@
 <a name='L101'></a><a href='#L101'>101</a>
 <a name='L102'></a><a href='#L102'>102</a>
 <a name='L103'></a><a href='#L103'>103</a>
-<a name='L104'></a><a href='#L104'>104</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,10 +181,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">321x</span>
-<span class="cline-any cline-yes">321x</span>
-<span class="cline-any cline-yes">321x</span>
-<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">320x</span>
+<span class="cline-any cline-yes">320x</span>
+<span class="cline-any cline-yes">320x</span>
+<span class="cline-any cline-yes">320x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -204,7 +206,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">320x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -214,7 +216,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">320x</span>
 <span class="cline-any cline-yes">115x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">115x</span>
@@ -222,11 +224,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">320x</span>
 <span class="cline-any cline-yes">115x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">320x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -300,8 +304,8 @@ const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = T
     function invertColors() {
     
         <span class="missing-if-branch" title="else path not taken" >E</span>if(mounted.current) {
-            setTextColor(Util.getTextColor(theme, variant, type == theme.types.filled? <span class="branch-0 cbranch-no" title="branch not covered" >theme.types.outlined:</span> theme.types.filled));
-            setBackgroundColor(Util.getBackgroundColor(theme, variant, type == theme.types.filled? <span class="branch-0 cbranch-no" title="branch not covered" >theme.types.outlined:</span> theme.types.filled));
+            setTextColor(styles.backgroundColor != null ? <span class="branch-0 cbranch-no" title="branch not covered" >styles.backgroundColor </span>: Util.getTextColor(theme, variant, type == theme.types.filled? <span class="branch-0 cbranch-no" title="branch not covered" >theme.types.outlined:</span> theme.types.filled));
+            setBackgroundColor(styles.color != null ? <span class="branch-0 cbranch-no" title="branch not covered" >styles.color </span>: Util.getBackgroundColor(theme, variant, type == theme.types.filled? <span class="branch-0 cbranch-no" title="branch not covered" >theme.types.outlined:</span> theme.types.filled));
             setBorderColor(Util.getBorderColor(theme, variant, type == theme.types.filled? <span class="branch-0 cbranch-no" title="branch not covered" >theme.types.outlined:</span> theme.types.filled));
         }
 &nbsp;
@@ -335,7 +339,9 @@ const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = T
             style={{ 
                 cursor: 'pointer',
                 backgroundColor: styles.backgroundColor != null ? styles.backgroundColor : backgroundColor,
-                color: textColor,
+                //color: textColor,
+&nbsp;
+                color: styles.color != null ? <span class="branch-0 cbranch-no" title="branch not covered" >styles.color </span>: textColor,
                 border: 'solid 1px ' + borderColor,
                 display: 'flex',
                 alignItems: 'center',
@@ -372,7 +378,7 @@ export default SfButton;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Oct 08 2022 00:19:03 GMT+0530 (India Standard Time)
+                at Mon Oct 10 2022 09:16:50 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>

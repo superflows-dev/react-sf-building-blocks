@@ -36,8 +36,8 @@ const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = T
     function invertColors() {
     
         if(mounted.current) {
-            setTextColor(Util.getTextColor(theme, variant, type == theme.types.filled? theme.types.outlined: theme.types.filled));
-            setBackgroundColor(Util.getBackgroundColor(theme, variant, type == theme.types.filled? theme.types.outlined: theme.types.filled));
+            setTextColor(styles.backgroundColor != null ? styles.backgroundColor : Util.getTextColor(theme, variant, type == theme.types.filled? theme.types.outlined: theme.types.filled));
+            setBackgroundColor(styles.color != null ? styles.color : Util.getBackgroundColor(theme, variant, type == theme.types.filled? theme.types.outlined: theme.types.filled));
             setBorderColor(Util.getBorderColor(theme, variant, type == theme.types.filled? theme.types.outlined: theme.types.filled));
         }
 
@@ -71,7 +71,9 @@ const SfButton = ({ variant, type, disabled = false, caption, onClick, theme = T
             style={{ 
                 cursor: 'pointer',
                 backgroundColor: styles.backgroundColor != null ? styles.backgroundColor : backgroundColor,
-                color: textColor,
+                //color: textColor,
+
+                color: styles.color != null ? styles.color : textColor,
                 border: 'solid 1px ' + borderColor,
                 display: 'flex',
                 alignItems: 'center',
