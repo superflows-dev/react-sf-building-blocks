@@ -48,6 +48,7 @@ interface Props {
     stylesProfilePictureContainer?: any;
     stylesProfilePreamble?: any;
     stylesProfileComponent?: any;
+    stylesBack?: any;
     classNameBrand?: any;
     classNameBrandLogo?: any;
     classNameMenu?: any;
@@ -65,6 +66,7 @@ interface Props {
     classNameProfilePictureContainer?: any;
     classNameProfilePreamble?: any;
     classNameProfileComponent?: any;
+    classNameBack?: any;
     onHomePressed?: () => void;
     onBackPressed?: () => void;
     onSearchPressed?: (value: string) => void;
@@ -301,7 +303,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
 
 }
 
-const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null,  showProfile = false, showSearch = true, showSignIn = true, showBack = false, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, onBackPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, backIcon = null, optionsIcon = null, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", classNameProfilePictureContainer = {}, stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}, stylesProfilePictureContainer = {}}: Props) => {
+const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null,  showProfile = false, showSearch = true, showSignIn = true, showBack = false, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, onBackPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, backIcon = null, optionsIcon = null, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", classNameProfilePictureContainer = "", classNameBack = "", stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}, stylesProfilePictureContainer = {}, stylesBack = {}}: Props) => {
 
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
     const [searchString, setSearchString] = useState('');
@@ -413,9 +415,10 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         alignItems: 'center'
                     }}>
 
-                        {showBack && <div className='nav_back_menu' onClick={() => {onBackPressed()}} style={{
+                        {showBack && <div className={'nav_back_menu ' + classNameBack} onClick={() => {onBackPressed()}} style={{
                             paddingRight: theme.spaces.ltl + 'px',
-                            fontWeight: '800'
+                            fontWeight: '800',
+                            ...stylesBack
                             }}><b>{backIcon == null ? '‹' : backIcon}</b></div>}
                         
                         {!showBack && <div className='nav_left_menu' onClick={() => {toggleLeftMenu()}} style={{
@@ -459,6 +462,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                             paddingLeft: theme.spaces.ltl + 'px',
                             }}>
                         
+                        {showSignIn && <SfButton className={'btn_signin_portrait ' + classNameSignIn} styles={{marginRight: Themes.getTheme().spaces.mod + 'px', height: '30px', fontSize: '90%',  ...stylesSignIn}} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} type={theme.types.filled} caption={signInCaption} onClick={(event) => {onSignInPressed(); event.stopPropagation()}} />}
+
                         <span style={{fontWeight: '800'}}><b>{optionsIcon == null ? '⋮' : optionsIcon}</b></span>
                     
                         {showProfile && <Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePicture={classNameProfilePicture} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/>}
@@ -631,7 +636,6 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     }}>
 
                         {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {toggleRightMenu(); onSearchPressed(searchString)}} />}
-                        {showSignIn && <SfButton className={'btn_signin_portrait ' + classNameSignIn} styles={{height: '40px', fontSize: '90%',  ...stylesSignIn}} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} type={theme.types.filled} caption={signInCaption} onClick={() => {toggleRightMenu(); onSignInPressed();}} />}
                         
                     </div>
 
@@ -657,7 +661,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     alignItems: 'center'
                 }}>
 
-                    {showBack && <div className='nav_back_menu' onClick={() => {onBackPressed()}} style={{paddingRight: theme.spaces.ltl + 'px', cursor: 'pointer'}}><b>{backIcon == null ? '‹' : backIcon}</b></div>}
+                    {showBack && <div className={'nav_back_menu ' + classNameBack} onClick={() => {onBackPressed()}} style={{paddingRight: theme.spaces.ltl + 'px', cursor: 'pointer', ...stylesBack}}><b>{backIcon == null ? '‹' : backIcon}</b></div>}
 
                      {(brandLogo != null && brandLogo != "") && <img 
                      className={'nav_brand_logo ' + classNameBrandLogo}
