@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1668073650735" clover="3.2.0">
-  <project timestamp="1668073650735" name="All files">
-    <metrics statements="467" coveredstatements="467" conditionals="721" coveredconditionals="563" methods="130" coveredmethods="125" elements="1318" coveredelements="1155" complexity="0" loc="467" ncloc="467" packages="1" files="7" classes="7"/>
+<coverage generated="1668399487121" clover="3.2.0">
+  <project timestamp="1668399487121" name="All files">
+    <metrics statements="467" coveredstatements="467" conditionals="723" coveredconditionals="565" methods="130" coveredmethods="125" elements="1320" coveredelements="1157" complexity="0" loc="467" ncloc="467" packages="1" files="7" classes="7"/>
     <file name="Constants.tsx" path="/Users/admin/Documents/GitHub/react-sf-building-blocks/src/Constants.tsx">
       <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <line num="1" count="1" type="stmt"/>
@@ -243,7 +243,7 @@
       <line num="746" count="17" type="stmt"/>
     </file>
     <file name="SfNav.tsx" path="/Users/admin/Documents/GitHub/react-sf-building-blocks/src/SfNav.tsx">
-      <metrics statements="88" coveredstatements="88" conditionals="296" coveredconditionals="224" methods="55" coveredmethods="51"/>
+      <metrics statements="88" coveredstatements="88" conditionals="298" coveredconditionals="226" methods="55" coveredmethods="51"/>
       <line num="107" count="49" type="stmt"/>
       <line num="108" count="49" type="stmt"/>
       <line num="114" count="1" type="stmt"/>
