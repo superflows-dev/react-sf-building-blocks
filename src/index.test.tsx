@@ -999,6 +999,192 @@ it('SfNav: Back Click Portrait', async () => {
 
 });
 
+it('SfNav: No unread notifications', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav showNotification={true} notificationList={[
+      {id: 1, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: true},
+      {id: 2, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+      {id: 3, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: true},
+      {id: 4, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: true},
+      {id: 5, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+      {id: 6, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: true}
+      ]} onViewAllNotificationsClicked={() => {}} onNotificationClicked={() => {}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('🔔');
+
+});
+
+it('SfNav: Notification Landscape', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  window = Object.assign(window, { innerWidth: 1380, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav showNotification={true} notificationList={[
+      {id: 1, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
+      {id: 2, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+      {id: 3, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false},
+      {id: 4, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
+      {id: 5, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+      {id: 6, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false}
+      ]} onViewAllNotificationsClicked={() => {}} onNotificationClicked={() => {}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('🔔');
+
+  let notifIcon = container.getElementsByClassName('btn_notif_icon')[0];
+
+  // open menu
+
+  act(() => {
+    fireEvent(
+      notifIcon,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  expect(container.innerHTML).toContain('nav_div_notif_menu_overlay');
+
+});
+
+it('SfNav: Notification Portrait', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  const onNotificationPressedMock = jest.fn();
+  const onViewAllPressedMock = jest.fn();
+
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav showNotification={true} notificationList={[
+      {id: 1, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
+      {id: 2, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+      {id: 3, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false},
+      {id: 4, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
+      {id: 5, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+      {id: 6, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false}
+      ]} onViewAllNotificationsClicked={() => {onViewAllPressedMock();}} onNotificationClicked={() => {onNotificationPressedMock();}} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('🔔');
+
+  let notifIcon = container.getElementsByClassName('btn_notif_icon')[0];
+
+  // open menu
+
+  act(() => {
+    fireEvent(
+      notifIcon,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  expect(container.innerHTML).toContain('nav_div_notif_menu_overlay');
+
+  let notifIconOverlay = container.getElementsByClassName('nav_div_notif_menu_overlay')[0];
+
+  // close menu
+
+  act(() => {
+    fireEvent(
+      notifIconOverlay,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  notifIcon = container.getElementsByClassName('btn_notif_icon')[0];
+
+  // again open menu
+
+  act(() => {
+    fireEvent(
+      notifIcon,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  expect(container.innerHTML).toContain('nav_div_notif_menu_overlay');
+
+  var notification = container.getElementsByClassName('nav_notif_list_0')[0];
+
+  act(() => {
+    fireEvent(
+      notification,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(onNotificationPressedMock).toHaveBeenCalled();
+
+  notifIcon = container.getElementsByClassName('btn_notif_icon')[0];
+
+  // again open menu
+
+  act(() => {
+    fireEvent(
+      notifIcon,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  expect(container.innerHTML).toContain('nav_div_notif_menu_overlay');
+
+  var viewAll = container.getElementsByClassName('div_viewall_notif')[0];
+
+  act(() => {
+    fireEvent(
+      viewAll,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(onViewAllPressedMock).toHaveBeenCalled();
+
+});
 
 it('SfInput: Basic Render Primary Date', async () => {
 
