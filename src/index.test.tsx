@@ -1061,6 +1061,47 @@ it('SfNav: Notification Landscape', async () => {
 
 });
 
+it('SfNav: Notification Landscape Icon', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  window = Object.assign(window, { innerWidth: 1380, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav showNotification={true} notificationList={[
+      {id: 1, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
+      {id: 2, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+      {id: 3, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false},
+      {id: 4, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
+      {id: 5, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+      {id: 6, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false}
+      ]} onViewAllNotificationsClicked={() => {}} onNotificationClicked={() => {}} notificationIcon={<Search />} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('btn_notif_icon');
+  expect(container.innerHTML).not.toContain('🔔');
+
+  let notifIcon = container.getElementsByClassName('btn_notif_icon')[0];
+
+  // open menu
+
+  act(() => {
+    fireEvent(
+      notifIcon,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  expect(container.innerHTML).toContain('nav_div_notif_menu_overlay');
+
+});
+
 it('SfNav: Notification Portrait', async () => {
 
   jest.setTimeout(TEST_TIMEOUT);

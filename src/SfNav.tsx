@@ -20,6 +20,7 @@ interface Props {
     menuIcon?: any;
     backIcon?: any;
     notificationList?: any;
+    notificationIcon?: any;
     profilePicture?: string;
     profileMenu?: any;
     profilePreamble?: any;
@@ -51,6 +52,11 @@ interface Props {
     stylesProfilePreamble?: any;
     stylesProfileComponent?: any;
     stylesBack?: any;
+    stylesNotificationIcon?: any;
+    stylesNotificationBadge?: any;
+    stylesNotificationListContainer?: any;
+    stylesNotificationRead?: any;
+    stylesNotificationUnRead?: any;
     classNameBrand?: any;
     classNameBrandLogo?: any;
     classNameMenu?: any;
@@ -69,6 +75,11 @@ interface Props {
     classNameProfilePreamble?: any;
     classNameProfileComponent?: any;
     classNameBack?: any;
+    classNameNotificationIcon?: any;
+    classNameNotificationBadge?: any;
+    classNameNotificationListContainer?: any;
+    classNameNotificationRead?: any;
+    classNameNotificationUnRead?: any;
     onNotificationClicked?: (value: any) => void;
     onViewAllNotificationsClicked?: () => void;
     onHomePressed?: () => void;
@@ -111,6 +122,12 @@ interface NotificationProps {
     variant: string;
     theme: any;
     notificationList: any;
+    stylesNotificationListContainer: any;
+    stylesNotificationRead: any;
+    stylesNotificationUnRead: any;
+    classNameNotificationListContainer: string;
+    classNameNotificationRead: string;
+    classNameNotificationUnRead: string;
     toggleNotificationMenu: () => any;
     onViewAllNotificationsClicked: () => void;
     onNotificationClicked: (value: any) => void;
@@ -316,7 +333,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
 
 }
 
-const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), notificationList, toggleNotificationMenu, onViewAllNotificationsClicked, onNotificationClicked}: NotificationProps) => {
+const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), notificationList, toggleNotificationMenu, onViewAllNotificationsClicked, onNotificationClicked, classNameNotificationListContainer, classNameNotificationRead, classNameNotificationUnRead, stylesNotificationListContainer, stylesNotificationRead, stylesNotificationUnRead}: NotificationProps) => {
 
     return (
         <div className={'nav_div_notif_menu '} style={{
@@ -346,7 +363,7 @@ const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme =
             }}>
 
                 <div 
-                //className={classNameContainerRightMenu}
+                className={classNameNotificationListContainer}
                 style={{
                     flexDirection: 'column',
                     display: 'flex',
@@ -354,17 +371,19 @@ const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme =
                     backgroundColor: 'white',
                     maxHeight: '400px',
                     overflowY: 'auto',
-                    position: 'relative'
-                    //...stylesContainerRightMenu
+                    position: 'relative',
+                    ...stylesNotificationListContainer
                 }}>
 
                     {
                         notificationList.map((item: any, key1: any) => {
 
+                        const styleNotification = (item.read ? stylesNotificationRead : stylesNotificationUnRead);
+
                         return (
                             <div 
                                 onClick={() => {onNotificationClicked(item); toggleNotificationMenu();}}
-                                className={'nav_notif_list_' + key1/* + classNameSubMenuMobile*/}
+                                className={'nav_notif_list_' + key1 + " " + (item.read ? classNameNotificationRead : classNameNotificationUnRead )}
                                 key={key1}
                                 style={{
                                     borderTopLeftRadius: key1 === 0 ? '5px' : '0px',
@@ -383,8 +402,7 @@ const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme =
                                     paddingBottom: Themes.getTheme().spaces.ltl + 'px',
                                     paddingLeft: Themes.getTheme().spaces.ltl + 'px',
                                     paddingRight: Themes.getTheme().spaces.ltl + 'px',
-                                    //...stylesSubMenuMobile
-
+                                    ...styleNotification
                                 }}>
                                     <div style={{fontSize: '90%', fontWeight: '400'}}>{item.title}</div>
                                     <div style={{fontSize: '70%', fontWeight: '400', marginTop: '4px'}}>{item.description}</div>
@@ -414,7 +432,7 @@ const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme =
 
 }
 
-const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null,  showProfile = false, showSearch = true, showSignIn = true, showBack = false, showNotification = false, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, onBackPressed = () => {}, onViewAllNotificationsClicked = () => {}, onNotificationClicked = () => {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, backIcon = null, optionsIcon = null, notificationList=[], classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", classNameProfilePictureContainer = "", classNameBack = "", stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}, stylesProfilePictureContainer = {}, stylesBack = {}}: Props) => {
+const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null,  showProfile = false, showSearch = true, showSignIn = true, showBack = false, showNotification = false, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, onBackPressed = () => {}, onViewAllNotificationsClicked = () => {}, onNotificationClicked = () => {}, signInCaption = "Sign In", searchCaption = "Search", searchIcon = null, menuIcon = null, backIcon = null, notificationIcon = null, optionsIcon = null, notificationList=[], classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", classNameProfilePictureContainer = "", classNameBack = "", classNameNotificationIcon = "", classNameNotificationBadge = "", classNameNotificationListContainer = "", classNameNotificationRead = "", classNameNotificationUnRead = "", stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}, stylesProfilePictureContainer = {}, stylesBack = {}, stylesNotificationIcon = {}, stylesNotificationBadge = {}, stylesNotificationListContainer = {}, stylesNotificationRead = {}, stylesNotificationUnRead = {}}: Props) => {
 
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
     const [searchString, setSearchString] = useState('');
@@ -608,7 +626,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         
                         {showSignIn && <SfButton className={'btn_signin_portrait ' + classNameSignIn} styles={{marginRight: theme.spaces.ltl + 'px', height: '30px', fontSize: '90%',  ...stylesSignIn}} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} type={theme.types.filled} caption={signInCaption} onClick={(event) => {onSignInPressed(); event.stopPropagation()}} />}
 
-                        {showNotification && <div className={'btn_notif_icon'} style={{display: 'flex', marginRight: theme.spaces.ltl + 'px', alignItems: 'center'}} onClick={(e) => {toggleNotificationMenu(); e.stopPropagation()}}><div>🔔</div>{notificationListContainsUnRead() && <div style={{fontSize: '70%', width: '10px', height: '10px', backgroundColor: 'red', color: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '8px', marginBottom: '15px', marginLeft: '-8px', fontWeight: '800'}}><div>0</div></div>}</div>}
+                        {showNotification && <div className={'btn_notif_icon ' + classNameNotificationIcon} style={{display: 'flex', marginRight: theme.spaces.ltl + 'px', alignItems: 'center', ...stylesNotificationIcon}} onClick={(e) => {toggleNotificationMenu(); e.stopPropagation()}}><div>{notificationIcon != null ? notificationIcon : "🔔"}</div>{notificationListContainsUnRead() && <div className={classNameNotificationBadge} style={{fontSize: '70%', width: '10px', height: '10px', backgroundColor: 'red', color: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '8px', marginBottom: '15px', marginLeft: '-8px', fontWeight: '800', ...stylesNotificationBadge}}><div>0</div></div>}</div>}
 
                         {showSearch && <span style={{fontWeight: '800'}}><b>{optionsIcon == null ? '⋮' : optionsIcon}</b></span>}
                     
@@ -787,7 +805,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
 
                     </div>}
 
-                    {showNotificationMenu && <NotificationMenu variant={variant} theme={theme} notificationList={notificationList} toggleNotificationMenu={toggleNotificationMenu} onViewAllNotificationsClicked={onViewAllNotificationsClicked} onNotificationClicked={onNotificationClicked}/>}
+                    {showNotificationMenu && <NotificationMenu variant={variant} theme={theme} notificationList={notificationList} toggleNotificationMenu={toggleNotificationMenu} onViewAllNotificationsClicked={onViewAllNotificationsClicked} onNotificationClicked={onNotificationClicked} stylesNotificationListContainer={stylesNotificationListContainer} stylesNotificationRead={stylesNotificationRead} stylesNotificationUnRead={stylesNotificationUnRead} classNameNotificationListContainer={classNameNotificationListContainer} classNameNotificationRead={classNameNotificationRead} classNameNotificationUnRead={classNameNotificationUnRead} />}
 
                 </div>
 
@@ -919,10 +937,10 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                 }}>
                     {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {onSearchPressed(searchString)}} />}
                     {showSignIn && <SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '40px', fontSize: '90%', marginLeft: theme.spaces.mod + 'px', ...stylesSignIn}} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} type={theme.types.filled} caption={signInCaption} onClick={() => {onSignInPressed()}} />}
-                    {showNotification && <div className={'btn_notif_icon'} style={{display: 'flex', marginLeft: theme.spaces.mod + 'px', alignItems: 'center', cursor: 'pointer'}} onClick={(e) => {toggleNotificationMenu(); e.stopPropagation()}}><div>🔔</div>{notificationListContainsUnRead() && <div style={{fontSize: '70%', width: '10px', height: '10px', backgroundColor: 'red', color: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '8px', marginBottom: '15px', marginLeft: '-8px', fontWeight: '800'}}><div>0</div></div>}</div>}
+                    {showNotification && <div className={'btn_notif_icon ' + classNameNotificationIcon} style={{display: 'flex', marginLeft: theme.spaces.mod + 'px', alignItems: 'center', cursor: 'pointer', ...stylesNotificationIcon}} onClick={(e) => {toggleNotificationMenu(); e.stopPropagation()}}><div>{notificationIcon != null ? notificationIcon : "🔔"}</div>{notificationListContainsUnRead() && <div className={classNameNotificationBadge} style={{fontSize: '70%', width: '10px', height: '10px', backgroundColor: 'red', color: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '8px', marginBottom: '15px', marginLeft: '-8px', fontWeight: '800', ...stylesNotificationBadge}}><div>0</div></div>}</div>}
                     {showProfile && <Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePicture={classNameProfilePicture} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/>}
 
-                    {showNotificationMenu && <NotificationMenu variant={variant} theme={theme} notificationList={notificationList} toggleNotificationMenu={toggleNotificationMenu} onViewAllNotificationsClicked={onViewAllNotificationsClicked} onNotificationClicked={onNotificationClicked}/>}
+                    {showNotificationMenu && <NotificationMenu variant={variant} theme={theme} notificationList={notificationList} toggleNotificationMenu={toggleNotificationMenu} onViewAllNotificationsClicked={onViewAllNotificationsClicked} onNotificationClicked={onNotificationClicked} stylesNotificationListContainer={stylesNotificationListContainer} stylesNotificationRead={stylesNotificationRead} stylesNotificationUnRead={stylesNotificationUnRead} classNameNotificationListContainer={classNameNotificationListContainer} classNameNotificationRead={classNameNotificationRead} classNameNotificationUnRead={classNameNotificationUnRead} />}
 
                 </div>
             </div>}
