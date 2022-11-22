@@ -1008,7 +1008,8 @@
 <a name='L950'></a><a href='#L950'>950</a>
 <a name='L951'></a><a href='#L951'>951</a>
 <a name='L952'></a><a href='#L952'>952</a>
-<a name='L953'></a><a href='#L953'>953</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L953'></a><a href='#L953'>953</a>
+<a name='L954'></a><a href='#L954'>954</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1934,6 +1935,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2894,10 +2896,11 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     }
                 &lt;/div&gt;
                 &lt;div style={{
+                    position: 'relative',
                     display: 'flex',
                     alignItems: 'center'
                 }}&gt;
-                    {showSearch &amp;&amp; &lt;SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant == theme.variants.dark ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.light </span>: variant == theme.variants.light ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.dark </span>: variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) =&gt; {setSearchString(value)}} onEnterPressed={() =&gt; {onSearchPressed(searchString)}} /&gt;}
+                    {showSearch &amp;&amp; &lt;SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={{...stylesSearchContainer}} stylesInput={stylesSearchInput} variant={variant == theme.variants.dark ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.light </span>: variant == theme.variants.light ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.dark </span>: variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) =&gt; {setSearchString(value)}} onEnterPressed={() =&gt; {onSearchPressed(searchString)}} /&gt;}
                     {showSignIn &amp;&amp; &lt;SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '40px', fontSize: '90%', marginLeft: theme.spaces.mod + 'px', ...stylesSignIn}} variant={variant == theme.variants.dark ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.light </span>: variant == theme.variants.light ? <span class="branch-0 cbranch-no" title="branch not covered" >theme.variants.dark </span>: variant} type={theme.types.filled} caption={signInCaption} onClick={() =&gt; {onSignInPressed()}} /&gt;}
                     {showNotification &amp;&amp; &lt;div className={'btn_notif_icon ' + classNameNotificationIcon} style={{display: 'flex', marginLeft: theme.spaces.mod + 'px', alignItems: 'center', cursor: 'pointer', ...stylesNotificationIcon}} onClick={(e) =&gt; {toggleNotificationMenu(); e.stopPropagation()}}&gt;&lt;div&gt;{notificationIcon != null ? notificationIcon : "🔔"}&lt;/div&gt;{notificationListContainsUnRead() &amp;&amp; &lt;div className={classNameNotificationBadge} style={{fontSize: '70%', width: '10px', height: '10px', backgroundColor: 'red', color: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '8px', marginBottom: '15px', marginLeft: '-8px', fontWeight: '800', ...stylesNotificationBadge}}&gt;&lt;div&gt;0&lt;/div&gt;&lt;/div&gt;}&lt;/div&gt;}
                     {showProfile &amp;&amp; &lt;Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePicture={classNameProfilePicture} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/&gt;}
@@ -2919,7 +2922,7 @@ export default SfNav;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Nov 18 2022 18:56:22 GMT+0530 (India Standard Time)
+                at Tue Nov 22 2022 09:35:36 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="prettify.js"></script>
