@@ -1227,6 +1227,100 @@ it('SfNav: Notification Portrait', async () => {
 
 });
 
+it('SfNav: Banner Basic Render', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav showBanner={true} />, container);
+  });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).toContain('⭐️');
+
+});
+
+it('SfNav: Banner onBannerCtaPressed', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  const onBannerCtaPressedMock = jest.fn();
+
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav showBanner={true} onBannerCtaPressed={()  => {onBannerCtaPressedMock()}} />, container);
+  });
+
+  let bannerCta = container.getElementsByClassName('banner_cta')[0];
+
+  act(() => {
+    fireEvent(
+      bannerCta,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(onBannerCtaPressedMock).toHaveBeenCalled();
+
+
+})
+
+it('SfNav: Banner onBannerCtaPressed', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav showBanner={true} />, container);
+  });
+
+  expect(container.innerHTML).toContain('✕');
+
+  let bannerDismiss = container.getElementsByClassName('banner_dismiss')[0];
+
+  act(() => {
+    fireEvent(
+      bannerDismiss,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+  });
+
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+  expect(container.innerHTML).not.toContain('✕');
+
+
+})
+
+
+it('SfNav: Banner Custom Component', async () => {
+
+  jest.setTimeout(TEST_TIMEOUT);
+
+  window = Object.assign(window, { innerWidth: 390, innerHeight: 844 });
+  await new Promise((r) => setTimeout(r, TIMEOUT));
+
+  act(() => {
+    render(<SfNav showBanner={true} bannerComponent={<div>Hello</div>} />, container);
+  });
+
+  expect(container.innerHTML).toContain('Hello');
+
+})
+
+
 it('SfInput: Basic Render Primary Date', async () => {
 
   jest.setTimeout(TEST_TIMEOUT);
