@@ -9,6 +9,7 @@ const Constants = {
     DEFAULT_BANNER_TEXT_MOBILE: "⭐️ Give us a star!",
     DEFAULT_BANNER_CTA: "View on GitHub",
     DEFAULT_BANNER_CTA_MOBILE: "GitHub",
+    DEFAULT_LINK_HOME: "home",
 
 }
 

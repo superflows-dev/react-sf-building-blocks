@@ -4,170 +4,19 @@ import Themes from 'react-sf-themes';
 import SfButton from './SfButton';
 import SfInput from './SfInput';
 import { Constants } from './Constants';
+import {ContextSfNavProvider} from './ContextSfNav';
+import {InterfaceNavigate} from './InterfaceNavigate';
 // import SfButton from './SfButton';
 // import Services from './Services';
 // import Util from './Util';
-
-
 import Util from './Util';
+import {InterfaceSfNavProvider} from './InterfaceSfNavProvider';
+import {InterfaceSfNavProps} from './InterfaceSfNavProps';
+import {InterfaceSfNavProfileProps} from './InterfaceSfNavProfileProps';
+import {InterfaceSfNavNotificationProps} from './InterfaceSfNavNotificationProps';
+import {InterfaceSfNavBannerProps} from './InterfaceSfNavBannerProps';
+import { InterfaceSfNavNotificationItem } from './InterfaceSfNavNotificationItem';
 
-interface Props {
-    variant?: string;
-    theme?: any;
-    brand?: string;
-    brandLogo?: any;
-    menu?: any;
-    menuIcon?: any;
-    backIcon?: any;
-    notificationList?: any;
-    notificationIcon?: any;
-    profilePicture?: string;
-    profileMenu?: any;
-    profilePreamble?: any;
-    profileComponent?: any;
-    bannerComponent?: any;
-    bannerComponentMobile?: any;
-    optionsIcon?: any;
-    showBack?: boolean;
-    showSearch?: boolean;
-    showSignIn?: boolean;
-    showProfile?: boolean;
-    showNotification?: boolean;
-    showBanner?: boolean;
-    bannerText?: string;
-    bannerTextMobile?: string;
-    bannerCta?: string;
-    bannerCtaMobile?: string;
-    bannerEnableDismiss?: boolean;
-    searchCaption?: string;
-    signInCaption?: string;
-    searchIcon?: any;
-    stylesBrand? : any;
-    stylesBrandLogo? : any;
-    stylesMenu? : any;
-    stylesSubMenu? : any;
-    stylesMenuMobile? : any;
-    stylesSubMenuMobile? : any;
-    stylesMenuMobileSelected? : any;
-    stylesSignIn?: any;
-    stylesSearchContainer?: any;
-    stylesSearchInput?: any;
-    stylesContainerDesktop?: any;
-    stylesContainerMobile?: any;
-    stylesContainerRightMenu?: any;
-    stylesProfilePicture?: any;
-    stylesProfilePictureContainer?: any;
-    stylesProfilePreamble?: any;
-    stylesProfileComponent?: any;
-    stylesBack?: any;
-    stylesNotificationIcon?: any;
-    stylesNotificationBadge?: any;
-    stylesNotificationListContainer?: any;
-    stylesNotificationRead?: any;
-    stylesNotificationUnRead?: any;
-    stylesNotificationViewAll?: any;
-    stylesBannerContainer?: any;
-    stylesBannerText?: any;
-    stylesBannerCta?: any;
-    classNameBrand?: any;
-    classNameBrandLogo?: any;
-    classNameMenu?: any;
-    classNameSubMenu?: any;
-    classNameMenuMobile?: any;
-    classNameSubMenuMobile?: any;
-    classNameMenuMobileSelected?: any;
-    classNameSignIn?: any;
-    classNameSearchContainer?: any;
-    classNameSearchInput?: any;
-    classNameContainerDesktop?: any;
-    classNameContainerMobile?: any;
-    classNameContainerRightMenu?: any;
-    classNameProfilePicture?: any;
-    classNameProfilePictureContainer?: any;
-    classNameProfilePreamble?: any;
-    classNameProfileComponent?: any;
-    classNameBack?: any;
-    classNameNotificationIcon?: any;
-    classNameNotificationBadge?: any;
-    classNameNotificationListContainer?: any;
-    classNameNotificationRead?: any;
-    classNameNotificationUnRead?: any;
-    classNameNotificationViewAll?: any;
-    classNameBannerContainer?: any;
-    classNameBannerText?: any;
-    classNameBannerCta?: any;
-    onNotificationClicked?: (value: any) => void;
-    onViewAllNotificationsClicked?: () => void;
-    onHomePressed?: () => void;
-    onBackPressed?: () => void;
-    onSearchPressed?: (value: string) => void;
-    onSignInPressed?: () => void;
-    onBannerCtaPressed?: () => void;
-    onMenuClicked?: (value: string) => void;
-}
-
-interface ProfileProps {
-    clickMenu: (value: any) => void;
-    toggleExpandProfile: () => void;
-    toggleProfileDropdownExpandedWrap: (value: number) => void;
-    setExpandProfile: (value: boolean) => void;
-    getProfileDropdownExpandedWrap: () => any;
-    theme:  any;
-    variant: string;
-    profilePicture: string;
-    expandProfile: boolean;
-    profilePreamble: any;
-    profileComponent: any;
-    profileMenu: any;
-    classNameProfilePreamble: any;
-    classNameProfileComponent: any;
-    classNameProfilePicture: any;
-    classNameProfilePictureContainer: any;
-    classNameMenuMobileSelected: any;
-    classNameMenuMobile: any;
-    classNameSubMenuMobile: any;
-    stylesProfilePreamble: any;
-    stylesProfileComponent: any;
-    stylesProfilePicture: any;
-    stylesProfilePictureContainer: any;
-    stylesMenuMobileSelected: any;
-    stylesMenuMobile: any;
-    stylesSubMenuMobile: any;
-}
-
-interface NotificationProps {
-    variant: string;
-    theme: any;
-    notificationList: any;
-    stylesNotificationListContainer: any;
-    stylesNotificationRead: any;
-    stylesNotificationUnRead: any;
-    stylesNotificationViewAll: any;
-    classNameNotificationListContainer: string;
-    classNameNotificationRead: string;
-    classNameNotificationUnRead: string;
-    classNameNotificationViewAll: string;
-    toggleNotificationMenu: () => any;
-    onViewAllNotificationsClicked: () => void;
-    onNotificationClicked: (value: any) => void;
-}
-
-interface BannerProps {
-    variant: string;
-    theme: any;
-    bannerComponent?: any;
-    showBanner?: boolean;
-    bannerText?: string;
-    bannerCta?: string;
-    bannerEnableDismiss?: boolean;
-    stylesBannerContainer?: any;
-    stylesBannerText?: any;
-    stylesBannerCta?: any;
-    classNameBannerContainer?: any;
-    classNameBannerText?: any;
-    classNameBannerCta?: any;
-    onBannerCtaPressed?: () => void;
-}
 
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
@@ -177,7 +26,7 @@ function getWindowDimensions() {
     };
   }
 
-const Banner = ({variant, theme, bannerCta = Constants.DEFAULT_BANNER_CTA, bannerComponent, bannerEnableDismiss, bannerText = Constants.DEFAULT_BANNER_TEXT, showBanner, onBannerCtaPressed = () => {}, stylesBannerContainer, stylesBannerCta, stylesBannerText, classNameBannerContainer, classNameBannerCta, classNameBannerText}: BannerProps) => {
+const Banner = ({variant, theme, bannerCta = Constants.DEFAULT_BANNER_CTA, bannerComponent, bannerEnableDismiss, bannerText = Constants.DEFAULT_BANNER_TEXT, showBanner, onBannerCtaPressed = () => {}, stylesBannerContainer, stylesBannerCta, stylesBannerText, classNameBannerContainer, classNameBannerCta, classNameBannerText}: InterfaceSfNavBannerProps) => {
 
     const [displayBanner, setDisplayBanner] = useState(true);
 
@@ -197,7 +46,7 @@ const Banner = ({variant, theme, bannerCta = Constants.DEFAULT_BANNER_CTA, banne
     )
 }
 
-const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpandedWrap, getProfileDropdownExpandedWrap, setExpandProfile, theme, variant, profilePicture, expandProfile, profilePreamble, profileComponent, profileMenu, classNameProfileComponent, classNameSubMenuMobile, classNameMenuMobileSelected, classNameMenuMobile, classNameProfilePreamble, classNameProfilePicture, classNameProfilePictureContainer, stylesProfileComponent, stylesProfilePreamble, stylesMenuMobileSelected, stylesMenuMobile, stylesSubMenuMobile, stylesProfilePicture, stylesProfilePictureContainer}: ProfileProps) => {
+const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpandedWrap, getProfileDropdownExpandedWrap, setExpandProfile, theme, variant, profilePicture, expandProfile, profilePreamble, profileComponent, profileMenu, classNameProfileComponent, classNameSubMenuMobile, classNameMenuMobileSelected, classNameMenuMobile, classNameProfilePreamble, classNameProfilePicture, classNameProfilePictureContainer, stylesProfileComponent, stylesProfilePreamble, stylesMenuMobileSelected, stylesMenuMobile, stylesSubMenuMobile, stylesProfilePicture, stylesProfilePictureContainer}: InterfaceSfNavProfileProps) => {
 
     return (
 
@@ -328,7 +177,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                                                         width: theme.dimensions.menuWidth + 'px',
                                                         boxShadow: key1 === element.length - 1 ? '0px 2px 2px #aaa' : 'none',
                                                         ...stylesSubMenuMobile
-                                                    }} key={key1} variant={variant} type="filled" caption={item.caption} onClick={(event) => {event.stopPropagation();  toggleProfileDropdownExpandedWrap(-1); setExpandProfile(false); clickMenu(item.link)}}/>
+                                                    }} key={key1} variant={variant} type="filled" caption={item.caption} onClick={(event) => {event.stopPropagation();  toggleProfileDropdownExpandedWrap(-1); setExpandProfile(false); clickMenu(item.link, item.component)}}/>
                                                 )
 
                                             })
@@ -358,7 +207,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
                                         zIndex: '199',
                                         boxShadow: profileComponent != null ? 'none' : key === profileMenu.length - 1 ? '0px 2px 2px #aaa' : 'none',
                                         ...stylesMenuMobile
-                                        }} key={key} variant={variant} type="filled" caption={element.caption} onClick={(event) => {event.stopPropagation(); toggleProfileDropdownExpandedWrap(-1); setExpandProfile(false); clickMenu(element.link)}}/>
+                                        }} key={key} variant={variant} type="filled" caption={element.caption} onClick={(event) => {event.stopPropagation(); toggleProfileDropdownExpandedWrap(-1); setExpandProfile(false); clickMenu(element.link, element.component)}}/>
                                 </div>
                             );
 
@@ -389,7 +238,57 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
 
 }
 
-const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), notificationList, toggleNotificationMenu, onViewAllNotificationsClicked, onNotificationClicked, classNameNotificationListContainer, classNameNotificationRead, classNameNotificationUnRead, stylesNotificationListContainer, stylesNotificationRead, stylesNotificationUnRead, stylesNotificationViewAll, classNameNotificationViewAll}: NotificationProps) => {
+const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), notificationList, notificationListMenu, notificationDetailsMenu, navigateTo, toggleNotificationMenu, onViewAllNotificationsClicked, onNotificationClicked, classNameNotificationListContainer, classNameNotificationRead, classNameNotificationUnRead, stylesNotificationListContainer, stylesNotificationRead, stylesNotificationUnRead, stylesNotificationViewAll, classNameNotificationViewAll, enableRouting}: InterfaceSfNavNotificationProps) => {
+
+    function onClickViewAllNotifications() {
+
+        console.log('inside view all');
+
+        if(enableRouting) {
+
+            console.log('inside view all enable routing');
+
+            if(notificationListMenu.component == null) {
+                console.log('inside view all enable routing component null');
+                onViewAllNotificationsClicked();
+            } else {
+                console.log('inside view all enable routing component not null');
+                const interfaceNavigate : InterfaceNavigate = {
+                    link: notificationListMenu.link,
+                    component: notificationListMenu.component,
+                    args: null
+                };
+                navigateTo(interfaceNavigate);
+            }
+
+        } else {
+
+            console.log('inside view all not enable routing');
+
+            onViewAllNotificationsClicked();
+        }
+    }
+
+    function onClickNotification(item: InterfaceSfNavNotificationItem) {
+
+        if(enableRouting) {
+
+            if(notificationDetailsMenu.component == null) {
+                onNotificationClicked(item)
+            } else {
+                const interfaceNavigate : InterfaceNavigate = {
+                    link: notificationDetailsMenu.link,
+                    component: notificationDetailsMenu.component,
+                    args: [item.id]
+                };
+                navigateTo(interfaceNavigate);
+            }
+
+        } else {
+            onNotificationClicked(item)   
+        }
+
+    }
 
     return (
         <div className={'nav_div_notif_menu '} style={{
@@ -438,7 +337,7 @@ const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme =
 
                         return (
                             <div 
-                                onClick={() => {onNotificationClicked(item); toggleNotificationMenu();}}
+                                onClick={() => {onClickNotification(item); toggleNotificationMenu();}}
                                 className={'nav_notif_list_' + key1 + " " + (item.read ? classNameNotificationRead : classNameNotificationUnRead )}
                                 key={key1}
                                 style={{
@@ -479,7 +378,7 @@ const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme =
                     ...stylesNotificationViewAll 
                 }} onClick={(e) => {
                     toggleNotificationMenu();
-                    onViewAllNotificationsClicked();
+                    onClickViewAllNotifications();
                     e.stopPropagation();
                 }}>View All ▶</div>
 
@@ -489,7 +388,16 @@ const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme =
 
 }
 
-const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = {}, profilePreamble = null, profileComponent = null, bannerComponent = null, bannerComponentMobile = null, showProfile = false, showSearch = true, showSignIn = true, showBack = false, showNotification = false, showBanner = false, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, onBackPressed = () => {}, onViewAllNotificationsClicked = () => {}, onNotificationClicked = () => {}, onBannerCtaPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", bannerText = Constants.DEFAULT_BANNER_TEXT, bannerTextMobile = "", bannerCta = Constants.DEFAULT_BANNER_CTA, bannerCtaMobile = "", bannerEnableDismiss = true, searchIcon = null, menuIcon = null, backIcon = null, notificationIcon = null, optionsIcon = null, notificationList=Constants.DEFAULT_NOTIFICATION_LIST, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", classNameProfilePictureContainer = "", classNameBack = "", classNameNotificationIcon = "", classNameNotificationBadge = "", classNameNotificationListContainer = "", classNameNotificationRead = "", classNameNotificationUnRead = "", classNameNotificationViewAll = {}, classNameBannerContainer = "", classNameBannerText = "", classNameBannerCta = "", stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}, stylesProfilePictureContainer = {}, stylesBack = {}, stylesNotificationIcon = {}, stylesNotificationBadge = {}, stylesNotificationListContainer = {}, stylesNotificationRead = {}, stylesNotificationUnRead = {}, stylesNotificationViewAll = {}, stylesBannerContainer = {}, stylesBannerCta = {}, stylesBannerText = {}}: Props) => {
+const ErrorNotFound = () => {
+
+    return (<div style={{textAlign: 'center', color: 'gray'}}><br /><br />
+        <b><h1>Page Not Found</h1></b>
+        <b>There is nothing here...</b>
+        <br /><br /><br /></div>);
+
+}
+
+const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = [], notificationDetailsMenu = {caption: "", link: "", component: null}, notificationListMenu = {caption: "", link: "", component: null}, profilePreamble = null, homeMenu = {caption: "", link: "", component: null}, profileComponent = null, bannerComponent = null, bannerComponentMobile = null, enableRouting = false, showProfile = false, showSearch = true, showSignIn = true, showBack = false, showNotification = false, showBanner = false, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, onBackPressed = () => {}, onViewAllNotificationsClicked = () => {}, onNotificationClicked = () => {}, onBannerCtaPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", bannerText = Constants.DEFAULT_BANNER_TEXT, bannerTextMobile = "", bannerCta = Constants.DEFAULT_BANNER_CTA, bannerCtaMobile = "", bannerEnableDismiss = true, searchIcon = null, menuIcon = null, backIcon = null, notificationIcon = null, optionsIcon = null, notificationList=Constants.DEFAULT_NOTIFICATION_LIST, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", classNameProfilePictureContainer = "", classNameBack = "", classNameNotificationIcon = "", classNameNotificationBadge = "", classNameNotificationListContainer = "", classNameNotificationRead = "", classNameNotificationUnRead = "", classNameNotificationViewAll = "", classNameBannerContainer = "", classNameBannerText = "", classNameBannerCta = "", stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}, stylesProfilePictureContainer = {}, stylesBack = {}, stylesNotificationIcon = {}, stylesNotificationBadge = {}, stylesNotificationListContainer = {}, stylesNotificationRead = {}, stylesNotificationUnRead = {}, stylesNotificationViewAll = {}, stylesBannerContainer = {}, stylesBannerCta = {}, stylesBannerText = {}}: InterfaceSfNavProps) => {
 
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
     const [searchString, setSearchString] = useState('');
@@ -500,6 +408,12 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
     const [showNotificationMenu, setShowNotificationMenu] = useState(false);
     const [expandProfile, setExpandProfile] = useState(false);
     const [notificationListStr, setNotificationListStr] = useState("[]");
+    const [history, setHistory] = useState<InterfaceNavigate[]>([])
+
+    const interfaceSfNavProvider : InterfaceSfNavProvider = {
+        navigateTo: navigateTo,
+        navigationData: history[history.length - 1]
+    };
 
     function setNotificationListStrWrap(list: any) {
         setNotificationListStr(JSON.stringify(list));
@@ -539,8 +453,32 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
         setShowNotificationMenu(!showNotificationMenu)
     }
 
-    function clickMenu(link: string) {
-        onMenuClicked(link);
+    function clickMenu(link: string, component: any = null, args: any = null) {
+
+        if(enableRouting) {
+
+            if(component != null) {
+                const interfaceNavigate : InterfaceNavigate = {
+                    link: link,
+                    component: component,
+                    args: args
+                };
+                navigateTo(interfaceNavigate);
+            } else {
+                onMenuClicked(link);
+            }
+
+        } else {
+            onMenuClicked(link);
+        }
+         
+    }
+
+    function navigateTo(component: InterfaceNavigate) {
+        //if(history.length > 0 && history[history.length - 1].link != component.link) {
+            window.history.pushState({}, "", "/" + component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/")));
+        //}
+        setHistory(history => [...history, component]);
     }
 
     function toggleDropdownExpandedWrap(index: number) {
@@ -609,351 +547,296 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
+
     }, []);
+
+    useEffect(() => {
+
+        function performClick(urlComponents: any, menuItem: any) {
+
+            if(urlComponents.length > 4) {
+                clickMenu(menuItem.link, menuItem.component, urlComponents.slice(4))
+            } else {
+                clickMenu(menuItem.link, menuItem.component)
+            }
+
+        }
+
+        if(enableRouting) {
+
+            // About not working properly
     
-    return (
-        <div style={{
-            color: Util.getTextColor(theme, variant == theme.variants.dark ? theme.variants.light :  variant == theme.variants.light ? theme.variants.dark : variant, theme.types.outlined)
-        }}>
-            {windowDimensions.width <= theme.breakpoints.tablet && <div style={{position: 'relative'}}>
+            const urlComponents = window.location.href.split("/");
+            const screenComponent = urlComponents[3];
+
+            console.log('screen component', screenComponent);
+            console.log('screen component home menu', homeMenu.link);
+    
+            if(homeMenu.link == screenComponent) {
+                performClick(urlComponents, homeMenu);
+                return;
+            }
+
+            console.log('screen component notif details menu', notificationDetailsMenu.link);
+    
+            if(notificationDetailsMenu.link == screenComponent) {
+                performClick(urlComponents, notificationDetailsMenu);
+                return;
+            }
+    
+            console.log('screen component notif list menu', notificationListMenu.link);
+
+            if(notificationListMenu.link == screenComponent) {
+                performClick(urlComponents, notificationListMenu);
+                return;
+            }
+    
+            for(var i = 0; i < menu.length; i++) {
+                console.log('menu[i]', menu[i], screenComponent);
+                if(menu[i].constructor.name == "Array") {
+    
+                    for(var j = 1; j < menu[i].length; j++) {
+    
+                        if(menu[i][j].link == screenComponent && menu[i][j].component != null) {
+                            performClick(urlComponents, menu[i][j]);
+                            return;
+                        }
+                    }
+                } else {
+    
+                    if(menu[i].link == screenComponent && menu[i].component != null) {
+                        performClick(urlComponents, menu[i]);
+                        return;
+                    }
+                }
                 
-                <Banner variant={variant} theme={theme} bannerComponent={bannerComponentMobile == null ? bannerComponent : bannerComponentMobile} bannerCta={bannerCtaMobile == "" ? bannerCta : bannerCtaMobile} bannerEnableDismiss={bannerEnableDismiss} bannerText={bannerTextMobile == "" ? bannerText : bannerTextMobile} onBannerCtaPressed={onBannerCtaPressed} showBanner={showBanner} stylesBannerContainer={stylesBannerContainer} stylesBannerCta={stylesBannerCta} stylesBannerText={stylesBannerText} classNameBannerContainer={classNameBannerContainer} classNameBannerCta={classNameBannerCta} classNameBannerText={classNameBannerText} />
+            }
 
-                <div 
-                className={classNameContainerMobile}
-                style={{
-                    position: 'relative',
-                    height: theme.dimensions.navHeight + 'px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    paddingLeft: theme.spaces.big + 'px',
-                    paddingRight: theme.spaces.big + 'px',
-                    ...stylesContainerMobile
-                }}>
-                    <div style={{
+            if(showProfile) {
+                for(var i = 0; i < profileMenu.length; i++) {
+                    if(profileMenu[i].constructor.name == "Array") {
+        
+                        for(var j = 1; j < profileMenu[i].length; j++) {
+        
+                            if(profileMenu[i][j].link == screenComponent && profileMenu[i][j].component != null) {
+                                performClick(urlComponents, profileMenu[i][j]);
+                                return;
+                            }
+                        }
+                    } else {
+        
+                        if(profileMenu[i].link == screenComponent && profileMenu[i].component != null) {
+                            performClick(urlComponents, profileMenu[i]);
+                            return;
+                        }
+                    }
+                    
+                }
+            }
+
+            navigateTo({component: <ErrorNotFound/>, link: "errornotfound", args: null});
+
+        }
+
+    }, [menu])
+
+    return (
+
+        <div>
+
+            <div style={{
+                color: Util.getTextColor(theme, variant == theme.variants.dark ? theme.variants.light :  variant == theme.variants.light ? theme.variants.dark : variant, theme.types.outlined)
+            }}>
+                {windowDimensions.width <= theme.breakpoints.tablet && <div style={{position: 'relative'}}>
+                    
+                    <Banner variant={variant} theme={theme} bannerComponent={bannerComponentMobile == null ? bannerComponent : bannerComponentMobile} bannerCta={bannerCtaMobile == "" ? bannerCta : bannerCtaMobile} bannerEnableDismiss={bannerEnableDismiss} bannerText={bannerTextMobile == "" ? bannerText : bannerTextMobile} onBannerCtaPressed={onBannerCtaPressed} showBanner={showBanner} stylesBannerContainer={stylesBannerContainer} stylesBannerCta={stylesBannerCta} stylesBannerText={stylesBannerText} classNameBannerContainer={classNameBannerContainer} classNameBannerCta={classNameBannerCta} classNameBannerText={classNameBannerText} />
+
+                    <div 
+                    className={classNameContainerMobile}
+                    style={{
+                        position: 'relative',
+                        height: theme.dimensions.navHeight + 'px',
                         display: 'flex',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        paddingLeft: theme.spaces.big + 'px',
+                        paddingRight: theme.spaces.big + 'px',
+                        ...stylesContainerMobile
                     }}>
-
-                        {showBack && <div className={'nav_back_menu ' + classNameBack} onClick={() => {onBackPressed()}} style={{
-                            paddingRight: theme.spaces.ltl + 'px',
-                            fontWeight: '800',
-                            ...stylesBack
-                            }}><b>{backIcon == null ? '‹' : backIcon}</b></div>}
-                        
-                        {!showBack && <div className='nav_left_menu' onClick={() => {toggleLeftMenu()}} style={{
-                            paddingRight: theme.spaces.ltl + 'px',
-                            fontWeight: '800'
-                            }}><b>{menuIcon == null ? '☰' : menuIcon}</b></div>}
-                        
                         <div style={{
                             display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontWeight: '800'
+                            alignItems: 'center'
                         }}>
-                            {(brandLogo != null && brandLogo != "") && <img 
-                            className={`nav_brand_logo ` + classNameBrandLogo}
-                            src={brandLogo} 
-                            onClick={() => {onHomePressed()}}
-                            style={{
-                                cursor: 'pointer',
-                                height: (parseInt(theme.dimensions.navHeight) * 8)/10 + 'px',
+
+                            {showBack && <div className={'nav_back_menu ' + classNameBack} onClick={() => {onBackPressed()}} style={{
                                 paddingRight: theme.spaces.ltl + 'px',
-                                ...stylesBrandLogo
-                            }}/>}
-                            {brand != "" && <div 
-                            onClick={() => {onHomePressed()}}
-                            className={'nav_brand ' + classNameBrand}
-                            style={{
-                                cursor: 'pointer',
-                                fontSize: '120%',
-                                ...stylesBrand
-                            }}>{brand}</div>}
-                        </div>                    
-                    </div>
-                    
-                    <div 
-                        className='nav_right_menu'
-                        onClick={() => {toggleRightMenu()}} 
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            paddingLeft: theme.spaces.ltl + 'px',
-                            }}>
-                        
-                        {showSignIn && <SfButton className={'btn_signin_portrait ' + classNameSignIn} styles={{marginRight: theme.spaces.ltl + 'px', height: '30px', fontSize: '90%',  ...stylesSignIn}} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} type={theme.types.filled} caption={signInCaption} onClick={(event) => {onSignInPressed(); event.stopPropagation()}} />}
-
-                        {showNotification && <div className={'btn_notif_icon ' + classNameNotificationIcon} style={{display: 'flex', marginRight: theme.spaces.ltl + 'px', alignItems: 'center', ...stylesNotificationIcon}} onClick={(e) => {toggleNotificationMenu(); e.stopPropagation()}}><div>{notificationIcon != null ? notificationIcon : "🔔"}</div>{notificationListContainsUnRead() && <div className={classNameNotificationBadge} style={{fontSize: '70%', width: '10px', height: '10px', backgroundColor: 'red', color: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '8px', marginBottom: '15px', marginLeft: '-8px', fontWeight: '800', ...stylesNotificationBadge}}><div>0</div></div>}</div>}
-
-                        {showSearch && <span style={{fontWeight: '800'}}><b>{optionsIcon == null ? '⋮' : optionsIcon}</b></span>}
-                    
-                        {showProfile && <Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePicture={classNameProfilePicture} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/>}
-                    
-                    </div>
-
-                    
-                    {showLeftMenu && <div className='nav_div_left_menu' style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'stretch',
-                        position: 'absolute',
-                        left: theme.spaces.ltl + 'px',
-                        backgroundColor: Util.getTextColor(theme, variant, "filled"),
-                        top: (parseInt(theme.dimensions.navHeight)) + 'px',
-                    }}>
-                        
-                        <div className='nav_div_left_menu_overlay' style={{
-                            position: 'fixed',
-                            left: '0px',
-                            top: '0px',
-                            width: '100%',
-                            height: '100%',
-                            backgroundColor: 'transparent',
-                            zIndex: '198'
-                        }} onClick={() => {toggleDropdownExpandedWrap(-1); toggleLeftMenu()}}>
-                        </div>
-
-                        {
-                            menu.map((element: any, key: any) => {
-
-                                if(Object.prototype.toString.call(element) === '[object Array]') {
-                                    
-                                    return (
-                                        <div key={key} style={{
-                                            position: 'relative',
-                                            zIndex: '199',
-                                            width: theme.dimensions.menuWidth + 'px',
-                                        }}>
-                                            {getDropdownExpandedWrap()[key] && <SfButton className={'nav_left_menu_' + key + '_expanded ' + classNameMenuMobileSelected} styles={{
-                                                width: '100%',
-                                                borderTopLeftRadius: key === 0 ? '5px' : '0px',
-                                                borderTopRightRadius: key === 0 ? '5px' : '0px',
-                                                borderBottomLeftRadius: key === menu.length - 1 ? '5px' : '0px',
-                                                borderBottomRightRadius: key === menu.length - 1 ? '5px' : '0px',
-                                                fontWeight: '400',
-                                                marginTop: '-2px',
-                                                cursor:  'pointer',
-                                                justifyContent: 'flex-start',
-                                                boxShadow: key === menu.length - 1 ? '0px 2px 2px #aaa' : 'none',
-                                                backgroundColor: Util.getTextColor(theme, variant, "filled"),
-                                                ...stylesMenuMobileSelected
-                                                }} variant={variant} type="outlined" caption={element[0].caption + (!getDropdownExpandedWrap()[key] ? ' ▸' : ' ▸')}  onClick={() => {toggleDropdownExpandedWrap(key)}}/>}
-
-                                            {!getDropdownExpandedWrap()[key] && <SfButton className={'nav_left_menu_' + key + '_collapsed ' + classNameMenuMobile} styles={{
-                                                width: '100%',
-                                                borderTopLeftRadius: key === 0 ? '5px' : '0px',
-                                                borderTopRightRadius: key === 0 ? '5px' : '0px',
-                                                borderBottomLeftRadius: key === menu.length - 1 ? '5px' : '0px',
-                                                borderBottomRightRadius: key === menu.length - 1 ? '5px' : '0px',
-                                                fontWeight: '400',
-                                                marginTop: '-2px',
-                                                cursor:  'pointer',
-                                                justifyContent: 'flex-start',
-                                                boxShadow: key === menu.length - 1 ? '0px 2px 2px #aaa' : 'none',
-                                                zIndex: '199',
-                                                ...stylesMenuMobile
-                                                }} variant={variant} type="filled" caption={element[0].caption + (!getDropdownExpandedWrap()[key] ? ' ▸' : ' ▸')}  onClick={() => {toggleDropdownExpandedWrap(key)}}/>}
-
-                                            {getDropdownExpandedWrap()[key] && <div style={{
-                                                width: theme.dimensions.menuWidth + 'px',
-                                                flexDirection: 'column',
-                                                position: 'absolute',
-                                                left: '105%',
-                                                top: '0px',
-                                                display: 'flex',
-                                                alignItems: 'stretch',
-                                                zIndex: '199',
-                                                backgroundColor: Util.getTextColor(theme, variant, "filled"),
-                                            }}>
-                                                {
-                                                    element.slice(1).map((item: any, key1: any) => {
-
-                                                        return (
-                                                            <SfButton  className={'nav_left_menu_' + key + '_' + key1 + " " + classNameSubMenuMobile} styles={{
-                                                                width: '100%',
-                                                                borderTopLeftRadius: key1 === 0 ? '5px' : '0px',
-                                                                borderTopRightRadius: key1 === 0 ? '5px' : '0px',
-                                                                borderBottomLeftRadius: key1 === element.length - 2 ? '5px' : '0px',
-                                                                borderBottomRightRadius: key1 === element.length - 2 ? '5px' : '0px',
-                                                                fontWeight: '400',
-                                                                marginTop: '-2px',
-                                                                cursor:  'pointer',
-                                                                justifyContent: 'flex-start',
-                                                                boxShadow: key1 === element.length - 1 ? '0px 2px 2px #aaa' : 'none',
-                                                                ...stylesSubMenuMobile
-                                                            }} key={key1} variant={variant} type="filled" caption={item.caption} onClick={() => { toggleDropdownExpandedWrap(-1); setShowLeftMenu(false); clickMenu(item.link)}}/>
-                                                        )
-
-                                                    })
-                                                }
-                                            </div>}
-
-                                        </div>
-                                    );
-
-                                } else {
-
-                                    return (
-                                        <div key={key} style={{
-                                            zIndex: '199',
-                                            width: theme.dimensions.menuWidth + 'px',
-                                        }}>
-                                            <SfButton  className={'nav_left_menu_' + key + ' ' + classNameMenuMobile} styles={{
-                                                width: '100%',
-                                                borderTopLeftRadius: key === 0 ? '5px' : '0px',
-                                                borderTopRightRadius: key === 0 ? '5px' : '0px',
-                                                borderBottomLeftRadius: key === menu.length - 1 ? '5px' : '0px',
-                                                borderBottomRightRadius: key === menu.length - 1 ? '5px' : '0px',
-                                                fontWeight: '400',
-                                                marginTop: '-2px',
-                                                cursor:  'pointer',
-                                                justifyContent: 'flex-start',
-                                                zIndex: '199',
-                                                ...stylesMenuMobile
-                                                }} key={key} variant={variant} type="filled" caption={element.caption} onClick={() => {toggleDropdownExpandedWrap(-1); setShowLeftMenu(false); clickMenu(element.link)}}/>
-                                        </div>
-                                    );
-
-                                }
-
-                            })
-                        }
-                    </div>} 
-
-                    {showRightMenu && <div 
-                    className={'nav_div_right_menu '} style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'stretch',
-                        position: 'absolute',
-                        right: theme.spaces.ltl + 'px',
-                        top: (parseInt(theme.dimensions.navHeight)) + 'px',
-                    }}>
-                        <div 
-                        className='nav_div_right_menu_overlay' 
-                        style={{
-                            position: 'fixed',
-                            left: '0px',
-                            top: '0px',
-                            width: '100%',
-                            height: '100%',
-                            backgroundColor: 'transparent',
-                            zIndex: '198'
-                        }} onClick={() => {toggleRightMenu()}}>
-                        </div>
-
-                        <div 
-                        className={classNameContainerRightMenu}
-                        style={{
-                            flexDirection: 'column',
-                            display: 'flex',
-                            alignItems: 'stretch',
-                            border: 'solid 1px' + Util.getBorderColor(theme, variant, "outlined"),
-                            backgroundColor: Util.getTextColor(theme, variant, "filled"),
-                            borderRadius: parseInt(theme.spaces.min) + 'px',
-                            padding: parseInt(theme.spaces.min) + 'px',
-                            zIndex: '199',
-                            ...stylesContainerRightMenu
-                        }}>
-
-                            {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {toggleRightMenu(); onSearchPressed(searchString)}} />}
+                                fontWeight: '800',
+                                ...stylesBack
+                                }}><b>{backIcon == null ? '‹' : backIcon}</b></div>}
                             
+                            {!showBack && <div className='nav_left_menu' onClick={() => {toggleLeftMenu()}} style={{
+                                paddingRight: theme.spaces.ltl + 'px',
+                                fontWeight: '800'
+                                }}><b>{menuIcon == null ? '☰' : menuIcon}</b></div>}
+                            
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontWeight: '800'
+                            }}>
+                                {(brandLogo != null && brandLogo != "") && <img 
+                                className={`nav_brand_logo ` + classNameBrandLogo}
+                                src={brandLogo} 
+                                onClick={() => {
+                                    if(enableRouting) {
+                                        if(homeMenu.component == null) 
+                                        {
+                                            onHomePressed()
+                                        } else {
+                                            const interfaceNavigate : InterfaceNavigate = {
+                                                link: homeMenu.link,
+                                                component: homeMenu.component,
+                                                args: null
+                                            };
+                                            navigateTo(interfaceNavigate);
+                                        }
+                                    } else {
+                                        onHomePressed()
+                                    }
+                                }}
+                                style={{
+                                    cursor: 'pointer',
+                                    height: (parseInt(theme.dimensions.navHeight) * 8)/10 + 'px',
+                                    paddingRight: theme.spaces.ltl + 'px',
+                                    ...stylesBrandLogo
+                                }}/>}
+                                {brand != "" && <div 
+                                onClick={() => {
+                                    if(enableRouting) {
+                                        if(homeMenu.component == null) 
+                                        {
+                                            onHomePressed()
+                                        } else {
+                                            const interfaceNavigate : InterfaceNavigate = {
+                                                link: homeMenu.link,
+                                                component: homeMenu.component,
+                                                args: null
+                                            };
+                                            navigateTo(interfaceNavigate);
+                                        }
+                                    } else {
+                                        onHomePressed();
+                                    }
+                                }}
+                                className={'nav_brand ' + classNameBrand}
+                                style={{
+                                    cursor: 'pointer',
+                                    fontSize: '120%',
+                                    ...stylesBrand
+                                }}>{brand}</div>}
+                            </div>                    
+                        </div>
+                        
+                        <div 
+                            className='nav_right_menu'
+                            onClick={() => {toggleRightMenu()}} 
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                paddingLeft: theme.spaces.ltl + 'px',
+                                }}>
+                            
+                            {showSignIn && <SfButton className={'btn_signin_portrait ' + classNameSignIn} styles={{marginRight: theme.spaces.ltl + 'px', height: '30px', fontSize: '90%',  ...stylesSignIn}} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} type={theme.types.filled} caption={signInCaption} onClick={(event) => {onSignInPressed(); event.stopPropagation()}} />}
+
+                            {showNotification && <div className={'btn_notif_icon ' + classNameNotificationIcon} style={{display: 'flex', marginRight: theme.spaces.ltl + 'px', alignItems: 'center', ...stylesNotificationIcon}} onClick={(e) => {toggleNotificationMenu(); e.stopPropagation()}}><div>{notificationIcon != null ? notificationIcon : "🔔"}</div>{notificationListContainsUnRead() && <div className={classNameNotificationBadge} style={{fontSize: '70%', width: '10px', height: '10px', backgroundColor: 'red', color: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '8px', marginBottom: '15px', marginLeft: '-8px', fontWeight: '800', ...stylesNotificationBadge}}><div>0</div></div>}</div>}
+
+                            {showSearch && <span style={{fontWeight: '800'}}><b>{optionsIcon == null ? '⋮' : optionsIcon}</b></span>}
+                        
+                            {showProfile && <Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePicture={classNameProfilePicture} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/>}
+                        
                         </div>
 
-                    </div>}
+                        
+                        {showLeftMenu && <div className='nav_div_left_menu' style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'stretch',
+                            position: 'absolute',
+                            left: theme.spaces.ltl + 'px',
+                            backgroundColor: Util.getTextColor(theme, variant, "filled"),
+                            top: (parseInt(theme.dimensions.navHeight)) + 'px',
+                        }}>
+                            
+                            <div className='nav_div_left_menu_overlay' style={{
+                                position: 'fixed',
+                                left: '0px',
+                                top: '0px',
+                                width: '100%',
+                                height: '100%',
+                                backgroundColor: 'transparent',
+                                zIndex: '198'
+                            }} onClick={() => {toggleDropdownExpandedWrap(-1); toggleLeftMenu()}}>
+                            </div>
 
-                    {showNotificationMenu && <NotificationMenu variant={variant} theme={theme} notificationList={notificationList} toggleNotificationMenu={toggleNotificationMenu} onViewAllNotificationsClicked={onViewAllNotificationsClicked} onNotificationClicked={onNotificationClicked} stylesNotificationListContainer={stylesNotificationListContainer} stylesNotificationRead={stylesNotificationRead} stylesNotificationUnRead={stylesNotificationUnRead} classNameNotificationListContainer={classNameNotificationListContainer} classNameNotificationRead={classNameNotificationRead} classNameNotificationUnRead={classNameNotificationUnRead} stylesNotificationViewAll={stylesNotificationViewAll} classNameNotificationViewAll={classNameNotificationViewAll} />}
+                            {
+                                menu.map((element: any, key: any) => {
 
-                </div>
+                                    if(Object.prototype.toString.call(element) === '[object Array]') {
+                                        
+                                        return (
+                                            <div key={key} style={{
+                                                position: 'relative',
+                                                zIndex: '199',
+                                                width: theme.dimensions.menuWidth + 'px',
+                                            }}>
+                                                {getDropdownExpandedWrap()[key] && <SfButton className={'nav_left_menu_' + key + '_expanded ' + classNameMenuMobileSelected} styles={{
+                                                    width: '100%',
+                                                    borderTopLeftRadius: key === 0 ? '5px' : '0px',
+                                                    borderTopRightRadius: key === 0 ? '5px' : '0px',
+                                                    borderBottomLeftRadius: key === menu.length - 1 ? '5px' : '0px',
+                                                    borderBottomRightRadius: key === menu.length - 1 ? '5px' : '0px',
+                                                    fontWeight: '400',
+                                                    marginTop: '-2px',
+                                                    cursor:  'pointer',
+                                                    justifyContent: 'flex-start',
+                                                    boxShadow: key === menu.length - 1 ? '0px 2px 2px #aaa' : 'none',
+                                                    backgroundColor: Util.getTextColor(theme, variant, "filled"),
+                                                    ...stylesMenuMobileSelected
+                                                    }} variant={variant} type="outlined" caption={element[0].caption + (!getDropdownExpandedWrap()[key] ? ' ▸' : ' ▸')}  onClick={() => {toggleDropdownExpandedWrap(key)}}/>}
 
-            </div>}
-            {windowDimensions.width > theme.breakpoints.tablet && 
-            <div>
-                <Banner variant={variant} theme={theme} bannerComponent={bannerComponent} bannerCta={bannerCta} bannerEnableDismiss={bannerEnableDismiss} bannerText={bannerText} onBannerCtaPressed={onBannerCtaPressed} showBanner={showBanner} stylesBannerContainer={stylesBannerContainer} stylesBannerCta={stylesBannerCta} stylesBannerText={stylesBannerText} classNameBannerContainer={classNameBannerContainer} classNameBannerCta={classNameBannerCta} classNameBannerText={classNameBannerText} />
-                <div 
-                className={classNameContainerDesktop}
-                style={{
-                    height: theme.dimensions.navHeight + 'px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    paddingLeft: theme.spaces.big + 'px',
-                    paddingRight: theme.spaces.big + 'px',
-                    ...stylesContainerDesktop
-                }}>
-                    <div style={{
-                        display: 'flex',
-                        alignItems: 'center'
-                    }}>
+                                                {!getDropdownExpandedWrap()[key] && <SfButton className={'nav_left_menu_' + key + '_collapsed ' + classNameMenuMobile} styles={{
+                                                    width: '100%',
+                                                    borderTopLeftRadius: key === 0 ? '5px' : '0px',
+                                                    borderTopRightRadius: key === 0 ? '5px' : '0px',
+                                                    borderBottomLeftRadius: key === menu.length - 1 ? '5px' : '0px',
+                                                    borderBottomRightRadius: key === menu.length - 1 ? '5px' : '0px',
+                                                    fontWeight: '400',
+                                                    marginTop: '-2px',
+                                                    cursor:  'pointer',
+                                                    justifyContent: 'flex-start',
+                                                    boxShadow: key === menu.length - 1 ? '0px 2px 2px #aaa' : 'none',
+                                                    zIndex: '199',
+                                                    ...stylesMenuMobile
+                                                    }} variant={variant} type="filled" caption={element[0].caption + (!getDropdownExpandedWrap()[key] ? ' ▸' : ' ▸')}  onClick={() => {toggleDropdownExpandedWrap(key)}}/>}
 
-                        {showBack && <div className={'nav_back_menu ' + classNameBack} onClick={() => {onBackPressed()}} style={{paddingRight: theme.spaces.ltl + 'px', cursor: 'pointer', ...stylesBack}}><b>{backIcon == null ? '‹' : backIcon}</b></div>}
-
-                        {(brandLogo != null && brandLogo != "") && <img 
-                        className={'nav_brand_logo ' + classNameBrandLogo}
-                        src={brandLogo} 
-                        onClick={() => {onHomePressed()}}
-                        style={{
-                            cursor: 'pointer',
-                            height: (parseInt(theme.dimensions.navHeight) * 10)/10 + 'px',
-                            paddingRight: theme.spaces.ltl + 'px',
-                            ...stylesBrandLogo
-                        }}/>}
-                        {brand != "" && <div 
-                        className={'nav_brand ' + classNameBrand}
-                        onClick={() => {onHomePressed()}}
-                        style={{
-                            cursor: 'pointer',
-                            fontWeight: 800,
-                            fontSize: '150%',
-                            ...stylesBrand
-                        }}>{brand}</div>}
-                    </div>
-                    <div style={{
-                        display: 'flex',
-                        alignItems: 'center'
-                    }}>
-                        {
-                            menu.map((element: any, key: any) => {
-
-                                let arr = getDropdownExpandedWrap();
-                                arr.push(false);
-
-                                if(Object.prototype.toString.call(element) === '[object Array]') {
-
-                                    return (
-                                        <div key={key} style={{
-                                            position: 'relative',
-                                            fontWeight: '500',
-                                            marginLeft: theme.spaces.big + 'px',
-                                            cursor: 'pointer',
-                                        }}>
-                                            <div className={'nav_menu_'+key + ' ' + classNameMenu} style={{display: 'flex', alignItems: 'center', ...stylesMenu}} onClick={() => {toggleDropdownExpandedWrap(key)}}>{element[0].caption}&nbsp;<small><small>{!getDropdownExpandedWrap()[key] && '▼'}{getDropdownExpandedWrap()[key] && '▲'}</small></small></div>
-                                            {getDropdownExpandedWrap()[key] && <div style={{
-                                                    position: 'absolute',
-                                                    top: '30px',
-                                                    left: '0px',
-                                                    display: 'flex',
+                                                {getDropdownExpandedWrap()[key] && <div style={{
+                                                    width: theme.dimensions.menuWidth + 'px',
                                                     flexDirection: 'column',
+                                                    position: 'absolute',
+                                                    left: '105%',
+                                                    top: '0px',
+                                                    display: 'flex',
                                                     alignItems: 'stretch',
+                                                    zIndex: '199',
+                                                    backgroundColor: Util.getTextColor(theme, variant, "filled"),
                                                 }}>
-
-                                                    <div className='nav_menu_overlay' style={{
-                                                        position: 'fixed',
-                                                        left: '0px',
-                                                        top: '0px',
-                                                        width: '100%',
-                                                        height: '100%',
-                                                        backgroundColor: 'transparent',
-                                                        zIndex: '198'
-                                                    }} onClick={() => {toggleDropdownExpandedWrap(key)}}>
-                                                    </div>
                                                     {
                                                         element.slice(1).map((item: any, key1: any) => {
 
                                                             return (
-                                                                <SfButton className={'nav_menu_' + key + '_' + key1 + ' ' + classNameSubMenu} styles={{
+                                                                <SfButton  className={'nav_left_menu_' + key + '_' + key1 + " " + classNameSubMenuMobile} styles={{
+                                                                    width: '100%',
                                                                     borderTopLeftRadius: key1 === 0 ? '5px' : '0px',
                                                                     borderTopRightRadius: key1 === 0 ? '5px' : '0px',
                                                                     borderBottomLeftRadius: key1 === element.length - 2 ? '5px' : '0px',
@@ -961,55 +844,276 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                                                                     fontWeight: '400',
                                                                     marginTop: '-2px',
                                                                     cursor:  'pointer',
-                                                                    zIndex: '199',
-                                                                    width: theme.dimensions.menuWidth + 'px',
-                                                                    ...stylesSubMenu
-                                                                }} key={key1} variant={variant} type="filled" caption={item.caption} onClick={() => {toggleDropdownExpandedWrap(key); clickMenu(item.link)}}/>
+                                                                    justifyContent: 'flex-start',
+                                                                    boxShadow: key1 === element.length - 1 ? '0px 2px 2px #aaa' : 'none',
+                                                                    ...stylesSubMenuMobile
+                                                                }} key={key1} variant={variant} type="filled" caption={item.caption} onClick={() => { toggleDropdownExpandedWrap(-1); setShowLeftMenu(false); clickMenu(item.link, item.component)}}/>
                                                             )
 
                                                         })
-                                                    }    
-                                            </div>}
-                                        </div>
-                                    
-                                    )
+                                                    }
+                                                </div>}
 
-                                } else {
+                                            </div>
+                                        );
 
-                                    arr.push(0);
+                                    } else {
 
-                                    return (
-                                        <div className={'nav_menu_' + key + ' ' + classNameMenu} key={key} style={{
-                                            cursor: 'pointer',
-                                            fontWeight: '500',
-                                            marginLeft: theme.spaces.big + 'px',
-                                            ...stylesMenu
-                                        }} onClick={() => {
-                                            clickMenu(element.link);
-                                        }}>{element.caption}</div>
-                                    )
-                                }
+                                        return (
+                                            <div key={key} style={{
+                                                zIndex: '199',
+                                                width: theme.dimensions.menuWidth + 'px',
+                                            }}>
+                                                <SfButton  className={'nav_left_menu_' + key + ' ' + classNameMenuMobile} styles={{
+                                                    width: '100%',
+                                                    borderTopLeftRadius: key === 0 ? '5px' : '0px',
+                                                    borderTopRightRadius: key === 0 ? '5px' : '0px',
+                                                    borderBottomLeftRadius: key === menu.length - 1 ? '5px' : '0px',
+                                                    borderBottomRightRadius: key === menu.length - 1 ? '5px' : '0px',
+                                                    fontWeight: '400',
+                                                    marginTop: '-2px',
+                                                    cursor:  'pointer',
+                                                    justifyContent: 'flex-start',
+                                                    zIndex: '199',
+                                                    ...stylesMenuMobile
+                                                    }} key={key} variant={variant} type="filled" caption={element.caption} onClick={() => {toggleDropdownExpandedWrap(-1); setShowLeftMenu(false); clickMenu(element.link, element.component)}}/>
+                                            </div>
+                                        );
 
-                            })
-                        }
+                                    }
+
+                                })
+                            }
+                        </div>} 
+
+                        {showRightMenu && <div 
+                        className={'nav_div_right_menu '} style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'stretch',
+                            position: 'absolute',
+                            right: theme.spaces.ltl + 'px',
+                            top: (parseInt(theme.dimensions.navHeight)) + 'px',
+                        }}>
+                            <div 
+                            className='nav_div_right_menu_overlay' 
+                            style={{
+                                position: 'fixed',
+                                left: '0px',
+                                top: '0px',
+                                width: '100%',
+                                height: '100%',
+                                backgroundColor: 'transparent',
+                                zIndex: '198'
+                            }} onClick={() => {toggleRightMenu()}}>
+                            </div>
+
+                            <div 
+                            className={classNameContainerRightMenu}
+                            style={{
+                                flexDirection: 'column',
+                                display: 'flex',
+                                alignItems: 'stretch',
+                                border: 'solid 1px' + Util.getBorderColor(theme, variant, "outlined"),
+                                backgroundColor: Util.getTextColor(theme, variant, "filled"),
+                                borderRadius: parseInt(theme.spaces.min) + 'px',
+                                padding: parseInt(theme.spaces.min) + 'px',
+                                zIndex: '199',
+                                ...stylesContainerRightMenu
+                            }}>
+
+                                {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={stylesSearchContainer} stylesInput={stylesSearchInput} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {toggleRightMenu(); onSearchPressed(searchString)}} />}
+                                
+                            </div>
+
+                        </div>}
+
+                        {showNotificationMenu && <NotificationMenu variant={variant} theme={theme} enableRouting={enableRouting} notificationList={notificationList} notificationListMenu={notificationListMenu} notificationDetailsMenu={notificationDetailsMenu} toggleNotificationMenu={toggleNotificationMenu} navigateTo={navigateTo} onViewAllNotificationsClicked={onViewAllNotificationsClicked} onNotificationClicked={onNotificationClicked} stylesNotificationListContainer={stylesNotificationListContainer} stylesNotificationRead={stylesNotificationRead} stylesNotificationUnRead={stylesNotificationUnRead} classNameNotificationListContainer={classNameNotificationListContainer} classNameNotificationRead={classNameNotificationRead} classNameNotificationUnRead={classNameNotificationUnRead} stylesNotificationViewAll={stylesNotificationViewAll} classNameNotificationViewAll={classNameNotificationViewAll} />}
+
                     </div>
-                    <div style={{
-                        position: 'relative',
+
+                </div>}
+                {windowDimensions.width > theme.breakpoints.tablet && 
+                <div>
+                    <Banner variant={variant} theme={theme} bannerComponent={bannerComponent} bannerCta={bannerCta} bannerEnableDismiss={bannerEnableDismiss} bannerText={bannerText} onBannerCtaPressed={onBannerCtaPressed} showBanner={showBanner} stylesBannerContainer={stylesBannerContainer} stylesBannerCta={stylesBannerCta} stylesBannerText={stylesBannerText} classNameBannerContainer={classNameBannerContainer} classNameBannerCta={classNameBannerCta} classNameBannerText={classNameBannerText} />
+                    <div 
+                    className={classNameContainerDesktop}
+                    style={{
+                        height: theme.dimensions.navHeight + 'px',
                         display: 'flex',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        paddingLeft: theme.spaces.big + 'px',
+                        paddingRight: theme.spaces.big + 'px',
+                        ...stylesContainerDesktop
                     }}>
-                        {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={{...stylesSearchContainer}} stylesInput={stylesSearchInput} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {onSearchPressed(searchString)}} />}
-                        {showSignIn && <SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '30px', fontSize: '90%', marginLeft: theme.spaces.mod + 'px', ...stylesSignIn}} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} type={theme.types.filled} caption={signInCaption} onClick={() => {onSignInPressed()}} />}
-                        {showNotification && <div className={'btn_notif_icon ' + classNameNotificationIcon} style={{display: 'flex', marginLeft: theme.spaces.mod + 'px', alignItems: 'center', cursor: 'pointer', ...stylesNotificationIcon}} onClick={(e) => {toggleNotificationMenu(); e.stopPropagation()}}><div>{notificationIcon != null ? notificationIcon : "🔔"}</div>{notificationListContainsUnRead() && <div className={classNameNotificationBadge} style={{fontSize: '70%', width: '10px', height: '10px', backgroundColor: 'red', color: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '8px', marginBottom: '15px', marginLeft: '-8px', fontWeight: '800', ...stylesNotificationBadge}}><div>0</div></div>}</div>}
-                        {showProfile && <Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePicture={classNameProfilePicture} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/>}
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center'
+                        }}>
 
-                        {showNotificationMenu && <NotificationMenu variant={variant} theme={theme} notificationList={notificationList} toggleNotificationMenu={toggleNotificationMenu} onViewAllNotificationsClicked={onViewAllNotificationsClicked} onNotificationClicked={onNotificationClicked} stylesNotificationListContainer={stylesNotificationListContainer} stylesNotificationRead={stylesNotificationRead} stylesNotificationUnRead={stylesNotificationUnRead} classNameNotificationListContainer={classNameNotificationListContainer} classNameNotificationRead={classNameNotificationRead} classNameNotificationUnRead={classNameNotificationUnRead} stylesNotificationViewAll={stylesNotificationViewAll} classNameNotificationViewAll={classNameNotificationViewAll} />}
+                            {showBack && <div className={'nav_back_menu ' + classNameBack} onClick={() => {onBackPressed()}} style={{paddingRight: theme.spaces.ltl + 'px', cursor: 'pointer', ...stylesBack}}><b>{backIcon == null ? '‹' : backIcon}</b></div>}
 
+                            {(brandLogo != null && brandLogo != "") && <img 
+                            className={'nav_brand_logo ' + classNameBrandLogo}
+                            src={brandLogo} 
+                            onClick={() => {
+                                if(enableRouting) {
+                                    if(homeMenu.component == null) 
+                                    {
+                                        onHomePressed()
+                                    } else {
+                                        const interfaceNavigate : InterfaceNavigate = {
+                                            link: homeMenu.link,
+                                            component: homeMenu.component,
+                                            args: null
+                                        };
+                                        navigateTo(interfaceNavigate);
+                                    }
+                                } else {
+                                    onHomePressed();
+                                }
+                            }}
+                            
+                            style={{
+                                cursor: 'pointer',
+                                height: (parseInt(theme.dimensions.navHeight) * 10)/10 + 'px',
+                                paddingRight: theme.spaces.ltl + 'px',
+                                ...stylesBrandLogo
+                            }}/>}
+                            {brand != "" && <div 
+                            className={'nav_brand ' + classNameBrand}
+                            onClick={() => {
+                                if(enableRouting) {
+                                    if(homeMenu.component == null) 
+                                    {
+                                        onHomePressed()
+                                    } else {
+                                        const interfaceNavigate : InterfaceNavigate = {
+                                            link: homeMenu.link,
+                                            component: homeMenu.component,
+                                            args: null
+                                        };
+                                        navigateTo(interfaceNavigate);
+                                    }
+                                } else {
+                                    onHomePressed();
+                                }
+                            }}
+                            style={{
+                                cursor: 'pointer',
+                                fontWeight: 800,
+                                fontSize: '150%',
+                                ...stylesBrand
+                            }}>{brand}</div>}
+                        </div>
+                        <div style={{
+                            display: 'flex',
+                            alignItems: 'center'
+                        }}>
+                            {
+                                menu.map((element: any, key: any) => {
+
+                                    let arr = getDropdownExpandedWrap();
+                                    arr.push(false);
+
+                                    if(Object.prototype.toString.call(element) === '[object Array]') {
+
+                                        return (
+                                            <div key={key} style={{
+                                                position: 'relative',
+                                                fontWeight: '500',
+                                                marginLeft: theme.spaces.big + 'px',
+                                                cursor: 'pointer',
+                                            }}>
+                                                <div className={'nav_menu_'+key + ' ' + classNameMenu} style={{display: 'flex', alignItems: 'center', ...stylesMenu}} onClick={() => {toggleDropdownExpandedWrap(key)}}>{element[0].caption}&nbsp;<small><small>{!getDropdownExpandedWrap()[key] && '▼'}{getDropdownExpandedWrap()[key] && '▲'}</small></small></div>
+                                                {getDropdownExpandedWrap()[key] && <div style={{
+                                                        position: 'absolute',
+                                                        top: '30px',
+                                                        left: '0px',
+                                                        display: 'flex',
+                                                        flexDirection: 'column',
+                                                        alignItems: 'stretch',
+                                                    }}>
+
+                                                        <div className='nav_menu_overlay' style={{
+                                                            position: 'fixed',
+                                                            left: '0px',
+                                                            top: '0px',
+                                                            width: '100%',
+                                                            height: '100%',
+                                                            backgroundColor: 'transparent',
+                                                            zIndex: '198'
+                                                        }} onClick={() => {toggleDropdownExpandedWrap(key)}}>
+                                                        </div>
+                                                        {
+                                                            element.slice(1).map((item: any, key1: any) => {
+
+                                                                return (
+                                                                    <SfButton className={'nav_menu_' + key + '_' + key1 + ' ' + classNameSubMenu} styles={{
+                                                                        borderTopLeftRadius: key1 === 0 ? '5px' : '0px',
+                                                                        borderTopRightRadius: key1 === 0 ? '5px' : '0px',
+                                                                        borderBottomLeftRadius: key1 === element.length - 2 ? '5px' : '0px',
+                                                                        borderBottomRightRadius: key1 === element.length - 2 ? '5px' : '0px',
+                                                                        fontWeight: '400',
+                                                                        marginTop: '-2px',
+                                                                        cursor:  'pointer',
+                                                                        zIndex: '199',
+                                                                        width: theme.dimensions.menuWidth + 'px',
+                                                                        ...stylesSubMenu
+                                                                    }} key={key1} variant={variant} type="filled" caption={item.caption} onClick={() => {toggleDropdownExpandedWrap(key); clickMenu(item.link, item.component)}}/>
+                                                                )
+
+                                                            })
+                                                        }    
+                                                </div>}
+                                            </div>
+                                        
+                                        )
+
+                                    } else {
+
+                                        arr.push(0);
+
+                                        return (
+                                            <div className={'nav_menu_' + key + ' ' + classNameMenu} key={key} style={{
+                                                cursor: 'pointer',
+                                                fontWeight: '500',
+                                                marginLeft: theme.spaces.big + 'px',
+                                                ...stylesMenu
+                                            }} onClick={() => {
+                                                clickMenu(element.link, element.component);
+                                            }}>{element.caption}</div>
+                                        )
+                                    }
+
+                                })
+                            }
+                        </div>
+                        <div style={{
+                            position: 'relative',
+                            display: 'flex',
+                            alignItems: 'center'
+                        }}>
+                            {showSearch && <SfInput classNameContainer={classNameSearchContainer} classNameInput={classNameSearchInput} stylesContainer={{...stylesSearchContainer}} stylesInput={stylesSearchInput} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} caption={searchCaption} icon={searchIcon != null ? searchIcon : null} inputType={theme.inputTypes.name} onComplete={(value) => {setSearchString(value)}} onEnterPressed={() => {onSearchPressed(searchString)}} />}
+                            {showSignIn && <SfButton className={'nav_signin_button ' + classNameSignIn} styles={{height: '30px', fontSize: '90%', marginLeft: theme.spaces.mod + 'px', ...stylesSignIn}} variant={variant == theme.variants.dark ? theme.variants.light : variant == theme.variants.light ? theme.variants.dark : variant} type={theme.types.filled} caption={signInCaption} onClick={() => {onSignInPressed()}} />}
+                            {showNotification && <div className={'btn_notif_icon ' + classNameNotificationIcon} style={{display: 'flex', marginLeft: theme.spaces.mod + 'px', alignItems: 'center', cursor: 'pointer', ...stylesNotificationIcon}} onClick={(e) => {toggleNotificationMenu(); e.stopPropagation()}}><div>{notificationIcon != null ? notificationIcon : "🔔"}</div>{notificationListContainsUnRead() && <div className={classNameNotificationBadge} style={{fontSize: '70%', width: '10px', height: '10px', backgroundColor: 'red', color: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '8px', marginBottom: '15px', marginLeft: '-8px', fontWeight: '800', ...stylesNotificationBadge}}><div>0</div></div>}</div>}
+                            {showProfile && <Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePicture={classNameProfilePicture} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/>}
+
+                            {showNotificationMenu && <NotificationMenu variant={variant} theme={theme} enableRouting={enableRouting} notificationList={notificationList} notificationListMenu={notificationListMenu} notificationDetailsMenu={notificationDetailsMenu} toggleNotificationMenu={toggleNotificationMenu} navigateTo={navigateTo} onViewAllNotificationsClicked={onViewAllNotificationsClicked} onNotificationClicked={onNotificationClicked} stylesNotificationListContainer={stylesNotificationListContainer} stylesNotificationRead={stylesNotificationRead} stylesNotificationUnRead={stylesNotificationUnRead} classNameNotificationListContainer={classNameNotificationListContainer} classNameNotificationRead={classNameNotificationRead} classNameNotificationUnRead={classNameNotificationUnRead} stylesNotificationViewAll={stylesNotificationViewAll} classNameNotificationViewAll={classNameNotificationViewAll} />}
+
+                        </div>
                     </div>
                 </div>
+                }
             </div>
-            }
+
+            <ContextSfNavProvider value={interfaceSfNavProvider}>
+                {(enableRouting && history.length > 0) && history[history.length - 1].component}
+            </ContextSfNavProvider>
+    
         </div>
+    
     )
 
 }
