@@ -238,57 +238,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
 
 }
 
-const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), notificationList, notificationListMenu, notificationDetailsMenu, navigateTo, toggleNotificationMenu, onViewAllNotificationsClicked, onNotificationClicked, classNameNotificationListContainer, classNameNotificationRead, classNameNotificationUnRead, stylesNotificationListContainer, stylesNotificationRead, stylesNotificationUnRead, stylesNotificationViewAll, classNameNotificationViewAll, enableRouting}: InterfaceSfNavNotificationProps) => {
-
-    function onClickViewAllNotifications() {
-
-        console.log('inside view all');
-
-        if(enableRouting) {
-
-            console.log('inside view all enable routing');
-
-            if(notificationListMenu.component == null) {
-                console.log('inside view all enable routing component null');
-                onViewAllNotificationsClicked();
-            } else {
-                console.log('inside view all enable routing component not null');
-                const interfaceNavigate : InterfaceNavigate = {
-                    link: notificationListMenu.link,
-                    component: notificationListMenu.component,
-                    args: null
-                };
-                navigateTo(interfaceNavigate);
-            }
-
-        } else {
-
-            console.log('inside view all not enable routing');
-
-            onViewAllNotificationsClicked();
-        }
-    }
-
-    function onClickNotification(item: InterfaceSfNavNotificationItem) {
-
-        if(enableRouting) {
-
-            if(notificationDetailsMenu.component == null) {
-                onNotificationClicked(item)
-            } else {
-                const interfaceNavigate : InterfaceNavigate = {
-                    link: notificationDetailsMenu.link,
-                    component: notificationDetailsMenu.component,
-                    args: [item.id]
-                };
-                navigateTo(interfaceNavigate);
-            }
-
-        } else {
-            onNotificationClicked(item)   
-        }
-
-    }
+const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), notificationList, toggleNotificationMenu, onViewAllNotificationsClicked, onNotificationClicked, classNameNotificationListContainer, classNameNotificationRead, classNameNotificationUnRead, stylesNotificationListContainer, stylesNotificationRead, stylesNotificationUnRead, stylesNotificationViewAll, classNameNotificationViewAll}: InterfaceSfNavNotificationProps) => {
 
     return (
         <div className={'nav_div_notif_menu '} style={{
@@ -337,7 +287,7 @@ const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme =
 
                         return (
                             <div 
-                                onClick={() => {onClickNotification(item); toggleNotificationMenu();}}
+                                onClick={() => {onNotificationClicked(item); toggleNotificationMenu();}}
                                 className={'nav_notif_list_' + key1 + " " + (item.read ? classNameNotificationRead : classNameNotificationUnRead )}
                                 key={key1}
                                 style={{
@@ -378,7 +328,7 @@ const NotificationMenu = ({variant = Themes.getTheme().variants.primary, theme =
                     ...stylesNotificationViewAll 
                 }} onClick={(e) => {
                     toggleNotificationMenu();
-                    onClickViewAllNotifications();
+                    onViewAllNotificationsClicked();
                     e.stopPropagation();
                 }}>View All ▶</div>
 
@@ -453,6 +403,25 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
         setShowNotificationMenu(!showNotificationMenu)
     }
 
+    function clickHome(link: string, component: any = null, args: any = null) {
+        if(enableRouting) {
+
+            if(component != null) {
+                const interfaceNavigate : InterfaceNavigate = {
+                    link: link,
+                    component: component,
+                    args: args
+                };
+                navigateTo(interfaceNavigate);
+            } else {
+                onHomePressed();
+            }
+
+        } else {
+            onHomePressed();
+        }
+    }
+
     function clickMenu(link: string, component: any = null, args: any = null) {
 
         if(enableRouting) {
@@ -475,8 +444,9 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
     }
 
     function navigateTo(component: InterfaceNavigate) {
+        console.log('navigating to', component, "/" + component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/")) );
         //if(history.length > 0 && history[history.length - 1].link != component.link) {
-            window.history.pushState({}, "", "/" + component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/")));
+            window.history.pushState({}, "", "/" + component.link == "" ? "" : (component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/"))));
         //}
         setHistory(history => [...history, component]);
     }
@@ -535,6 +505,59 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
         return JSON.parse(profileDropdownExpanded);
     }
 
+    function onClickNotification(item: InterfaceSfNavNotificationItem) {
+
+        console.log('notification item', item);
+
+        if(enableRouting) {
+
+            if(notificationDetailsMenu.component == null) {
+                onNotificationClicked(item.id)
+            } else {
+                const interfaceNavigate : InterfaceNavigate = {
+                    link: notificationDetailsMenu.link,
+                    component: notificationDetailsMenu.component,
+                    args: [item.id]
+                };
+                navigateTo(interfaceNavigate);
+            }
+
+        } else {
+            onNotificationClicked(item.id)   
+        }
+
+    }
+
+    function onClickNotificationViewAll() {
+
+        console.log('inside view all');
+
+        if(enableRouting) {
+
+            console.log('inside view all enable routing');
+
+            if(notificationListMenu.component == null) {
+                console.log('inside view all enable routing component null');
+                onViewAllNotificationsClicked();
+            } else {
+                console.log('inside view all enable routing component not null');
+                const interfaceNavigate : InterfaceNavigate = {
+                    link: notificationListMenu.link,
+                    component: notificationListMenu.component,
+                    args: null
+                };
+                navigateTo(interfaceNavigate);
+            }
+
+        } else {
+
+            console.log('inside view all not enable routing');
+
+            onViewAllNotificationsClicked();
+        }
+
+    }
+
     useEffect(() => {
         setNotificationListStrWrap(notificationList);
     }, [notificationList])
@@ -551,7 +574,19 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
     }, []);
 
     useEffect(() => {
+        
+        function performHomeClick(urlComponents: any, menuItem: any) {
 
+            console.log('perform home click');
+
+            if(urlComponents.length > 4) {
+                clickHome(menuItem.link, menuItem.component, urlComponents.slice(4))
+            } else {
+                clickHome(menuItem.link, menuItem.component)
+            }
+
+        }
+        
         function performClick(urlComponents: any, menuItem: any) {
 
             if(urlComponents.length > 4) {
@@ -570,17 +605,18 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
             const screenComponent = urlComponents[3];
 
             console.log('screen component', screenComponent);
-            console.log('screen component home menu', homeMenu.link);
+            console.log('screen component home menu', homeMenu);
     
             if(homeMenu.link == screenComponent) {
-                performClick(urlComponents, homeMenu);
+                performHomeClick(urlComponents, homeMenu);
                 return;
             }
 
             console.log('screen component notif details menu', notificationDetailsMenu.link);
     
             if(notificationDetailsMenu.link == screenComponent) {
-                performClick(urlComponents, notificationDetailsMenu);
+
+                onClickNotification({id: urlComponents[4] != null ? parseInt(urlComponents[4]) : 0, description: "", read: false, timestampReceived: "", title: ""})
                 return;
             }
     
@@ -928,7 +964,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
 
                         </div>}
 
-                        {showNotificationMenu && <NotificationMenu variant={variant} theme={theme} enableRouting={enableRouting} notificationList={notificationList} notificationListMenu={notificationListMenu} notificationDetailsMenu={notificationDetailsMenu} toggleNotificationMenu={toggleNotificationMenu} navigateTo={navigateTo} onViewAllNotificationsClicked={onViewAllNotificationsClicked} onNotificationClicked={onNotificationClicked} stylesNotificationListContainer={stylesNotificationListContainer} stylesNotificationRead={stylesNotificationRead} stylesNotificationUnRead={stylesNotificationUnRead} classNameNotificationListContainer={classNameNotificationListContainer} classNameNotificationRead={classNameNotificationRead} classNameNotificationUnRead={classNameNotificationUnRead} stylesNotificationViewAll={stylesNotificationViewAll} classNameNotificationViewAll={classNameNotificationViewAll} />}
+                        {showNotificationMenu && <NotificationMenu variant={variant} theme={theme} notificationList={notificationList}  toggleNotificationMenu={toggleNotificationMenu} onViewAllNotificationsClicked={onClickNotificationViewAll} onNotificationClicked={onClickNotification} stylesNotificationListContainer={stylesNotificationListContainer} stylesNotificationRead={stylesNotificationRead} stylesNotificationUnRead={stylesNotificationUnRead} classNameNotificationListContainer={classNameNotificationListContainer} classNameNotificationRead={classNameNotificationRead} classNameNotificationUnRead={classNameNotificationUnRead} stylesNotificationViewAll={stylesNotificationViewAll} classNameNotificationViewAll={classNameNotificationViewAll} />}
 
                     </div>
 
@@ -1100,7 +1136,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                             {showNotification && <div className={'btn_notif_icon ' + classNameNotificationIcon} style={{display: 'flex', marginLeft: theme.spaces.mod + 'px', alignItems: 'center', cursor: 'pointer', ...stylesNotificationIcon}} onClick={(e) => {toggleNotificationMenu(); e.stopPropagation()}}><div>{notificationIcon != null ? notificationIcon : "🔔"}</div>{notificationListContainsUnRead() && <div className={classNameNotificationBadge} style={{fontSize: '70%', width: '10px', height: '10px', backgroundColor: 'red', color: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '8px', marginBottom: '15px', marginLeft: '-8px', fontWeight: '800', ...stylesNotificationBadge}}><div>0</div></div>}</div>}
                             {showProfile && <Profile clickMenu={clickMenu} toggleExpandProfile={toggleExpandProfile} toggleProfileDropdownExpandedWrap={toggleProfileDropdownExpandedWrap} setExpandProfile={setExpandProfile} getProfileDropdownExpandedWrap={getProfileDropdownExpandedWrap } theme={theme} variant={variant} profilePicture={profilePicture} expandProfile={expandProfile} profilePreamble={profilePreamble} profileComponent={profileComponent} profileMenu={profileMenu} classNameProfilePicture={classNameProfilePicture} classNameProfilePreamble={classNameProfilePreamble} classNameProfileComponent={classNameProfileComponent} classNameMenuMobileSelected={classNameMenuMobileSelected} classNameMenuMobile={classNameMenuMobile} classNameSubMenuMobile={classNameSubMenuMobile} classNameProfilePictureContainer={classNameProfilePictureContainer} stylesProfilePreamble={stylesProfilePreamble} stylesProfileComponent={stylesProfileComponent} stylesMenuMobileSelected={stylesMenuMobileSelected} stylesMenuMobile={stylesMenuMobile} stylesSubMenuMobile={stylesSubMenuMobile} stylesProfilePicture={stylesProfilePicture} stylesProfilePictureContainer={stylesProfilePictureContainer}/>}
 
-                            {showNotificationMenu && <NotificationMenu variant={variant} theme={theme} enableRouting={enableRouting} notificationList={notificationList} notificationListMenu={notificationListMenu} notificationDetailsMenu={notificationDetailsMenu} toggleNotificationMenu={toggleNotificationMenu} navigateTo={navigateTo} onViewAllNotificationsClicked={onViewAllNotificationsClicked} onNotificationClicked={onNotificationClicked} stylesNotificationListContainer={stylesNotificationListContainer} stylesNotificationRead={stylesNotificationRead} stylesNotificationUnRead={stylesNotificationUnRead} classNameNotificationListContainer={classNameNotificationListContainer} classNameNotificationRead={classNameNotificationRead} classNameNotificationUnRead={classNameNotificationUnRead} stylesNotificationViewAll={stylesNotificationViewAll} classNameNotificationViewAll={classNameNotificationViewAll} />}
+                            {showNotificationMenu && <NotificationMenu variant={variant} theme={theme} notificationList={notificationList}  toggleNotificationMenu={toggleNotificationMenu} onViewAllNotificationsClicked={onClickNotificationViewAll} onNotificationClicked={onClickNotification} stylesNotificationListContainer={stylesNotificationListContainer} stylesNotificationRead={stylesNotificationRead} stylesNotificationUnRead={stylesNotificationUnRead} classNameNotificationListContainer={classNameNotificationListContainer} classNameNotificationRead={classNameNotificationRead} classNameNotificationUnRead={classNameNotificationUnRead} stylesNotificationViewAll={stylesNotificationViewAll} classNameNotificationViewAll={classNameNotificationViewAll} />}
 
                         </div>
                     </div>

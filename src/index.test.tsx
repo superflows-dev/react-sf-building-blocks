@@ -57,136 +57,8 @@ afterEach(() => {
   container = null;
 });
 
-describe('SfNav: Enable Routing: URL Detection', () => {
 
-  it('SfNav: Home', async () => {
-
-    jest.setTimeout(TEST_TIMEOUT);
-
-    const onViewAllPressedMock = jest.fn();
-    const onNotificationPressedMock = jest.fn();
-
-    window = Object.assign(window, { innerWidth: 1600, innerHeight: 844 });
-    await new Promise((r) => setTimeout(r, TIMEOUT));
-
-    act(() => {
-      render(<SfNav 
-        enableRouting={true}
-        showNotification={true} 
-        notificationList={[
-          {id: 1, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
-          {id: 2, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
-          {id: 3, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false},
-          {id: 4, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
-          {id: 5, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
-          {id: 6, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false}
-        ]} 
-        menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
-        onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
-        onNotificationClicked={() => {onNotificationPressedMock()}}
-        notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
-        }
-        notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
-        }
-        homeMenu={
-          {caption:"home", link: '', component: <Home />}
-        }
-        />, container);
-    });
-
-    await new Promise((r) => setTimeout(r, TIMEOUT));
-    expect(container.innerHTML).toContain('🔔');
-    expect(container.innerHTML).toContain('Home Component');
-
-  })
-
-  it('SfNav: Notif List', async () => {
-
-    jest.setTimeout(TEST_TIMEOUT);
-
-    const onViewAllPressedMock = jest.fn();
-    const onNotificationPressedMock = jest.fn();
-
-    window = Object.assign(window, { innerWidth: 1600, innerHeight: 844 });
-    await new Promise((r) => setTimeout(r, TIMEOUT));
-
-    act(() => {
-      render(<SfNav 
-        enableRouting={true}
-        showNotification={true} 
-        notificationList={[
-          {id: 1, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
-          {id: 2, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
-          {id: 3, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false},
-          {id: 4, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
-          {id: 5, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
-          {id: 6, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false}
-        ]} 
-        menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
-        onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
-        onNotificationClicked={() => {onNotificationPressedMock()}}
-        notificationListMenu={
-          {caption:"notif_list", link: '', component:<NotificationList /> }
-        }
-        notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
-        }
-        homeMenu={
-          {caption:"home", link: 'home', component: <Home />}
-        }
-        />, container);
-    });
-
-    await new Promise((r) => setTimeout(r, TIMEOUT));
-    expect(container.innerHTML).toContain('🔔');
-    expect(container.innerHTML).toContain('Notification List');
-
-  })
-
-  it('SfNav: Notif Details', async () => {
-
-    jest.setTimeout(TEST_TIMEOUT);
-
-    const onViewAllPressedMock = jest.fn();
-    const onNotificationPressedMock = jest.fn();
-
-    window = Object.assign(window, { innerWidth: 1600, innerHeight: 844 });
-    await new Promise((r) => setTimeout(r, TIMEOUT));
-
-    act(() => {
-      render(<SfNav 
-        enableRouting={true}
-        showNotification={true} 
-        notificationList={[
-          {id: 1, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
-          {id: 2, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
-          {id: 3, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false},
-          {id: 4, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
-          {id: 5, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
-          {id: 6, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false}
-        ]} 
-        menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
-        onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
-        onNotificationClicked={() => {onNotificationPressedMock()}}
-        notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
-        }
-        notificationDetailsMenu={
-          {caption:"notif_details", link: '', component: <NotificationDetails />}
-        }
-        homeMenu={
-          {caption:"home", link: 'home', component: <Home />}
-        }
-        />, container);
-    });
-
-    await new Promise((r) => setTimeout(r, TIMEOUT));
-    expect(container.innerHTML).toContain('🔔');
-    expect(container.innerHTML).toContain('Notification Details');
-
-  })
+describe('SfNav: Enable Routing: URL Detection 2', () => {
 
   it('SfNav: Menu', async () => {
 
@@ -367,6 +239,139 @@ describe('SfNav: Enable Routing: URL Detection', () => {
     await new Promise((r) => setTimeout(r, TIMEOUT));
     expect(container.innerHTML).toContain('🔔');
     expect(container.innerHTML).toContain('Notifications Component');
+
+  })
+
+});
+
+describe('SfNav: Enable Routing: URL Detection', () => {
+
+  it('SfNav: Home', async () => {
+
+    jest.setTimeout(TEST_TIMEOUT);
+
+    const onViewAllPressedMock = jest.fn();
+    const onNotificationPressedMock = jest.fn();
+
+    window = Object.assign(window, { innerWidth: 1600, innerHeight: 844 });
+    await new Promise((r) => setTimeout(r, TIMEOUT));
+
+    act(() => {
+      render(<SfNav 
+        enableRouting={true}
+        showNotification={true} 
+        notificationList={[
+          {id: 1, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
+          {id: 2, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+          {id: 3, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false},
+          {id: 4, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
+          {id: 5, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+          {id: 6, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false}
+        ]} 
+        menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
+        onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
+        onNotificationClicked={() => {onNotificationPressedMock()}}
+        notificationListMenu={
+          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+        }
+        notificationDetailsMenu={
+          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+        }
+        homeMenu={
+          {caption:"home", link: '', component: <Home />}
+        }
+        />, container);
+    });
+
+    await new Promise((r) => setTimeout(r, TIMEOUT));
+    expect(container.innerHTML).toContain('🔔');
+    expect(container.innerHTML).toContain('Home Component');
+
+  })
+
+  it('SfNav: Notif List', async () => {
+
+    jest.setTimeout(TEST_TIMEOUT);
+
+    const onViewAllPressedMock = jest.fn();
+    const onNotificationPressedMock = jest.fn();
+
+    window = Object.assign(window, { innerWidth: 1600, innerHeight: 844 });
+    await new Promise((r) => setTimeout(r, TIMEOUT));
+
+    act(() => {
+      render(<SfNav 
+        enableRouting={true}
+        showNotification={true} 
+        notificationList={[
+          {id: 1, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
+          {id: 2, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+          {id: 3, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false},
+          {id: 4, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
+          {id: 5, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+          {id: 6, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false}
+        ]} 
+        menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
+        onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
+        onNotificationClicked={() => {onNotificationPressedMock()}}
+        notificationListMenu={
+          {caption:"notif_list", link: '', component:<NotificationList /> }
+        }
+        notificationDetailsMenu={
+          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+        }
+        homeMenu={
+          {caption:"home", link: 'home', component: <Home />}
+        }
+        />, container);
+    });
+
+    await new Promise((r) => setTimeout(r, TIMEOUT));
+    expect(container.innerHTML).toContain('🔔');
+    expect(container.innerHTML).toContain('Notification List');
+
+  })
+
+  it('SfNav: Notif Details', async () => {
+
+    jest.setTimeout(TEST_TIMEOUT);
+
+    const onViewAllPressedMock = jest.fn();
+    const onNotificationPressedMock = jest.fn();
+
+    window = Object.assign(window, { innerWidth: 1600, innerHeight: 844 });
+    await new Promise((r) => setTimeout(r, TIMEOUT));
+
+    act(() => {
+      render(<SfNav 
+        enableRouting={true}
+        showNotification={true} 
+        notificationList={[
+          {id: 1, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
+          {id: 2, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+          {id: 3, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false},
+          {id: 4, title: "title 1", description: 'This is the desc 1', timestampReceived: "2 days ago", read: false},
+          {id: 5, title: "title 2", description: 'This is the desc 2', timestampReceived: "5 days ago", read: true},
+          {id: 6, title: "title 3", description: 'This is the desc 3 also it is necessary', timestampReceived: "1 month ago", read: false}
+        ]} 
+        menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
+        onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
+        onNotificationClicked={() => {onNotificationPressedMock()}}
+        notificationListMenu={
+          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+        }
+        notificationDetailsMenu={
+          {caption:"notif_details", link: '', component: <NotificationDetails />}
+        }
+        homeMenu={
+          {caption:"home", link: 'home', component: <Home />}
+        }
+        />, container);
+    });
+
+    await new Promise((r) => setTimeout(r, TIMEOUT));
+    expect(container.innerHTML).toContain('🔔');
+    expect(container.innerHTML).toContain('Notification Details');
 
   })
 
