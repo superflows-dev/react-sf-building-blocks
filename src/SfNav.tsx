@@ -16,7 +16,6 @@ import {InterfaceSfNavProfileProps} from './InterfaceSfNavProfileProps';
 import {InterfaceSfNavNotificationProps} from './InterfaceSfNavNotificationProps';
 import {InterfaceSfNavBannerProps} from './InterfaceSfNavBannerProps';
 import { InterfaceSfNavNotificationItem } from './InterfaceSfNavNotificationItem';
-import { link } from 'fs';
 
 
 function getWindowDimensions() {
