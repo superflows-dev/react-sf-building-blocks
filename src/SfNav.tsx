@@ -437,9 +437,9 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
 
     function navigateTo(component: InterfaceNavigate) {
         console.log('navigating to', component, "/" + component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/")) );
-        //if(history.length > 0 && history[history.length - 1].link != component.link) {
+        if(history.length > 0 && history[history.length - 1].link != component.link) {
             window.history.pushState({}, "", "/" + component.link == "" ? "" : (component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/"))));
-        //}
+        }
         setHistory(history => [...history, component]);
     }
 
