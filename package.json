@@ -1,6 +1,6 @@
 {
   "name": "react-sf-building-blocks",
-  "version": "1.0.66",
+  "version": "1.0.67",
   "description": "Basic building blocks of the superflows component system",
   "author": "superflows-dev",
   "license": "MIT",
@@ -19,7 +19,7 @@
     "test:build": "run-s build",
     "test:lint": "eslint .",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom --verbose=true --coverage",
-    "test:watch": "react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom --runInBand",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build"
   },

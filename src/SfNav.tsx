@@ -16,6 +16,7 @@ import {InterfaceSfNavProfileProps} from './InterfaceSfNavProfileProps';
 import {InterfaceSfNavNotificationProps} from './InterfaceSfNavNotificationProps';
 import {InterfaceSfNavBannerProps} from './InterfaceSfNavBannerProps';
 import { InterfaceSfNavNotificationItem } from './InterfaceSfNavNotificationItem';
+import { link } from 'fs';
 
 
 function getWindowDimensions() {
@@ -403,23 +404,15 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
         setShowNotificationMenu(!showNotificationMenu)
     }
 
-    function clickHome(link: string, component: any = null, args: any = null) {
-        if(enableRouting) {
+    function clickHome() {
 
-            if(component != null) {
-                const interfaceNavigate : InterfaceNavigate = {
-                    link: link,
-                    component: component,
-                    args: args
-                };
-                navigateTo(interfaceNavigate);
-            } else {
-                onHomePressed();
-            }
+        const interfaceNavigate : InterfaceNavigate = {
+            link: homeMenu.link,
+            component: homeMenu.component,
+            args: null
+        };
+        navigateTo(interfaceNavigate);
 
-        } else {
-            onHomePressed();
-        }
     }
 
     function clickMenu(link: string, component: any = null, args: any = null) {
@@ -517,7 +510,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                 const interfaceNavigate : InterfaceNavigate = {
                     link: notificationDetailsMenu.link,
                     component: notificationDetailsMenu.component,
-                    args: [item.id]
+                    args: [item.id > 0 ? item.id : ""]
                 };
                 navigateTo(interfaceNavigate);
             }
@@ -574,59 +567,45 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
     }, []);
 
     useEffect(() => {
-        
-        function performHomeClick(urlComponents: any, menuItem: any) {
-
-            console.log('perform home click');
-
-            if(urlComponents.length > 4) {
-                clickHome(menuItem.link, menuItem.component, urlComponents.slice(4))
-            } else {
-                clickHome(menuItem.link, menuItem.component)
-            }
-
-        }
-        
-        function performClick(urlComponents: any, menuItem: any) {
-
-            if(urlComponents.length > 4) {
-                clickMenu(menuItem.link, menuItem.component, urlComponents.slice(4))
-            } else {
-                clickMenu(menuItem.link, menuItem.component)
-            }
-
-        }
 
         if(enableRouting) {
 
-            // About not working properly
-    
             const urlComponents = window.location.href.split("/");
             const screenComponent = urlComponents[3];
+            //const args = urlComponents.slice(4);
 
+            console.log('url components', urlComponents);
             console.log('screen component', screenComponent);
             console.log('screen component home menu', homeMenu);
     
-            if(homeMenu.link == screenComponent) {
-                performHomeClick(urlComponents, homeMenu);
+            // First check if it is the home link
+
+            if(homeMenu.link == screenComponent && homeMenu.component != null) {
+                clickHome()
                 return;
             }
+
+            // Then check if it is the notification details link
 
             console.log('screen component notif details menu', notificationDetailsMenu.link);
     
-            if(notificationDetailsMenu.link == screenComponent) {
+            if(notificationDetailsMenu.link == screenComponent && notificationDetailsMenu.component != null) {
 
-                onClickNotification({id: urlComponents[4] != null ? parseInt(urlComponents[4]) : 0, description: "", read: false, timestampReceived: "", title: ""})
+                onClickNotification({id: urlComponents[4] != null ? parseInt(urlComponents[4]) : -1, description: "", read: false, timestampReceived: "", title: ""})
                 return;
             }
     
+            // Then check if it is the notification view all link
+
             console.log('screen component notif list menu', notificationListMenu.link);
 
             if(notificationListMenu.link == screenComponent) {
-                performClick(urlComponents, notificationListMenu);
+                onClickNotificationViewAll();
                 return;
             }
     
+            // Then check if it is any of the menu pages
+
             for(var i = 0; i < menu.length; i++) {
                 console.log('menu[i]', menu[i], screenComponent);
                 if(menu[i].constructor.name == "Array") {
@@ -634,20 +613,24 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     for(var j = 1; j < menu[i].length; j++) {
     
                         if(menu[i][j].link == screenComponent && menu[i][j].component != null) {
-                            performClick(urlComponents, menu[i][j]);
+                            clickMenu(menu[i][j].link, menu[i][j].component)
                             return;
                         }
                     }
                 } else {
     
+                    console.log('menu[i]', menu[i], "link=", menu[i].link, "screen=", screenComponent );
                     if(menu[i].link == screenComponent && menu[i].component != null) {
-                        performClick(urlComponents, menu[i]);
+                        clickMenu(menu[i].link, menu[i].component)
                         return;
                     }
                 }
                 
             }
 
+
+            // then check if it is in the profile menus
+            
             if(showProfile) {
                 for(var i = 0; i < profileMenu.length; i++) {
                     if(profileMenu[i].constructor.name == "Array") {
@@ -655,19 +638,26 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         for(var j = 1; j < profileMenu[i].length; j++) {
         
                             if(profileMenu[i][j].link == screenComponent && profileMenu[i][j].component != null) {
-                                performClick(urlComponents, profileMenu[i][j]);
+                                clickMenu(profileMenu[i][j].link, profileMenu[i][j].component);
                                 return;
                             }
                         }
                     } else {
         
                         if(profileMenu[i].link == screenComponent && profileMenu[i].component != null) {
-                            performClick(urlComponents, profileMenu[i]);
+                            clickMenu(profileMenu[i].link, profileMenu[i].component);
                             return;
                         }
                     }
                     
                 }
+            }
+
+            // Then check if the link is blank and home component is provided
+
+            if(screenComponent == "" && homeMenu.component != null) {
+                clickHome();
+                return;
             }
 
             navigateTo({component: <ErrorNotFound/>, link: "errornotfound", args: null});
