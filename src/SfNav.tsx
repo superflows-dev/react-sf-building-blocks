@@ -439,14 +439,9 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
         console.log('navigating to', component, "/" + component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/")) );
         console.log('push state', "/" + (component.link == "" ? "" : (component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/")))));
         
-        if(history.length === 0) {
+        //if(history.length > 0 && history[history.length - 1].link != component.link) {
             window.history.pushState({}, "", "/" + component.link == "" ? "" : (component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/"))));
-        } else {
-            if(history[history.length - 1].link != component.link) {
-                window.history.pushState({}, "", "/" + component.link == "" ? "" : (component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/"))));
-            }
-        }
-
+        //}
         setHistory(history => [...history, component]);
     }
 
@@ -619,7 +614,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     for(var j = 1; j < menu[i].length; j++) {
     
                         if(menu[i][j].link == screenComponent && menu[i][j].component != null) {
-                            clickMenu(menu[i][j].link, menu[i][j].component)
+                            //clickMenu(menu[i][j].link, menu[i][j].component)
+                            setHistory(history => [...history, menu]);
                             return;
                         }
                     }
@@ -627,7 +623,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
     
                     console.log('menu[i]', menu[i], "link=", menu[i].link, "screen=", screenComponent );
                     if(menu[i].link == screenComponent && menu[i].component != null) {
-                        clickMenu(menu[i].link, menu[i].component)
+                        //clickMenu(menu[i].link, menu[i].component)
+                        setHistory(history => [...history, menu]);
                         return;
                     }
                 }
