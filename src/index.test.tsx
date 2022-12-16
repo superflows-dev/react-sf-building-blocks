@@ -2687,6 +2687,18 @@ describe('SfNav: Routing', () => {
 
 describe('SfInput', () => {
 
+  beforeEach(() => {
+    container = document.createElement("div");
+    document.body.appendChild(container);
+  });
+  
+  afterEach(() => {
+    // cleanup on exiting
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+  });
+
   it('SfInput: Basic Render Primary Date', async () => {
 
     jest.setTimeout(TEST_TIMEOUT);
@@ -3901,6 +3913,18 @@ describe('SfInput', () => {
 });
 
 describe('SfButton', () => {
+
+  beforeEach(() => {
+    container = document.createElement("div");
+    document.body.appendChild(container);
+  });
+  
+  afterEach(() => {
+    // cleanup on exiting
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+  });
 
   it('SfButton: Basic Render Primary Filled', async () => {
 
