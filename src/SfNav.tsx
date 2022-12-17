@@ -403,16 +403,16 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
         setShowNotificationMenu(!showNotificationMenu)
     }
 
-    function clickHome() {
+    // function clickHome() {
 
-        const interfaceNavigate : InterfaceNavigate = {
-            link: homeMenu.link,
-            component: homeMenu.component,
-            args: null
-        };
-        navigateTo(interfaceNavigate);
+    //     const interfaceNavigate : InterfaceNavigate = {
+    //         link: homeMenu.link,
+    //         component: homeMenu.component,
+    //         args: null
+    //     };
+    //     navigateTo(interfaceNavigate);
 
-    }
+    // }
 
     function clickMenu(link: string, component: any = null, args: any = null) {
 
@@ -438,7 +438,6 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
     function navigateTo(component: InterfaceNavigate) {
         console.log('navigating to', component, "/" + component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/")) );
         console.log('push state', "/" + (component.link == "" ? "" : (component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/")))));
-        
         //if(history.length > 0 && history[history.length - 1].link != component.link) {
             window.history.pushState({}, "", "/" + component.link == "" ? "" : (component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/"))));
         //}
@@ -573,7 +572,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
 
             const urlComponents = window.location.href.split("/");
             const screenComponent = urlComponents[3];
-            //const args = urlComponents.slice(4);
+            const args = urlComponents.slice(4);
 
             console.log('url components', urlComponents);
             console.log('screen component', screenComponent);
@@ -582,7 +581,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
             // First check if it is the home link
 
             if(homeMenu.link == screenComponent && homeMenu.component != null) {
-                clickHome()
+                //clickHome()
+                setHistory(history => [...history, {link: homeMenu.link, component: homeMenu.component, args: null}]);
                 return;
             }
 
@@ -592,7 +592,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
     
             if(notificationDetailsMenu.link == screenComponent && notificationDetailsMenu.component != null) {
 
-                onClickNotification({id: urlComponents[4] != null ? parseInt(urlComponents[4]) : -1, description: "", read: false, timestampReceived: "", title: ""})
+                //onClickNotification({id: urlComponents[4] != null ? parseInt(urlComponents[4]) : -1, description: "", read: false, timestampReceived: "", title: ""})
+                setHistory(history => [...history, {link: notificationDetailsMenu.link, component: notificationDetailsMenu.component, args: args}]);
                 return;
             }
     
@@ -601,7 +602,8 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
             console.log('screen component notif list menu', notificationListMenu.link);
 
             if(notificationListMenu.link == screenComponent && notificationListMenu.component != null) {
-                onClickNotificationViewAll();
+                //onClickNotificationViewAll();
+                setHistory(history => [...history, {link: notificationListMenu.link, component: notificationListMenu.component, args: null}]);
                 return;
             }
     
@@ -615,7 +617,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
     
                         if(menu[i][j].link == screenComponent && menu[i][j].component != null) {
                             //clickMenu(menu[i][j].link, menu[i][j].component)
-                            setHistory(history => [...history, menu]);
+                            setHistory(history => [...history, {link: menu[i][j].link, component: menu[i][j].component, args: null}]);
                             return;
                         }
                     }
@@ -624,7 +626,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                     console.log('menu[i]', menu[i], "link=", menu[i].link, "screen=", screenComponent );
                     if(menu[i].link == screenComponent && menu[i].component != null) {
                         //clickMenu(menu[i].link, menu[i].component)
-                        setHistory(history => [...history, menu]);
+                        setHistory(history => [...history, {link: menu[i].link, component: menu[i].component, args: null}]);
                         return;
                     }
                 }
@@ -641,14 +643,16 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
                         for(var j = 1; j < profileMenu[i].length; j++) {
         
                             if(profileMenu[i][j].link == screenComponent && profileMenu[i][j].component != null) {
-                                clickMenu(profileMenu[i][j].link, profileMenu[i][j].component);
+                                //clickMenu(profileMenu[i][j].link, profileMenu[i][j].component);
+                                setHistory(history => [...history, {link: profileMenu[i][j].link, component: profileMenu[i][j].component, args: null}]);
                                 return;
                             }
                         }
                     } else {
         
                         if(profileMenu[i].link == screenComponent && profileMenu[i].component != null) {
-                            clickMenu(profileMenu[i].link, profileMenu[i].component);
+                            // clickMenu(profileMenu[i].link, profileMenu[i].component);
+                            setHistory(history => [...history, {link: profileMenu[i].link, component: profileMenu[i].component, args: null}]);
                             return;
                         }
                     }
@@ -659,11 +663,13 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
             // Then check if the link is blank and home component is provided
 
             if(screenComponent == "" && homeMenu.component != null) {
-                clickHome();
+                //clickHome();
+                setHistory(history => [...history, {link: homeMenu.link, component: homeMenu.component, args: null}]);
                 return;
             }
 
-            navigateTo({component: <ErrorNotFound/>, link: "errornotfound", args: null});
+            //navigateTo({component: <ErrorNotFound/>, link: "errornotfound", args: null});
+            setHistory(history => [...history, {link: "errornotfound", component: <ErrorNotFound />, args: null}]);
 
         }
 
