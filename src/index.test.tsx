@@ -90,13 +90,13 @@ describe('SfNav: Enable Routing: URL Detection 2', () => {
         onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
         onNotificationClicked={() => {onNotificationPressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: '', component:<NotificationList /> }
+          {args: [], link: '', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         homeMenu={
-          {caption:"home", link: 'home', component: <Home />}
+          {args: [], link: 'home', component: <Home />}
         }
         />, container);
     });
@@ -131,13 +131,13 @@ describe('SfNav: Enable Routing: URL Detection 2', () => {
         onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
         onNotificationClicked={() => {onNotificationPressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: '', component: <NotificationDetails />}
+          {args: [], link: '', component: <NotificationDetails />}
         }
         homeMenu={
-          {caption:"home", link: 'home', component: <Home />}
+          {args: [], link: 'home', component: <Home />}
         }
         />, container);
     });
@@ -172,13 +172,13 @@ describe('SfNav: Enable Routing: URL Detection 2', () => {
         onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
         onNotificationClicked={() => {onNotificationPressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         homeMenu={
-          {caption:"home", link: 'home', component: <Home />}
+          {args: [], link: 'home', component: <Home />}
         }
         />, container);
     });
@@ -215,13 +215,13 @@ describe('SfNav: Enable Routing: URL Detection 2', () => {
         onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
         onNotificationClicked={() => {onNotificationPressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         homeMenu={
-          {caption:"home", link: 'home', component: <Home />}
+          {args: [], link: 'home', component: <Home />}
         }
         />, container);
     });
@@ -258,13 +258,13 @@ describe('SfNav: Enable Routing: URL Detection 2', () => {
         onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
         onNotificationClicked={() => {onNotificationPressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         homeMenu={
-          {caption:"home", link: 'home', component: <Home />}
+          {args: [], link: 'home', component: <Home />}
         }
         showProfile={true} 
         profileMenu={
@@ -306,13 +306,13 @@ describe('SfNav: Enable Routing: URL Detection 2', () => {
         onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
         onNotificationClicked={() => {onNotificationPressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         homeMenu={
-          {caption:"home", link: 'home', component: <Home />}
+          {args: [], link: 'home', component: <Home />}
         }
         showProfile={true} 
         profileMenu={
@@ -355,13 +355,13 @@ describe('SfNav: Enable Routing: URL Detection 2', () => {
         onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
         onNotificationClicked={() => {onNotificationPressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         homeMenu={
-          {caption:"home", link: '', component: <Home />}
+          {args: [], link: '', component: <Home />}
         }
         showProfile={true} 
         profileMenu={
@@ -405,13 +405,13 @@ describe('SfNav: Enable Routing: URL Detection 2', () => {
         onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
         onNotificationClicked={() => {onNotificationPressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         homeMenu={
-          {caption:"home", link: 'home', component: <Home />}
+          {args: [], link: 'home', component: <Home />}
         }
         />, container);
     });
@@ -1925,10 +1925,10 @@ describe('SfNav: Routing', () => {
         ]} 
         onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component:<NotificationDetails />}
+          {args: [], link: 'notif_details', component:<NotificationDetails />}
         }
         />, container);
     });
@@ -2062,10 +2062,10 @@ describe('SfNav: Routing', () => {
         onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
         onNotificationClicked={() => {onNotificationPressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         />, container);
     });
@@ -2137,10 +2137,10 @@ describe('SfNav: Routing', () => {
         onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
         onNotificationClicked={() => {onNotificationPressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         />, container);
     });
@@ -2195,10 +2195,10 @@ describe('SfNav: Routing', () => {
         onViewAllNotificationsClicked={() => {onViewAllPressedMock()}}
         onNotificationClicked={() => {onNotificationPressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         onMenuClicked={() => {onMenuClickedMock()}}
         />, container);
@@ -2251,10 +2251,10 @@ describe('SfNav: Routing', () => {
         menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
         onHomePressed={() => {onHomePressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         />, container);
     });
@@ -2306,10 +2306,10 @@ describe('SfNav: Routing', () => {
         menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
         onHomePressed={() => {onHomePressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         brandLogo="https://superflows.dev/img/superflows_gray_transparent_200.png"
         />, container);
@@ -2362,13 +2362,13 @@ describe('SfNav: Routing', () => {
         menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
         onHomePressed={() => {onHomePressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         homeMenu={
-          {caption: "home", link: "home", component: <Home />}
+          {args: [], link: "home", component: <Home />}
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         />, container);
     });
@@ -2420,14 +2420,14 @@ describe('SfNav: Routing', () => {
         menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
         onHomePressed={() => {onHomePressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         homeMenu={
-          {caption: "home", link: "home", component: <Home />}
+          {args: [], link: "home", component: <Home />}
         }
         brandLogo="https://superflows.dev/img/superflows_gray_transparent_200.png"
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         />, container);
     });
@@ -2479,10 +2479,10 @@ describe('SfNav: Routing', () => {
         menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
         onHomePressed={() => {onHomePressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         />, container);
     });
@@ -2534,10 +2534,10 @@ describe('SfNav: Routing', () => {
         menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
         onHomePressed={() => {onHomePressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         brandLogo="https://superflows.dev/img/superflows_gray_transparent_200.png"
         />, container);
@@ -2590,13 +2590,13 @@ describe('SfNav: Routing', () => {
         menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
         onHomePressed={() => {onHomePressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         homeMenu={
-          {caption: "home", link: "home", component: <Home />}
+          {args: [], link: "home", component: <Home />}
         }
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         />, container);
     });
@@ -2648,14 +2648,14 @@ describe('SfNav: Routing', () => {
         menu={[{caption: "About", link: "about", component: <About /> }, [{caption: "Solutions", link: "solutions"}, {caption: "Products", link: "products"}, {caption: "Services", link: "services", component: <Services />}], [{caption: "Contact", link: "contact"}, {caption: 'Instagram', link: "instagram"}]]} 
         onHomePressed={() => {onHomePressedMock()}}
         notificationListMenu={
-          {caption:"notif_list", link: 'notif_list', component:<NotificationList /> }
+          {args: [], link: 'notif_list', component:<NotificationList /> }
         }
         homeMenu={
-          {caption: "home", link: "home", component: <Home />}
+          {args: [], link: "home", component: <Home />}
         }
         brandLogo="https://superflows.dev/img/superflows_gray_transparent_200.png"
         notificationDetailsMenu={
-          {caption:"notif_details", link: 'notif_details', component: <NotificationDetails />}
+          {args: [], link: 'notif_details', component: <NotificationDetails />}
         }
         />, container);
     });

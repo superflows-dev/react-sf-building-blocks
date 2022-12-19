@@ -19,6 +19,7 @@ interface InterfaceSfNavProps {
     homeMenu?: InterfaceSfNavMenuItem;
     notificationListMenu?: InterfaceSfNavMenuItem;
     notificationDetailsMenu?: InterfaceSfNavMenuItem;
+    otherMenu?: any;
     bannerComponentMobile?: any;
     optionsIcon?: any;
     enableRouting?: boolean;

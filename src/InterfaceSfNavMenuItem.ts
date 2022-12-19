@@ -1,5 +1,5 @@
 interface InterfaceSfNavMenuItem {
-    caption: string;
+    args: any;
     link: string;
     component?: any;
 }
