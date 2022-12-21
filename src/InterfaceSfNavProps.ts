@@ -34,6 +34,7 @@ interface InterfaceSfNavProps {
     bannerCta?: string;
     bannerCtaMobile?: string;
     bannerEnableDismiss?: boolean;
+    rootUrl?: string;
     searchCaption?: string;
     signInCaption?: string;
     searchIcon?: any;

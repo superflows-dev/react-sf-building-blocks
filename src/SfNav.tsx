@@ -64,7 +64,7 @@ const Profile = ({ clickMenu, toggleExpandProfile, toggleProfileDropdownExpanded
             }}>
                 {profilePicture.length > 0 && <img className={classNameProfilePicture} src={profilePicture} 
                     style={{
-                        height: (parseInt(theme.dimensions.navHeight) * 4)/5 + 'px',
+                        height: (parseInt(theme.dimensions.navHeight) * 5)/7 + 'px',
                         marginRight: (theme.spaces.min) + 'px',
                         borderRadius: (parseInt(theme.dimensions.navHeight) * 4)/10 + 'px',
                         ...stylesProfilePicture
@@ -347,7 +347,7 @@ const ErrorNotFound = () => {
 
 }
 
-const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = [], notificationDetailsMenu = {args: [], link: "", component: null}, notificationListMenu = {args: [], link: "", component: null}, profilePreamble = null, otherMenu = [], homeMenu = {args: [], link: "", component: null}, profileComponent = null, bannerComponent = null, bannerComponentMobile = null, enableRouting = false, showProfile = false, showSearch = true, showSignIn = true, showBack = false, showNotification = false, showBanner = false, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, onBackPressed = () => {}, onViewAllNotificationsClicked = () => {}, onNotificationClicked = () => {}, onBannerCtaPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", bannerText = Constants.DEFAULT_BANNER_TEXT, bannerTextMobile = "", bannerCta = Constants.DEFAULT_BANNER_CTA, bannerCtaMobile = "", bannerEnableDismiss = true, searchIcon = null, menuIcon = null, backIcon = null, notificationIcon = null, optionsIcon = null, notificationList=Constants.DEFAULT_NOTIFICATION_LIST, classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", classNameProfilePictureContainer = "", classNameBack = "", classNameNotificationIcon = "", classNameNotificationBadge = "", classNameNotificationListContainer = "", classNameNotificationRead = "", classNameNotificationUnRead = "", classNameNotificationViewAll = "", classNameBannerContainer = "", classNameBannerText = "", classNameBannerCta = "", stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}, stylesProfilePictureContainer = {}, stylesBack = {}, stylesNotificationIcon = {}, stylesNotificationBadge = {}, stylesNotificationListContainer = {}, stylesNotificationRead = {}, stylesNotificationUnRead = {}, stylesNotificationViewAll = {}, stylesBannerContainer = {}, stylesBannerCta = {}, stylesBannerText = {}}: InterfaceSfNavProps) => {
+const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.getTheme(), brand = Constants.DEFAULT_BRAND_NAME, stylesBrand = {}, brandLogo = Constants.DEFAULT_BRAND_ICON, stylesBrandLogo = {}, menu = Constants.DEFAULT_MENU, profilePicture = Constants.DEFAULT_PROFILE_PICTURE, profileMenu = [], notificationDetailsMenu = {args: [], link: "", component: null}, notificationListMenu = {args: [], link: "", component: null}, profilePreamble = null, otherMenu = [], homeMenu = {args: [], link: "", component: null}, profileComponent = null, bannerComponent = null, bannerComponentMobile = null, enableRouting = false, showProfile = false, showSearch = true, showSignIn = true, showBack = false, showNotification = false, showBanner = false, onMenuClicked = () => {}, onHomePressed = () => {}, onSearchPressed = () => {}, onSignInPressed = () => {}, onBackPressed = () => {}, onViewAllNotificationsClicked = () => {}, onNotificationClicked = () => {}, onBannerCtaPressed = () => {}, signInCaption = "Sign In", searchCaption = "Search", bannerText = Constants.DEFAULT_BANNER_TEXT, bannerTextMobile = "", bannerCta = Constants.DEFAULT_BANNER_CTA, bannerCtaMobile = "", bannerEnableDismiss = true, searchIcon = null, menuIcon = null, backIcon = null, notificationIcon = null, optionsIcon = null, notificationList=Constants.DEFAULT_NOTIFICATION_LIST, rootUrl = "", classNameBrand = "", classNameBrandLogo = "", classNameMenu = "", classNameSubMenu = "", classNameMenuMobile = "", classNameSubMenuMobile = "", classNameMenuMobileSelected = "", classNameSignIn = "", classNameSearchContainer = "", classNameSearchInput = "", classNameContainerDesktop = "", classNameContainerMobile = "", classNameContainerRightMenu = "", classNameProfilePreamble = "", classNameProfileComponent = "", classNameProfilePicture = "", classNameProfilePictureContainer = "", classNameBack = "", classNameNotificationIcon = "", classNameNotificationBadge = "", classNameNotificationListContainer = "", classNameNotificationRead = "", classNameNotificationUnRead = "", classNameNotificationViewAll = "", classNameBannerContainer = "", classNameBannerText = "", classNameBannerCta = "", stylesMenu = {}, stylesSubMenu = {}, stylesMenuMobile = {}, stylesSubMenuMobile = {}, stylesMenuMobileSelected = "", stylesSignIn = {}, stylesSearchContainer = {}, stylesSearchInput = {}, stylesContainerDesktop = {}, stylesContainerMobile = {}, stylesContainerRightMenu = {}, stylesProfilePreamble = {}, stylesProfileComponent = {}, stylesProfilePicture = {}, stylesProfilePictureContainer = {}, stylesBack = {}, stylesNotificationIcon = {}, stylesNotificationBadge = {}, stylesNotificationListContainer = {}, stylesNotificationRead = {}, stylesNotificationUnRead = {}, stylesNotificationViewAll = {}, stylesBannerContainer = {}, stylesBannerCta = {}, stylesBannerText = {}}: InterfaceSfNavProps) => {
 
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
     const [searchString, setSearchString] = useState('');
@@ -426,8 +426,13 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
 
     function navigateTo(component: InterfaceNavigate) {
         
+        let prefix = location.protocol + '//' + location.host + '/';
+        if(rootUrl != "") {
+            prefix = rootUrl.endsWith("/") ? rootUrl : rootUrl + "/";
+        }
         //if(history.length > 0 && history[history.length - 1].link != component.link) {
-            window.history.pushState({}, "", "/" + component.link == "" ? "" : (component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/"))));
+            window.history.pushState({}, "", component.link == "" ? "" : (prefix + component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/"))));
+            console.log({}, "", component.link == "" ? "" : (prefix + component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/"))));
         //}
         setHistory(history => [...history, component]);
     }
@@ -487,8 +492,6 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
     }
 
     function onClickNotification(item: InterfaceSfNavNotificationItem) {
-
-        
 
         if(enableRouting) {
 
