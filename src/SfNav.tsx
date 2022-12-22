@@ -432,7 +432,6 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
         }
         //if(history.length > 0 && history[history.length - 1].link != component.link) {
             window.history.pushState({}, "", component.link == "" ? "" : (prefix + component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/"))));
-            console.log({}, "", component.link == "" ? "" : (prefix + component.link + (component.args == null ? "" : component.args.length === 0 ? "" : "/" + component.args.join("/"))));
         //}
         setHistory(history => [...history, component]);
     }
@@ -542,22 +541,7 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
 
     }
 
-    useEffect(() => {
-        setNotificationListStrWrap(notificationList);
-    }, [notificationList])
-
-    useEffect(() => {
-
-        function handleResize() {
-            setWindowDimensions(getWindowDimensions());
-        }
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-
-    }, []);
-
-    useEffect(() => {
+    function processHistory() {
 
         if(enableRouting) {
 
@@ -666,6 +650,39 @@ const SfNav = ({variant = Themes.getTheme().variants.primary, theme = Themes.get
             setHistory(history => [...history, {link: "errornotfound", component: <ErrorNotFound />, args: null}]);
 
         }
+
+    }
+
+    useEffect(() => {
+        setNotificationListStrWrap(notificationList);
+    }, [notificationList])
+
+    useEffect(() => {
+
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+
+    }, []);
+
+    useEffect(() => {
+
+        function handlePopState( event: any ) {
+            console.log(`location: ${document.location}, state: ${JSON.stringify(event.state)}`);
+            processHistory();
+        }
+
+        window.addEventListener('popstate', handlePopState);
+        return () => window.removeEventListener('popstate', handlePopState);
+
+    }, []);
+
+    useEffect(() => {
+
+        processHistory();
 
     }, [])
 

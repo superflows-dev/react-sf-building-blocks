@@ -1,9 +1,16 @@
+<img src="https://superflows-images.s3.ap-south-1.amazonaws.com/superflows_logo_gray_c2c.png" width="400"/>
+
 # react-sf-building-blocks
 
 > Basic building blocks of the Superflows component system
 
 [![NPM](https://img.shields.io/npm/v/react-sf-themes.svg)](https://www.npmjs.com/package/react-sf-themes) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Node.js CI](https://github.com/superflows-dev/react-sf-themes/actions/workflows/node.js.yml/badge.svg)](https://github.com/superflows-dev/react-sf-themes/actions/workflows/node.js.yml)
 
+## What's New
+
+How To Implement A Customizable React NavBar With Built-in Routing
+
+<a href="https://youtu.be/1C0fCp7yUKs"><img src="https://user-images.githubusercontent.com/108924653/209134511-7d5cc4f0-1fde-421a-839c-00bc7885bd6c.jpg" width="200"/></a>
 
 ## Documentation
 
